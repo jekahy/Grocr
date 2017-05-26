@@ -16,18 +16,19 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * OUT OF OR IN CONNECTION WITH TFirebase/CoreHE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
 
 import Foundation
+import FirebaseDatabase
 
 struct GroceryItem {
   
   let key: String
   let name: String
   let addedByUser: String
-  let ref: FIRDatabaseReference?
+  let ref: DatabaseReference?
   var completed: Bool
   
   init(name: String, addedByUser: String, completed: Bool, key: String = "") {
@@ -38,7 +39,7 @@ struct GroceryItem {
     self.ref = nil
   }
   
-  init(snapshot: FIRDataSnapshot) {
+  init(snapshot: DataSnapshot) {
     key = snapshot.key
     let snapshotValue = snapshot.value as! [String: AnyObject]
     name = snapshotValue["name"] as! String

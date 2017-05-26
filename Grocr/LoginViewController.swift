@@ -39,8 +39,9 @@ class LoginViewController: UIViewController {
     Auth.auth().addStateDidChangeListener() { auth, user in
 
       if user != nil {
-
+        
         self.performSegue(withIdentifier: self.loginToList, sender: nil)
+        
       }
     }
     

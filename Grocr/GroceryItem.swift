@@ -31,7 +31,8 @@ struct GroceryItem {
   let ref: DatabaseReference?
   var completed: Bool
   
-  init(name: String, addedByUser: String, completed: Bool, key: String = "") {
+  init(name: String, addedByUser: String, completed: Bool, key: String = "")
+  {
     self.key = key
     self.name = name
     self.addedByUser = addedByUser
@@ -39,7 +40,8 @@ struct GroceryItem {
     self.ref = nil
   }
   
-  init(snapshot: DataSnapshot) {
+  init(snapshot: DataSnapshot)
+  {
     key = snapshot.key
     let snapshotValue = snapshot.value as! [String: AnyObject]
     name = snapshotValue["name"] as! String
@@ -48,7 +50,8 @@ struct GroceryItem {
     ref = snapshot.ref
   }
   
-  func toAnyObject() -> Any {
+  func toAnyObject() -> Any
+  {
     return [
       "name": name,
       "addedByUser": addedByUser,

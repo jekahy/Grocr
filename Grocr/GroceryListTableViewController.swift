@@ -65,7 +65,7 @@ class GroceryListTableViewController: UITableViewController {
     
     Auth.auth().addStateDidChangeListener { auth, user in
       guard let _user = user else { return }
-      self.user = User(authData: _user)
+      self.user = User(_user)
     }
   }
   

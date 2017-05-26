@@ -18,6 +18,11 @@
 		BB30CD4A1B439B60004B3177 /* OnlineUsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB30CD491B439B60004B3177 /* OnlineUsersTableViewController.swift */; };
 		BB7DA5111B42C8100018B530 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7DA5101B42C8100018B530 /* User.swift */; };
 		E145A51B1ED87CE000A1179E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */; };
+		E1DD64D31ED8A4FA00D596A5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64D21ED8A4FA00D596A5 /* TextField.swift */; };
+		E1DD64D71ED8A6B600D596A5 /* ErrorBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64D61ED8A6B600D596A5 /* ErrorBorder.swift */; };
+		E1DD64D91ED8A7EA00D596A5 /* Validatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64D81ED8A7EA00D596A5 /* Validatable.swift */; };
+		E1DD64DC1ED8AA5300D596A5 /* ValidatorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64DB1ED8AA5300D596A5 /* ValidatorExtension.swift */; };
+		E1DD64DE1ED8ACD100D596A5 /* EasyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64DD1ED8ACD100D596A5 /* EasyAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +43,11 @@
 		BB7DA5101B42C8100018B530 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E157370A1ED88BC600DDBB82 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
+		E1DD64D21ED8A4FA00D596A5 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextField.swift; path = Controls/TextField.swift; sourceTree = "<group>"; };
+		E1DD64D61ED8A6B600D596A5 /* ErrorBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorBorder.swift; path = Protocols/ErrorBorder.swift; sourceTree = "<group>"; };
+		E1DD64D81ED8A7EA00D596A5 /* Validatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validatable.swift; path = Protocols/Validatable.swift; sourceTree = "<group>"; };
+		E1DD64DB1ED8AA5300D596A5 /* ValidatorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValidatorExtension.swift; path = Extensions/ValidatorExtension.swift; sourceTree = "<group>"; };
+		E1DD64DD1ED8ACD100D596A5 /* EasyAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EasyAlert.swift; path = Protocols/EasyAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +103,9 @@
 			isa = PBXGroup;
 			children = (
 				E157370A1ED88BC600DDBB82 /* Grocr.entitlements */,
+				E1DD64DA1ED8AA3500D596A5 /* Extensions */,
+				E1DD64D51ED8A69700D596A5 /* Protocols */,
+				E1DD64D41ED8A4FD00D596A5 /* Controls */,
 				BB2385881B3DD9550079CD01 /* Models */,
 				BB2385811B3DD8310079CD01 /* Controllers */,
 				BB2385821B3DD8490079CD01 /* Layouts */,
@@ -147,6 +160,32 @@
 				BB2385611B3DD5AB0079CD01 /* AppDelegate.swift */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		E1DD64D41ED8A4FD00D596A5 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				E1DD64D21ED8A4FA00D596A5 /* TextField.swift */,
+			);
+			name = Controls;
+			sourceTree = "<group>";
+		};
+		E1DD64D51ED8A69700D596A5 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E1DD64D61ED8A6B600D596A5 /* ErrorBorder.swift */,
+				E1DD64D81ED8A7EA00D596A5 /* Validatable.swift */,
+				E1DD64DD1ED8ACD100D596A5 /* EasyAlert.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		E1DD64DA1ED8AA3500D596A5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E1DD64DB1ED8AA5300D596A5 /* ValidatorExtension.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,8 +322,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB2385641B3DD5AB0079CD01 /* LoginViewController.swift in Sources */,
+				E1DD64D91ED8A7EA00D596A5 /* Validatable.swift in Sources */,
 				BB2385841B3DD8660079CD01 /* GroceryListTableViewController.swift in Sources */,
 				BB23858A1B3DD9640079CD01 /* GroceryItem.swift in Sources */,
+				E1DD64DE1ED8ACD100D596A5 /* EasyAlert.swift in Sources */,
+				E1DD64D31ED8A4FA00D596A5 /* TextField.swift in Sources */,
+				E1DD64D71ED8A6B600D596A5 /* ErrorBorder.swift in Sources */,
+				E1DD64DC1ED8AA5300D596A5 /* ValidatorExtension.swift in Sources */,
 				BB30CD4A1B439B60004B3177 /* OnlineUsersTableViewController.swift in Sources */,
 				BB7DA5111B42C8100018B530 /* User.swift in Sources */,
 				BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */,

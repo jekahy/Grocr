@@ -22,40 +22,100 @@
 
 import UIKit
 import FirebaseAuth
+import SwiftValidator
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, Validatable, EasyAlert {
   
   // MARK: Constants
-  let loginToList = "LoginToList"
+  fileprivate let loginToList = "LoginToList"
+  fileprivate let validationFailedMess = "It looks like something is wrong with the input data. Here what we've found: "
+  fileprivate let willCheckTitle = "OK, I'll check it out"
+  
+  let validator = Validator()
   
   // MARK: Outlets
-  @IBOutlet weak var textFieldLoginEmail: UITextField!
-  @IBOutlet weak var textFieldLoginPassword: UITextField!
+  @IBOutlet weak var textFieldLoginEmail: TextField!
+  @IBOutlet weak var textFieldLoginPassword: TextField!
   
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  enum ValidationRules {
     
-    Auth.auth().addStateDidChangeListener() { auth, user in
+    case email
+    case password
+    case confirmation(UITextField)
+    
+    func rules() -> [Rule]
+    {
+      switch self {
+      case .email:
+        return [RequiredRule(message: "email is missing"), EmailRule(message: "email is invalid")]
+      case .password:
+        return [RequiredRule(message: "password is missing"), MinLengthRule(length:6, message: "password is too short")]
+      case .confirmation(let passTF):
+        return [ConfirmationRule(confirmField: passTF, message:"passwords don't match")]
+      }
+      
+    }
+  }
+  
+  //MARK: Methods
 
+  override func viewDidLoad()
+  {
+    super.viewDidLoad()
+    addAuthListener()
+    setupValidator()
+  }
+  
+  fileprivate func addAuthListener()
+  {
+    Auth.auth().addStateDidChangeListener() { auth, user in
+      
       if user != nil {
         
         self.performSegue(withIdentifier: self.loginToList, sender: nil)
         
       }
     }
-    
+  }
+  
+  func setupValidator()
+  {
+    validator.styleTransformers(success: { validationRule in
+      
+      if let tf = validationRule.field as? TextField  {
+        tf.removeErrorHighlight()
+      }
+    }) { validationError in
+      
+      if let tf = validationError.field as? TextField  {
+        tf.highlightError()
+      }
+    }
+    validator.registerField(textFieldLoginEmail, rules: .email)
+    validator.registerField(textFieldLoginPassword, rules: .password)
   }
   
   // MARK: Actions
-  @IBAction func loginDidTouch(_ sender: AnyObject) {
+  @IBAction func loginDidTouch(_ sender: AnyObject)
+  {
     
-    Auth.auth().signIn(withEmail: textFieldLoginEmail.text!,
-                           password: textFieldLoginPassword.text!)
+    validator.validate {[unowned self] errors in
+      if errors.count > 0 {
+        let issues = errors.map{ $1.errorMessage}.joined(separator: ", ")
+        let finalMess = self.validationFailedMess + "\(issues)."
+        let action = UIAlertAction(title: self.willCheckTitle, style: .cancel, handler: nil)
+        self.showAlert("Hey", message: finalMess, alertActions: [action])
+      }else{
+        Auth.auth().signIn(withEmail: self.textFieldLoginEmail.text!,
+                           password: self.textFieldLoginPassword.text!)
+      }
+    }
+    
     
   }
   
-  @IBAction func signUpDidTouch(_ sender: AnyObject) {
+  @IBAction func signUpDidTouch(_ sender: AnyObject)
+  {
     let alert = UIAlertController(title: "Register",
                                   message: "Register",
                                   preferredStyle: .alert)
@@ -98,12 +158,15 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: UITextFieldDelegate {
   
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    if textField == textFieldLoginEmail {
-      textFieldLoginPassword.becomeFirstResponder()
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool
+  {
+    guard let tf =  textField as? TextField else{
+      return true
     }
-    if textField == textFieldLoginPassword {
-      textField.resignFirstResponder()
+    if let next = tf.nextResp{
+      next.becomeFirstResponder()
+    }else{
+      tf.resignFirstResponder()
     }
     return true
   }

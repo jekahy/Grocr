@@ -35,6 +35,8 @@ class GroceryListTableViewController: UITableViewController {
   var user: User!
   var userCountBarButtonItem: UIBarButtonItem!
   
+  
+  
   // MARK: UIViewController Lifecycle
   
   override func viewDidLoad() {
@@ -50,6 +52,15 @@ class GroceryListTableViewController: UITableViewController {
     navigationItem.leftBarButtonItem = userCountBarButtonItem
     
     user = User(uid: "FakeId", email: "hungry@person.food")
+    
+    let dataChangeClosure:(DataSnapshot)->() = {[weak self] snapshot in
+      
+      self?.items = snapshot.children.map{GroceryItem(snapshot: $0 as! DataSnapshot)}
+      self?.tableView.reloadData()
+    }
+    
+    ref.observe(.value, with: dataChangeClosure)
+    ref.queryOrdered(byChild: "completed").observe(.value, with: dataChangeClosure)
   }
   
   // MARK: UITableView Delegate methods
@@ -75,20 +86,24 @@ class GroceryListTableViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    
     if editingStyle == .delete {
-      items.remove(at: indexPath.row)
-      tableView.reloadData()
+      let groceryItem = items[indexPath.row]
+      groceryItem.ref?.removeValue()
     }
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
     guard let cell = tableView.cellForRow(at: indexPath) else { return }
-    var groceryItem = items[indexPath.row]
+    let groceryItem = items[indexPath.row]
     let toggledCompletion = !groceryItem.completed
-    
+
     toggleCellCheckbox(cell, isCompleted: toggledCompletion)
-    groceryItem.completed = toggledCompletion
-    tableView.reloadData()
+
+    groceryItem.ref?.updateChildValues([
+      "completed": toggledCompletion
+      ])
   }
   
   func toggleCellCheckbox(_ cell: UITableViewCell, isCompleted: Bool) {

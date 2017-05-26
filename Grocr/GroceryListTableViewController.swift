@@ -22,6 +22,7 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseAuth
 
 class GroceryListTableViewController: UITableViewController {
 
@@ -61,6 +62,11 @@ class GroceryListTableViewController: UITableViewController {
     
     ref.observe(.value, with: dataChangeClosure)
     ref.queryOrdered(byChild: "completed").observe(.value, with: dataChangeClosure)
+    
+    Auth.auth().addStateDidChangeListener { auth, user in
+      guard let _user = user else { return }
+      self.user = User(authData: _user)
+    }
   }
   
   // MARK: UITableView Delegate methods

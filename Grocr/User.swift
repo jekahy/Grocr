@@ -21,16 +21,17 @@
  */
 
 import Foundation
+import FirebaseAuth
 
 struct User {
   
   let uid: String
   let email: String
   
-  init(authData: User) {
+  init(authData: FirebaseAuth.User) {
     
     uid = authData.uid
-    email = authData.email
+    email = authData.email!
   }
   
   init(uid: String, email: String) {

@@ -21,6 +21,7 @@
  */
 
 import UIKit
+import FirebaseAuth
 
 class OnlineUsersTableViewController: UITableViewController {
   
@@ -52,7 +53,19 @@ class OnlineUsersTableViewController: UITableViewController {
   // MARK: Actions
   
   @IBAction func signoutButtonPressed(_ sender: AnyObject) {
-    dismiss(animated: true, completion: nil)
+    
+    do{
+      try Auth.auth().signOut()
+      dismiss(animated: true, completion: nil)
+
+    }catch {
+      let alertVC = UIAlertController(title: "Error", message: "An error occured while trying to sign out: \(error.localizedDescription)", preferredStyle: .alert)
+      alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler:{ item in
+        self.dismiss(animated: true, completion: nil)
+      }))
+      self.show(alertVC, sender: nil)
+    }
+    
   }
   
 }

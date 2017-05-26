@@ -21,11 +21,14 @@
  */
 
 import UIKit
+import FirebaseDatabase
 
 class GroceryListTableViewController: UITableViewController {
 
   // MARK: Constants
   let listToUsers = "ListToUsers"
+  let ref = Database.database().reference(withPath: "grocery-items")
+
   
   // MARK: Properties 
   var items: [GroceryItem] = []
@@ -108,13 +111,17 @@ class GroceryListTableViewController: UITableViewController {
                                   preferredStyle: .alert)
     
     let saveAction = UIAlertAction(title: "Save",
-                                   style: .default) { action in
-      let textField = alert.textFields![0] 
-      let groceryItem = GroceryItem(name: textField.text!,
-                                    addedByUser: self.user.email,
-                                    completed: false)
-      self.items.append(groceryItem)
-      self.tableView.reloadData()
+                                   style: .default) { _ in
+                                    // 1
+        guard let textField = alert.textFields?.first,
+          let text = textField.text else { return }
+        
+        let groceryItem = GroceryItem(name: text,
+                                      addedByUser: self.user.email,
+                                      completed: false)
+        let groceryItemRef = self.ref.child(text.lowercased())
+        
+        groceryItemRef.setValue(groceryItem.toAnyObject())
     }
     
     let cancelAction = UIAlertAction(title: "Cancel",

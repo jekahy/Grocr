@@ -26,6 +26,8 @@ import SwiftValidator
 
 class LoginViewController: UIViewController, Validatable, EasyAlert {
   
+  fileprivate typealias EmptyClosure = ()->()
+  
   // MARK: Constants
   fileprivate let loginToList = "LoginToList"
   fileprivate let validationFailedMess = "It looks like something is wrong with the input data. Here what we've found: "
@@ -98,60 +100,85 @@ class LoginViewController: UIViewController, Validatable, EasyAlert {
   // MARK: Actions
   @IBAction func loginDidTouch(_ sender: AnyObject)
   {
-    
-    validator.validate {[unowned self] errors in
-      if errors.count > 0 {
-        let issues = errors.map{ $1.errorMessage}.joined(separator: ", ")
-        let finalMess = self.validationFailedMess + "\(issues)."
-        let action = UIAlertAction(title: self.willCheckTitle, style: .cancel, handler: nil)
-        self.showAlert("Hey", message: finalMess, alertActions: [action])
-      }else{
-        Auth.auth().signIn(withEmail: self.textFieldLoginEmail.text!,
-                           password: self.textFieldLoginPassword.text!)
+    validateFields {[weak self] in
+      if let strSelf = self{
+        Auth.auth().signIn(withEmail: strSelf.textFieldLoginEmail.text!,
+                           password: strSelf.textFieldLoginPassword.text!)
       }
     }
-    
-    
   }
   
   @IBAction func signUpDidTouch(_ sender: AnyObject)
+  {
+    validateFields {[weak self] in
+      if let alert = self?.signUpAlert(){
+        self?.present(alert, animated: true, completion: nil)
+      }
+    }
+  }
+  
+  //MARK: Methods
+  
+  fileprivate func validateFields(success:@escaping EmptyClosure)
+  {
+    validator.validate {[unowned self] errors in
+      
+      if errors.count > 0 {
+        let issues = errors.map{ $1.errorMessage}.joined(separator: ", ")
+        let finalMess = self.validationFailedMess + "\(issues)."
+        self.showAlert("Hey", message: finalMess, alertActions: [.okWithTitle(self.willCheckTitle)])
+        
+      }else{
+        success()
+      }
+    }
+  }
+  
+  fileprivate func signUpAlert()->UIAlertController
   {
     let alert = UIAlertController(title: "Register",
                                   message: "Register",
                                   preferredStyle: .alert)
     
-    let saveAction = UIAlertAction(title: "Save",
-                                   style: .default) { action in
-        let emailField = alert.textFields![0]
-        let passwordField = alert.textFields![1]
+    let saveAction = UIAlertAction(title: "Save", style: .default) {[weak self] action in
+      
+      
+      guard let confTF = alert.textFields?[0], let strSelf = self else {
+        return
+      }
+      strSelf.validator.registerField(confTF, rules:.confirmation(strSelf.textFieldLoginPassword))
+      strSelf.validator.validateField(confTF, callback: { error in
         
-  
-        Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { user, error in
+        if let error = error {
+          
+          let finalMess = strSelf.validationFailedMess + "\(error.errorMessage)."
+          strSelf.showAlert("Hey", message: finalMess, alertActions: [.okWithTitle(strSelf.willCheckTitle)])
+          strSelf.validator.unregisterField(confTF)
+          
+        }else{
+          
+          Auth.auth().createUser(withEmail: strSelf.textFieldLoginEmail.text!, password: confTF.text!) { user, error in
             if error == nil {
               
-              Auth.auth().signIn(withEmail: self.textFieldLoginEmail.text!,
-                                     password: self.textFieldLoginPassword.text!)
+              Auth.auth().signIn(withEmail: strSelf.textFieldLoginEmail.text!,
+                                 password: strSelf.textFieldLoginPassword.text!)
+            }else{
+              strSelf.showAlert("OOpss", message: "Something went wrong :/ (\(error!.localizedDescription)).", alertActions: [.ok])
             }
+          }
         }
-                          
+      })
     }
     
-    let cancelAction = UIAlertAction(title: "Cancel",
-                                     style: .default)
-    
-    alert.addTextField { textEmail in
-      textEmail.placeholder = "Enter your email"
-    }
     
     alert.addTextField { textPassword in
       textPassword.isSecureTextEntry = true
-      textPassword.placeholder = "Enter your password"
+      textPassword.placeholder = "Password confirmation"
     }
     
     alert.addAction(saveAction)
-    alert.addAction(cancelAction)
-    
-    present(alert, animated: true, completion: nil)
+    alert.addAction(.cancel)
+    return alert
   }
   
 }
@@ -170,5 +197,4 @@ extension LoginViewController: UITextFieldDelegate {
     }
     return true
   }
-  
 }

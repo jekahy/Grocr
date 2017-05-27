@@ -20,4 +20,9 @@ extension EasyAlert where Self:UIViewController{
     self.show(alert, sender: nil)
   }
   
+  func showAlert(_ title: String?, message: String?, alertActions: [UIAlertAction.DefaultAction])
+  {
+    self.showAlert(title, message: message, alertActions: alertActions.map{$0.action})
+  }
+  
 }

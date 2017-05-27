@@ -17,6 +17,8 @@
 		BB23858A1B3DD9640079CD01 /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385891B3DD9640079CD01 /* GroceryItem.swift */; };
 		BB30CD4A1B439B60004B3177 /* OnlineUsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB30CD491B439B60004B3177 /* OnlineUsersTableViewController.swift */; };
 		BB7DA5111B42C8100018B530 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7DA5101B42C8100018B530 /* User.swift */; };
+		E115FB1E1ED9BB85003C1C50 /* AlertActionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB1D1ED9BB85003C1C50 /* AlertActionExtension.swift */; };
+		E115FB201ED9C19A003C1C50 /* AlertVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB1F1ED9C19A003C1C50 /* AlertVCExtension.swift */; };
 		E145A51B1ED87CE000A1179E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */; };
 		E1DD64D31ED8A4FA00D596A5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64D21ED8A4FA00D596A5 /* TextField.swift */; };
 		E1DD64D71ED8A6B600D596A5 /* ErrorBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64D61ED8A6B600D596A5 /* ErrorBorder.swift */; };
@@ -41,6 +43,8 @@
 		BB2385891B3DD9640079CD01 /* GroceryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItem.swift; sourceTree = "<group>"; };
 		BB30CD491B439B60004B3177 /* OnlineUsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineUsersTableViewController.swift; sourceTree = "<group>"; };
 		BB7DA5101B42C8100018B530 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E115FB1D1ED9BB85003C1C50 /* AlertActionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertActionExtension.swift; path = Extensions/AlertActionExtension.swift; sourceTree = "<group>"; };
+		E115FB1F1ED9C19A003C1C50 /* AlertVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertVCExtension.swift; path = Extensions/AlertVCExtension.swift; sourceTree = "<group>"; };
 		E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E157370A1ED88BC600DDBB82 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
 		E1DD64D21ED8A4FA00D596A5 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextField.swift; path = Controls/TextField.swift; sourceTree = "<group>"; };
@@ -184,6 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				E1DD64DB1ED8AA5300D596A5 /* ValidatorExtension.swift */,
+				E115FB1D1ED9BB85003C1C50 /* AlertActionExtension.swift */,
+				E115FB1F1ED9C19A003C1C50 /* AlertVCExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -325,9 +331,11 @@
 				E1DD64D91ED8A7EA00D596A5 /* Validatable.swift in Sources */,
 				BB2385841B3DD8660079CD01 /* GroceryListTableViewController.swift in Sources */,
 				BB23858A1B3DD9640079CD01 /* GroceryItem.swift in Sources */,
+				E115FB1E1ED9BB85003C1C50 /* AlertActionExtension.swift in Sources */,
 				E1DD64DE1ED8ACD100D596A5 /* EasyAlert.swift in Sources */,
 				E1DD64D31ED8A4FA00D596A5 /* TextField.swift in Sources */,
 				E1DD64D71ED8A6B600D596A5 /* ErrorBorder.swift in Sources */,
+				E115FB201ED9C19A003C1C50 /* AlertVCExtension.swift in Sources */,
 				E1DD64DC1ED8AA5300D596A5 /* ValidatorExtension.swift in Sources */,
 				BB30CD4A1B439B60004B3177 /* OnlineUsersTableViewController.swift in Sources */,
 				BB7DA5111B42C8100018B530 /* User.swift in Sources */,

@@ -11,4 +11,7 @@ pod 'Firebase/Storage'
 
 pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', :branch => 'master'
 
+pod 'ObjectMapper', '~> 2.2'
+#pod 'SwiftyJSON'
+
 end

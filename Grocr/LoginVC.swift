@@ -24,7 +24,7 @@ import UIKit
 import FirebaseAuth
 import SwiftValidator
 
-class LoginViewController: UIViewController, Validatable, EasyAlert {
+class LoginVC: UIViewController, Validatable, EasyAlert {
   
   fileprivate typealias EmptyClosure = ()->()
   
@@ -183,7 +183,7 @@ class LoginViewController: UIViewController, Validatable, EasyAlert {
   
 }
 
-extension LoginViewController: UITextFieldDelegate {
+extension LoginVC: UITextFieldDelegate {
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool
   {

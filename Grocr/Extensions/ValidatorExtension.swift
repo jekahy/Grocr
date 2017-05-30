@@ -11,7 +11,7 @@ import SwiftValidator
 
 extension Validator{
   
-  func registerField(_ field: ValidatableField, errorLabel:UILabel? = nil, rules:LoginViewController.ValidationRules)
+  func registerField(_ field: ValidatableField, errorLabel:UILabel? = nil, rules:LoginVC.ValidationRules)
   {
     self.registerField(field, rules: rules.rules())
   }

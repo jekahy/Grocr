@@ -24,52 +24,67 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class GroceryListTableViewController: UITableViewController {
-
+class GroceryVC: UITableViewController {
+  
   // MARK: Constants
-  let listToUsers = "ListToUsers"
-  let ref = Database.database().reference(withPath: "grocery-items")
-
+  fileprivate let ref = Database.database().reference(withPath: "grocery-items")
   
-  // MARK: Properties 
+  // MARK: Properties
+  var grocery:Grocery!
   var items: [GroceryItem] = []
-  var user: User!
-  var userCountBarButtonItem: UIBarButtonItem!
-  
-  
-  
+
   // MARK: UIViewController Lifecycle
   
-  override func viewDidLoad() {
+  override func viewDidLoad()
+  {
     super.viewDidLoad()
     
     tableView.allowsMultipleSelectionDuringEditing = false
     
-    userCountBarButtonItem = UIBarButtonItem(title: "1",
-                                             style: .plain,
-                                             target: self,
-                                             action: #selector(userCountButtonDidTouch))
-    userCountBarButtonItem.tintColor = UIColor.white
-    navigationItem.leftBarButtonItem = userCountBarButtonItem
-    
-    user = User(uid: "FakeId", email: "hungry@person.food")
-    
-    let dataChangeClosure:(DataSnapshot)->() = {[weak self] snapshot in
+    ref.observe(.value, with: {[weak self] snapshot in
       
-      self?.items = snapshot.children.map{GroceryItem(snapshot: $0 as! DataSnapshot)}
+      self?.items = snapshot.children.flatMap{GroceryItem(snapshot: $0 as! DataSnapshot)}
       self?.tableView.reloadData()
-    }
-    
-    ref.observe(.value, with: dataChangeClosure)
-    ref.queryOrdered(byChild: "completed").observe(.value, with: dataChangeClosure)
-    
-    Auth.auth().addStateDidChangeListener { auth, user in
-      guard let _user = user else { return }
-      self.user = User(_user)
-    }
+      
+    })
   }
   
-  // MARK: UITableView Delegate methods
+  // MARK: Add Item
+  
+  @IBAction func addButtonDidTouch(_ sender: AnyObject)
+  {
+    let alert = UIAlertController(title: "Grocery Item",
+                                  message: "Add an Item",
+                                  preferredStyle: .alert)
+    
+    let saveAction = UIAlertAction(title: "Save",
+                                   style: .default) { [unowned self] _ in
+        guard let textField = alert.textFields?.first,
+          let text = textField.text else { return }
+        
+        let groceryItemRef = self.ref.childByAutoId()
+
+        let groceryItem = GroceryItem(name: text,
+                                      addedByUser: Auth.auth().currentUser?.email,
+                                      groceryID:self.grocery.key,
+                                      ref: groceryItemRef)
+        
+        groceryItemRef.setValue(groceryItem.jsonStr)
+        let itemsRef = self.grocery.ref.child("items")
+        itemsRef.updateChildValues([groceryItem.key : true])
+    }
+    
+    alert.addTextField()
+    alert.addAction(saveAction)
+    alert.addAction(.cancel)
+    
+    present(alert, animated: true, completion: nil)
+  }
+  
+}
+
+
+extension GroceryVC {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return items.count
@@ -100,19 +115,20 @@ class GroceryListTableViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+    
     guard let cell = tableView.cellForRow(at: indexPath) else { return }
     let groceryItem = items[indexPath.row]
     let toggledCompletion = !groceryItem.completed
-
+    
     toggleCellCheckbox(cell, isCompleted: toggledCompletion)
-
+    
     groceryItem.ref?.updateChildValues([
       "completed": toggledCompletion
       ])
   }
   
-  func toggleCellCheckbox(_ cell: UITableViewCell, isCompleted: Bool) {
+  fileprivate func toggleCellCheckbox(_ cell: UITableViewCell, isCompleted: Bool)
+  {
     if !isCompleted {
       cell.accessoryType = .none
       cell.textLabel?.textColor = UIColor.black
@@ -123,41 +139,5 @@ class GroceryListTableViewController: UITableViewController {
       cell.detailTextLabel?.textColor = UIColor.gray
     }
   }
-  
-  // MARK: Add Item
-  
-  @IBAction func addButtonDidTouch(_ sender: AnyObject) {
-    let alert = UIAlertController(title: "Grocery Item",
-                                  message: "Add an Item",
-                                  preferredStyle: .alert)
-    
-    let saveAction = UIAlertAction(title: "Save",
-                                   style: .default) { _ in
-                                    // 1
-        guard let textField = alert.textFields?.first,
-          let text = textField.text else { return }
-        
-        let groceryItem = GroceryItem(name: text,
-                                      addedByUser: self.user.email,
-                                      completed: false)
-        let groceryItemRef = self.ref.child(text.lowercased())
-        
-        groceryItemRef.setValue(groceryItem.toAnyObject())
-    }
-    
-    let cancelAction = UIAlertAction(title: "Cancel",
-                                     style: .default)
-    
-    alert.addTextField()
-    
-    alert.addAction(saveAction)
-    alert.addAction(cancelAction)
-    
-    present(alert, animated: true, completion: nil)
-  }
-  
-  func userCountButtonDidTouch() {
-    performSegue(withIdentifier: listToUsers, sender: nil)
-  }
-  
 }
+

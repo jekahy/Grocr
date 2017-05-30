@@ -22,41 +22,39 @@
 
 import Foundation
 import FirebaseDatabase
+import ObjectMapper
 
-struct GroceryItem {
+struct GroceryItem:FRModel {
   
-  let key: String
-  let name: String
-  let addedByUser: String
-  let ref: DatabaseReference?
-  var completed: Bool
+  weak var ref: DatabaseReference!
+  var key: String!
   
-  init(name: String, addedByUser: String, completed: Bool, key: String = "")
+  var name  = ""
+  var addedByUser:String?
+  var createdAt = Date()
+  var groceryID:String!
+  
+  var completed = false
+  
+  init?(map: Map) {}
+
+  init(name: String, addedByUser: String?, groceryID:String, ref:DatabaseReference, completed: Bool = false)
   {
-    self.key = key
     self.name = name
     self.addedByUser = addedByUser
+    self.groceryID = groceryID
     self.completed = completed
-    self.ref = nil
+    self.ref = ref
+    self.key = ref.key
+    self.createdAt = Date()
   }
-  
-  init(snapshot: DataSnapshot)
+
+  mutating func mapping(map: Map)
   {
-    key = snapshot.key
-    let snapshotValue = snapshot.value as! [String: AnyObject]
-    name = snapshotValue["name"] as! String
-    addedByUser = snapshotValue["addedByUser"] as! String
-    completed = snapshotValue["completed"] as! Bool
-    ref = snapshot.ref
+    name 	<- map["name"]
+    createdAt	<- (map["createdAt"], DateTransform())
+    addedByUser <- map["addedByUser"]
+    groceryID <- map["groceryID"]
+    completed <- map["completed"]
   }
-  
-  func toAnyObject() -> Any
-  {
-    return [
-      "name": name,
-      "addedByUser": addedByUser,
-      "completed": completed
-    ]
-  }
-  
 }

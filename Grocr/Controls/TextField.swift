@@ -14,5 +14,4 @@ class TextField: UITextField, ErrorBorder {
   
   @IBOutlet weak var nextResp:UIResponder?
   
-  
 }

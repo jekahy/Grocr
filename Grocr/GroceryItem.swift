@@ -31,14 +31,16 @@ struct GroceryItem:FRModel {
   
   var name  = ""
   var addedByUser:String?
+  var description:String?
   var createdAt = Date()
   var groceryID:String!
-  
+  var amount:String?
   var completed = false
+  var imageAddr:String?
   
   init?(map: Map) {}
 
-  init(name: String, addedByUser: String?, groceryID:String, ref:DatabaseReference, completed: Bool = false)
+  init(name: String, addedByUser: String?, groceryID:String, ref:DatabaseReference, completed: Bool = false, amount:String?=nil, description:String? = nil)
   {
     self.name = name
     self.addedByUser = addedByUser
@@ -47,6 +49,8 @@ struct GroceryItem:FRModel {
     self.ref = ref
     self.key = ref.key
     self.createdAt = Date()
+    self.description = description
+    self.amount = amount
   }
 
   mutating func mapping(map: Map)
@@ -56,5 +60,8 @@ struct GroceryItem:FRModel {
     addedByUser <- map["addedByUser"]
     groceryID <- map["groceryID"]
     completed <- map["completed"]
+    description <- map["description"]
+    amount <- map["amount"]
+    imageAddr <- map["imageAddr"]
   }
 }

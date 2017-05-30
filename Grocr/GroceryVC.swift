@@ -28,10 +28,10 @@ class GroceryVC: UITableViewController {
   
   // MARK: Constants
   fileprivate let ref = Database.database().reference(withPath: "grocery-items")
-  
+  fileprivate let toGroceryItemVC = "toGroceryItemVC"
   // MARK: Properties
   var grocery:Grocery!
-  var items: [GroceryItem] = []
+  fileprivate var items: [GroceryItem] = []
 
   // MARK: UIViewController Lifecycle
   
@@ -81,6 +81,14 @@ class GroceryVC: UITableViewController {
     present(alert, animated: true, completion: nil)
   }
   
+//  MARK: Prepare for segue
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+  {
+    if segue.identifier == toGroceryItemVC, let itemVC = segue.destination as? GroceryItemVC, let item = sender as? GroceryItem {
+      itemVC.item = item
+    }
+  }
+  
 }
 
 
@@ -115,16 +123,12 @@ extension GroceryVC {
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
-    guard let cell = tableView.cellForRow(at: indexPath) else { return }
+
+    tableView.deselectRow(at: indexPath, animated: true)
     let groceryItem = items[indexPath.row]
-    let toggledCompletion = !groceryItem.completed
     
-    toggleCellCheckbox(cell, isCompleted: toggledCompletion)
-    
-    groceryItem.ref?.updateChildValues([
-      "completed": toggledCompletion
-      ])
+    self.performSegue(withIdentifier: toGroceryItemVC, sender: groceryItem)
+   
   }
   
   fileprivate func toggleCellCheckbox(_ cell: UITableViewCell, isCompleted: Bool)

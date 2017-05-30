@@ -23,6 +23,7 @@
 		E115FB2A1EDC14AA003C1C50 /* GroceryListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB291EDC14AA003C1C50 /* GroceryListVC.swift */; };
 		E115FB2C1EDC17AA003C1C50 /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB2B1EDC17AA003C1C50 /* Grocery.swift */; };
 		E145A51B1ED87CE000A1179E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */; };
+		E16068981EDDC8BE00C522D8 /* GroceryItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */; };
 		E19ADEA11EDC468200F18BB7 /* FRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19ADEA01EDC468200F18BB7 /* FRModel.swift */; };
 		E1DD64D31ED8A4FA00D596A5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64D21ED8A4FA00D596A5 /* TextField.swift */; };
 		E1DD64D71ED8A6B600D596A5 /* ErrorBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64D61ED8A6B600D596A5 /* ErrorBorder.swift */; };
@@ -54,6 +55,7 @@
 		E115FB2B1EDC17AA003C1C50 /* Grocery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Grocery.swift; path = Models/Grocery.swift; sourceTree = "<group>"; };
 		E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E157370A1ED88BC600DDBB82 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
+		E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItemVC.swift; sourceTree = "<group>"; };
 		E19ADEA01EDC468200F18BB7 /* FRModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FRModel.swift; path = Protocols/FRModel.swift; sourceTree = "<group>"; };
 		E1DD64D21ED8A4FA00D596A5 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextField.swift; path = Controls/TextField.swift; sourceTree = "<group>"; };
 		E1DD64D61ED8A6B600D596A5 /* ErrorBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorBorder.swift; path = Protocols/ErrorBorder.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				BB2385631B3DD5AB0079CD01 /* LoginVC.swift */,
 				E115FB291EDC14AA003C1C50 /* GroceryListVC.swift */,
 				BB2385831B3DD8660079CD01 /* GroceryVC.swift */,
+				E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */,
 				E115FB251EDC11A3003C1C50 /* OnlineUsersTableViewController.swift */,
 			);
 			name = Controllers;
@@ -348,6 +351,7 @@
 				E115FB2A1EDC14AA003C1C50 /* GroceryListVC.swift in Sources */,
 				E115FB281EDC13A2003C1C50 /* GRListsCell.swift in Sources */,
 				E1DD64D31ED8A4FA00D596A5 /* TextField.swift in Sources */,
+				E16068981EDDC8BE00C522D8 /* GroceryItemVC.swift in Sources */,
 				E1DD64D71ED8A6B600D596A5 /* ErrorBorder.swift in Sources */,
 				E19ADEA11EDC468200F18BB7 /* FRModel.swift in Sources */,
 				E115FB201ED9C19A003C1C50 /* AlertVCExtension.swift in Sources */,

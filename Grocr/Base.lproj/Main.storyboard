@@ -336,7 +336,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="207" id="KAG-XA-G2g"/>
                                                         </constraints>
-                                                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
@@ -370,11 +370,21 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="NO"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N37-4K-o7h" customClass="PKDownloadButton">
+                                                <rect key="frame" x="162" y="47" width="50" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="0EV-lP-Ruk"/>
+                                                    <constraint firstAttribute="height" constant="50" id="890-FV-t5p"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="4bB-yn-zYZ" firstAttribute="top" secondItem="vS6-kP-HNL" secondAttribute="bottom" id="21A-w7-uya"/>
+                                            <constraint firstItem="N37-4K-o7h" firstAttribute="centerY" secondItem="vS6-kP-HNL" secondAttribute="centerY" id="Lzg-NP-FVC"/>
                                             <constraint firstItem="vS6-kP-HNL" firstAttribute="leading" secondItem="2M7-X6-7Eb" secondAttribute="leading" id="W62-ke-MSD"/>
+                                            <constraint firstItem="N37-4K-o7h" firstAttribute="centerX" secondItem="2M7-X6-7Eb" secondAttribute="centerX" id="aap-eL-4Za"/>
                                             <constraint firstAttribute="bottom" secondItem="4bB-yn-zYZ" secondAttribute="bottom" id="fos-v9-Fmd"/>
                                             <constraint firstAttribute="trailing" secondItem="vS6-kP-HNL" secondAttribute="trailing" id="gCO-9C-zS9"/>
                                             <constraint firstItem="4bB-yn-zYZ" firstAttribute="top" secondItem="vS6-kP-HNL" secondAttribute="bottom" priority="751" id="kT1-AV-vcG"/>
@@ -418,12 +428,14 @@
                             </mask>
                         </variation>
                     </view>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="amountLab" destination="pcx-Pe-ASG" id="Rnj-YM-Ojm"/>
                         <outlet property="descriptionHeighConstr" destination="KAG-XA-G2g" id="GAi-RU-9CE"/>
                         <outlet property="descriptionTextView" destination="twB-9c-gk1" id="EhR-7N-2eh"/>
                         <outlet property="detailView" destination="4bB-yn-zYZ" id="agp-d9-6cx"/>
                         <outlet property="imgHeightConstr" destination="Rww-5U-aut" id="F9w-Zo-Yyy"/>
+                        <outlet property="imgUploadBut" destination="N37-4K-o7h" id="6zk-gt-8NN"/>
                         <outlet property="imgView" destination="vS6-kP-HNL" id="134-Hb-gcz"/>
                         <outlet property="titleLab" destination="gpf-B4-yjD" id="GGD-Q0-b9C"/>
                         <outletCollection property="imgContsrExpanded" destination="mTK-0B-V7T" collectionClass="NSMutableArray" id="uWC-IC-kBR"/>

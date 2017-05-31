@@ -26,7 +26,7 @@ import ObjectMapper
 
 struct GroceryItem:FRModel {
   
-  weak var ref: DatabaseReference!
+  var ref: DatabaseReference!
   var key: String!
   
   var name  = ""
@@ -36,7 +36,14 @@ struct GroceryItem:FRModel {
   var groceryID:String!
   var amount:String?
   var completed = false
-  var imageAddr:String?
+  var imageID:String?
+  
+  var titleImageURL:URL? {
+    if let urlAddr = imageID{
+      return URL(string: urlAddr)
+    }
+    return nil
+  }
   
   init?(map: Map) {}
 
@@ -62,6 +69,6 @@ struct GroceryItem:FRModel {
     completed <- map["completed"]
     description <- map["description"]
     amount <- map["amount"]
-    imageAddr <- map["imageAddr"]
+    imageID <- map["imageID"]
   }
 }

@@ -40,5 +40,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>You may want to add a photo of your favourite banana to the app</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>In case you want to add a pic from your library we would need this permission =)</string>
 </dict>
 </plist>

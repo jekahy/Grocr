@@ -21,8 +21,8 @@
  */
 
 import UIKit
-import FirebaseAuth
 import SwiftValidator
+import RxSwift
 
 class LoginVC: UIViewController, Validatable, EasyAlert {
   
@@ -34,6 +34,9 @@ class LoginVC: UIViewController, Validatable, EasyAlert {
   fileprivate let willCheckTitle = "OK, I'll check it out"
   
   let validator = Validator()
+  
+  let viewModel = LoginVM()
+  private let disposeBag = DisposeBag()
   
   // MARK: Outlets
   @IBOutlet weak var textFieldLoginEmail: TextField!
@@ -58,8 +61,6 @@ class LoginVC: UIViewController, Validatable, EasyAlert {
       
     }
   }
-  
-  //MARK: Methods
 
   override func viewDidLoad()
   {
@@ -68,16 +69,36 @@ class LoginVC: UIViewController, Validatable, EasyAlert {
     setupValidator()
   }
   
-  fileprivate func addAuthListener()
+
+  // MARK: Actions
+  @IBAction func loginDidTouch(_ sender: AnyObject)
   {
-    Auth.auth().addStateDidChangeListener() { auth, user in
-      
-      if user != nil {
-        
-        self.performSegue(withIdentifier: self.loginToList, sender: nil)
-        
+    validateFields {[weak self] in
+      if let strSelf = self{
+        strSelf.viewModel.signIn(strSelf.textFieldLoginEmail.text!, password: strSelf.textFieldLoginPassword.text!)
       }
     }
+  }
+  
+  @IBAction func signUpDidTouch(_ sender: AnyObject)
+  {
+    validateFields {[weak self] in
+      if let alert = self?.signUpAlert(){
+        self?.present(alert, animated: true, completion: nil)
+      }
+    }
+  }
+  
+  //MARK: Methods
+  
+  
+  fileprivate func addAuthListener()
+  {
+    viewModel.signInObservable.subscribe { didSingIn in
+      
+      self.performSegue(withIdentifier: self.loginToList, sender: nil)
+      }
+      .disposed(by: disposeBag)
   }
   
   func setupValidator()
@@ -97,27 +118,6 @@ class LoginVC: UIViewController, Validatable, EasyAlert {
     validator.registerField(textFieldLoginPassword, rules: .password)
   }
   
-  // MARK: Actions
-  @IBAction func loginDidTouch(_ sender: AnyObject)
-  {
-    validateFields {[weak self] in
-      if let strSelf = self{
-        Auth.auth().signIn(withEmail: strSelf.textFieldLoginEmail.text!,
-                           password: strSelf.textFieldLoginPassword.text!)
-      }
-    }
-  }
-  
-  @IBAction func signUpDidTouch(_ sender: AnyObject)
-  {
-    validateFields {[weak self] in
-      if let alert = self?.signUpAlert(){
-        self?.present(alert, animated: true, completion: nil)
-      }
-    }
-  }
-  
-  //MARK: Methods
   
   fileprivate func validateFields(success:@escaping EmptyClosure)
   {
@@ -156,16 +156,11 @@ class LoginVC: UIViewController, Validatable, EasyAlert {
           strSelf.validator.unregisterField(confTF)
           
         }else{
-          
-          Auth.auth().createUser(withEmail: strSelf.textFieldLoginEmail.text!, password: confTF.text!) { user, error in
-            if error == nil {
-              
-              Auth.auth().signIn(withEmail: strSelf.textFieldLoginEmail.text!,
-                                 password: strSelf.textFieldLoginPassword.text!)
-            }else{
+          self?.viewModel.createUser(strSelf.textFieldLoginEmail.text!, password: confTF.text!, handler: { error in
+            if error != nil {
               strSelf.showAlert("OOpss", message: "Something went wrong :/ (\(error!.localizedDescription)).", alertActions: [.ok])
             }
-          }
+          })
         }
       })
     }

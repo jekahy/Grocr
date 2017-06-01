@@ -16,4 +16,5 @@ pod 'ObjectMapper', '~> 2.2'
 pod 'ImagePicker'
 pod 'DownloadButton'
 
+pod 'RxSwift'
 end

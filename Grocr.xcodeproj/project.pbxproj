@@ -31,6 +31,7 @@
 		E1DD64D91ED8A7EA00D596A5 /* Validatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64D81ED8A7EA00D596A5 /* Validatable.swift */; };
 		E1DD64DC1ED8AA5300D596A5 /* ValidatorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64DB1ED8AA5300D596A5 /* ValidatorExtension.swift */; };
 		E1DD64DE1ED8ACD100D596A5 /* EasyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64DD1ED8ACD100D596A5 /* EasyAlert.swift */; };
+		E1F113081EE0033C0055621C /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F113071EE0033C0055621C /* LoginVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		E1DD64D81ED8A7EA00D596A5 /* Validatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validatable.swift; path = Protocols/Validatable.swift; sourceTree = "<group>"; };
 		E1DD64DB1ED8AA5300D596A5 /* ValidatorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValidatorExtension.swift; path = Extensions/ValidatorExtension.swift; sourceTree = "<group>"; };
 		E1DD64DD1ED8ACD100D596A5 /* EasyAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EasyAlert.swift; path = Protocols/EasyAlert.swift; sourceTree = "<group>"; };
+		E1F113071EE0033C0055621C /* LoginVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginVM.swift; path = "View Models/LoginVM.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				E1DD64DA1ED8AA3500D596A5 /* Extensions */,
 				E1DD64D51ED8A69700D596A5 /* Protocols */,
 				E1DD64D41ED8A4FD00D596A5 /* Controls */,
+				E1F113061EE001AF0055621C /* VIewModels */,
 				BB2385881B3DD9550079CD01 /* Models */,
 				BB2385811B3DD8310079CD01 /* Controllers */,
 				BB2385821B3DD8490079CD01 /* Layouts */,
@@ -212,6 +215,14 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		E1F113061EE001AF0055621C /* VIewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E1F113071EE0033C0055621C /* LoginVM.swift */,
+			);
+			name = VIewModels;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -242,7 +253,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = "Razeware LLC";
+				ORGANIZATIONNAME = Eugene;
 				TargetAttributes = {
 					BB23855B1B3DD5AB0079CD01 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -349,6 +360,7 @@
 				E1DD64D91ED8A7EA00D596A5 /* Validatable.swift in Sources */,
 				BB2385841B3DD8660079CD01 /* GroceryVC.swift in Sources */,
 				BB23858A1B3DD9640079CD01 /* GroceryItem.swift in Sources */,
+				E1F113081EE0033C0055621C /* LoginVM.swift in Sources */,
 				E115FB1E1ED9BB85003C1C50 /* AlertActionExtension.swift in Sources */,
 				E1DD64DE1ED8ACD100D596A5 /* EasyAlert.swift in Sources */,
 				E115FB2A1EDC14AA003C1C50 /* GroceryListVC.swift in Sources */,
@@ -517,6 +529,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = rw.firebase.gettingstarted;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Grocr/Grocr-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;

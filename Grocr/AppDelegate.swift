@@ -27,6 +27,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
+  let storyboard = UIStoryboard(name: "Main", bundle: nil)
   
   override init() {
     super.init()

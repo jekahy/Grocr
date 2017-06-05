@@ -16,10 +16,12 @@
 		BB2385841B3DD8660079CD01 /* GroceryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385831B3DD8660079CD01 /* GroceryVC.swift */; };
 		BB23858A1B3DD9640079CD01 /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385891B3DD9640079CD01 /* GroceryItem.swift */; };
 		BB7DA5111B42C8100018B530 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7DA5101B42C8100018B530 /* User.swift */; };
+		E103D9F41EE1EB3100ECC881 /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E103D9F31EE1EB3100ECC881 /* DictionaryExtension.swift */; };
+		E103D9F61EE2C7FA00ECC881 /* BoolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E103D9F51EE2C7FA00ECC881 /* BoolExtension.swift */; };
 		E115FB1E1ED9BB85003C1C50 /* AlertActionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB1D1ED9BB85003C1C50 /* AlertActionExtension.swift */; };
 		E115FB201ED9C19A003C1C50 /* AlertVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB1F1ED9C19A003C1C50 /* AlertVCExtension.swift */; };
 		E115FB261EDC11A3003C1C50 /* OnlineUsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB251EDC11A3003C1C50 /* OnlineUsersTableViewController.swift */; };
-		E115FB281EDC13A2003C1C50 /* GRListsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB271EDC13A2003C1C50 /* GRListsCell.swift */; };
+		E115FB281EDC13A2003C1C50 /* GroceryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB271EDC13A2003C1C50 /* GroceryCell.swift */; };
 		E115FB2A1EDC14AA003C1C50 /* GroceryListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB291EDC14AA003C1C50 /* GroceryListVC.swift */; };
 		E115FB2C1EDC17AA003C1C50 /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB2B1EDC17AA003C1C50 /* Grocery.swift */; };
 		E145A51B1ED87CE000A1179E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */; };
@@ -32,6 +34,12 @@
 		E1DD64DC1ED8AA5300D596A5 /* ValidatorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64DB1ED8AA5300D596A5 /* ValidatorExtension.swift */; };
 		E1DD64DE1ED8ACD100D596A5 /* EasyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64DD1ED8ACD100D596A5 /* EasyAlert.swift */; };
 		E1F113081EE0033C0055621C /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F113071EE0033C0055621C /* LoginVM.swift */; };
+		E1F1130A1EE02B4F0055621C /* GroceryListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F113091EE02B4F0055621C /* GroceryListVM.swift */; };
+		E1F1130C1EE02F890055621C /* GroceryListItemVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1130B1EE02F890055621C /* GroceryListItemVM.swift */; };
+		E1F1130E1EE03F390055621C /* GroceryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1130D1EE03F390055621C /* GroceryVM.swift */; };
+		E1F113101EE063FA0055621C /* GroceryItemVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1130F1EE063FA0055621C /* GroceryItemVM.swift */; };
+		E1F113121EE06A790055621C /* GroceryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F113111EE06A790055621C /* GroceryItemCell.swift */; };
+		E1F113141EE071290055621C /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F113131EE071290055621C /* CheckButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,10 +57,12 @@
 		BB2385851B3DD8820079CD01 /* Grocr-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Grocr-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB2385891B3DD9640079CD01 /* GroceryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItem.swift; sourceTree = "<group>"; };
 		BB7DA5101B42C8100018B530 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E103D9F31EE1EB3100ECC881 /* DictionaryExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DictionaryExtension.swift; path = Extensions/DictionaryExtension.swift; sourceTree = "<group>"; };
+		E103D9F51EE2C7FA00ECC881 /* BoolExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoolExtension.swift; path = Extensions/BoolExtension.swift; sourceTree = "<group>"; };
 		E115FB1D1ED9BB85003C1C50 /* AlertActionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertActionExtension.swift; path = Extensions/AlertActionExtension.swift; sourceTree = "<group>"; };
 		E115FB1F1ED9C19A003C1C50 /* AlertVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertVCExtension.swift; path = Extensions/AlertVCExtension.swift; sourceTree = "<group>"; };
 		E115FB251EDC11A3003C1C50 /* OnlineUsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineUsersTableViewController.swift; sourceTree = "<group>"; };
-		E115FB271EDC13A2003C1C50 /* GRListsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRListsCell.swift; path = Controls/GRListsCell.swift; sourceTree = "<group>"; };
+		E115FB271EDC13A2003C1C50 /* GroceryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryCell.swift; path = Controls/GroceryCell.swift; sourceTree = "<group>"; };
 		E115FB291EDC14AA003C1C50 /* GroceryListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListVC.swift; sourceTree = "<group>"; };
 		E115FB2B1EDC17AA003C1C50 /* Grocery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Grocery.swift; path = Models/Grocery.swift; sourceTree = "<group>"; };
 		E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -66,6 +76,12 @@
 		E1DD64DB1ED8AA5300D596A5 /* ValidatorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValidatorExtension.swift; path = Extensions/ValidatorExtension.swift; sourceTree = "<group>"; };
 		E1DD64DD1ED8ACD100D596A5 /* EasyAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EasyAlert.swift; path = Protocols/EasyAlert.swift; sourceTree = "<group>"; };
 		E1F113071EE0033C0055621C /* LoginVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginVM.swift; path = "View Models/LoginVM.swift"; sourceTree = "<group>"; };
+		E1F113091EE02B4F0055621C /* GroceryListVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryListVM.swift; path = "View Models/GroceryListVM.swift"; sourceTree = "<group>"; };
+		E1F1130B1EE02F890055621C /* GroceryListItemVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryListItemVM.swift; path = "View Models/GroceryListItemVM.swift"; sourceTree = "<group>"; };
+		E1F1130D1EE03F390055621C /* GroceryVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryVM.swift; path = "View Models/GroceryVM.swift"; sourceTree = "<group>"; };
+		E1F1130F1EE063FA0055621C /* GroceryItemVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryItemVM.swift; path = "View Models/GroceryItemVM.swift"; sourceTree = "<group>"; };
+		E1F113111EE06A790055621C /* GroceryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryItemCell.swift; path = Controls/GroceryItemCell.swift; sourceTree = "<group>"; };
+		E1F113131EE071290055621C /* CheckButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckButton.swift; path = Controls/CheckButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,11 +200,21 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
+		E189FC071EE5666D00278F50 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E115FB271EDC13A2003C1C50 /* GroceryCell.swift */,
+				E1F113111EE06A790055621C /* GroceryItemCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		E1DD64D41ED8A4FD00D596A5 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
 				E1DD64D21ED8A4FA00D596A5 /* TextField.swift */,
-				E115FB271EDC13A2003C1C50 /* GRListsCell.swift */,
+				E1F113131EE071290055621C /* CheckButton.swift */,
+				E189FC071EE5666D00278F50 /* Cells */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -211,6 +237,8 @@
 				E115FB1D1ED9BB85003C1C50 /* AlertActionExtension.swift */,
 				E115FB1F1ED9C19A003C1C50 /* AlertVCExtension.swift */,
 				E1AB38C01EDED5CC00E88E67 /* UIImageExtension.swift */,
+				E103D9F31EE1EB3100ECC881 /* DictionaryExtension.swift */,
+				E103D9F51EE2C7FA00ECC881 /* BoolExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -219,6 +247,10 @@
 			isa = PBXGroup;
 			children = (
 				E1F113071EE0033C0055621C /* LoginVM.swift */,
+				E1F113091EE02B4F0055621C /* GroceryListVM.swift */,
+				E1F1130B1EE02F890055621C /* GroceryListItemVM.swift */,
+				E1F1130D1EE03F390055621C /* GroceryVM.swift */,
+				E1F1130F1EE063FA0055621C /* GroceryItemVM.swift */,
 			);
 			name = VIewModels;
 			sourceTree = "<group>";
@@ -360,18 +392,26 @@
 				E1DD64D91ED8A7EA00D596A5 /* Validatable.swift in Sources */,
 				BB2385841B3DD8660079CD01 /* GroceryVC.swift in Sources */,
 				BB23858A1B3DD9640079CD01 /* GroceryItem.swift in Sources */,
+				E1F1130E1EE03F390055621C /* GroceryVM.swift in Sources */,
 				E1F113081EE0033C0055621C /* LoginVM.swift in Sources */,
+				E1F1130C1EE02F890055621C /* GroceryListItemVM.swift in Sources */,
 				E115FB1E1ED9BB85003C1C50 /* AlertActionExtension.swift in Sources */,
 				E1DD64DE1ED8ACD100D596A5 /* EasyAlert.swift in Sources */,
 				E115FB2A1EDC14AA003C1C50 /* GroceryListVC.swift in Sources */,
-				E115FB281EDC13A2003C1C50 /* GRListsCell.swift in Sources */,
+				E1F113121EE06A790055621C /* GroceryItemCell.swift in Sources */,
+				E115FB281EDC13A2003C1C50 /* GroceryCell.swift in Sources */,
+				E1F113101EE063FA0055621C /* GroceryItemVM.swift in Sources */,
 				E1DD64D31ED8A4FA00D596A5 /* TextField.swift in Sources */,
 				E16068981EDDC8BE00C522D8 /* GroceryItemVC.swift in Sources */,
 				E1DD64D71ED8A6B600D596A5 /* ErrorBorder.swift in Sources */,
 				E19ADEA11EDC468200F18BB7 /* FRModel.swift in Sources */,
 				E115FB201ED9C19A003C1C50 /* AlertVCExtension.swift in Sources */,
+				E103D9F41EE1EB3100ECC881 /* DictionaryExtension.swift in Sources */,
+				E1F1130A1EE02B4F0055621C /* GroceryListVM.swift in Sources */,
 				E1AB38C11EDED5CC00E88E67 /* UIImageExtension.swift in Sources */,
+				E1F113141EE071290055621C /* CheckButton.swift in Sources */,
 				E1DD64DC1ED8AA5300D596A5 /* ValidatorExtension.swift in Sources */,
+				E103D9F61EE2C7FA00ECC881 /* BoolExtension.swift in Sources */,
 				E115FB2C1EDC17AA003C1C50 /* Grocery.swift in Sources */,
 				E115FB261EDC11A3003C1C50 /* OnlineUsersTableViewController.swift in Sources */,
 				BB7DA5111B42C8100018B530 /* User.swift in Sources */,

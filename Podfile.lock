@@ -46,6 +46,8 @@ PODS:
   - GTMSessionFetcher/Core (1.1.10)
   - ImagePicker (2.1.1)
   - ObjectMapper (2.2.6)
+  - RxCocoa (3.4.1):
+    - RxSwift (~> 3.4)
   - RxSwift (3.4.1)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
@@ -61,6 +63,7 @@ DEPENDENCIES:
   - FirebaseUI/Storage
   - ImagePicker
   - ObjectMapper (~> 2.2)
+  - RxCocoa
   - RxSwift
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
 
@@ -88,10 +91,11 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
   ImagePicker: fe4c699abb56ff03994fa98d8b02e3883ee118be
   ObjectMapper: 042708195cc46c20871cbcbec0453826398273fd
+  RxCocoa: a8a5f1d061d0043e28f56976829f31ce63e8eb09
   RxSwift: 656f8fbeca5bc372121a72d9ebdd3cd3bc0ffade
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
 
-PODFILE CHECKSUM: a7070dbb152756dc91c554382bc1ba29ffbffb1d
+PODFILE CHECKSUM: 6129c05c84cf539a7e5a19ab632bd4879f7a0862
 
 COCOAPODS: 1.2.1

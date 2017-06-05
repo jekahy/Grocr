@@ -17,4 +17,5 @@ pod 'ImagePicker'
 pod 'DownloadButton'
 
 pod 'RxSwift'
+pod 'RxCocoa'
 end

@@ -15,11 +15,14 @@ protocol GroceryListItemVMType {
   var title: Driver<String>{get}
   var count: Driver<String>{get}
   var groceryID:String {get}
+  func removeFromDB()
 
 }
 
 final class GroceryListItemVM: GroceryListItemVMType {
   
+  fileprivate let refItems = Database.database().reference(withPath: "grocery-items")
+
   fileprivate (set) lazy var title: Driver<String> = self.titleVar.asDriver()
   fileprivate (set) lazy var count: Driver<String> = self.countVar.asDriver()
   
@@ -45,5 +48,14 @@ final class GroceryListItemVM: GroceryListItemVMType {
       }
       
     })
+  }
+  
+  func removeFromDB()
+  {
+    grocery.ref.removeValue()
+    
+    var itemsToRemove = [String:AnyObject]()
+    grocery.items.keys.forEach{itemsToRemove[$0]=nil}
+    refItems.updateChildValues(itemsToRemove)
   }
 }

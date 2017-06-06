@@ -13,7 +13,7 @@ import RxCocoa
 class GroceryListVC:UIViewController {
 
   fileprivate let cellIdentifier = "listCell"
-  fileprivate let toGRVCSegueID = "toGRListVC"
+  fileprivate static let toGRVCSegueID = "toGRListVC"
   fileprivate let viewModel:GroceryListType = GroceryListVM()
   fileprivate let disposeBag = DisposeBag()
   
@@ -24,6 +24,7 @@ class GroceryListVC:UIViewController {
   {
     super.viewDidLoad()
     
+    
     viewModel.groceryVMs.bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: GroceryCell.self)) { (index, groceryModel: GroceryListItemVMType, cell) in
       cell.groceryVM = groceryModel
       }.addDisposableTo(disposeBag)
@@ -33,11 +34,11 @@ class GroceryListVC:UIViewController {
       if let selectedRowIndexPath = self?.tableView.indexPathForSelectedRow {
         self?.tableView.deselectRow(at: selectedRowIndexPath, animated: true)
       }
-      if let segId = self?.toGRVCSegueID {
-        self?.performSegue(withIdentifier:segId , sender: itemVM)
-      }
+      self?.performSegue(withIdentifier:GroceryListVC.toGRVCSegueID , sender: itemVM)
+      
     }).disposed(by: disposeBag)
     
+    tableView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
   //MARK: IBActions
@@ -56,9 +57,9 @@ class GroceryListVC:UIViewController {
     }
     
     alert.addTextField()
-    
     alert.addAction(saveAction)
     alert.addAction(.cancel)
+    
     
     present(alert, animated: true, completion: nil)
   }
@@ -70,5 +71,18 @@ class GroceryListVC:UIViewController {
       listVC.groceryID = item.groceryID
     }
   }
+
 }
 
+extension GroceryListVC:UITableViewDelegate {
+  
+  func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    
+    let deleteAction = UITableViewRowAction(style: .destructive, title: "Remove") {
+      [weak self] _, indexPath in
+      
+      self?.viewModel.removeGrocery(atIndex: indexPath.row)
+    }
+    return [deleteAction]
+  }
+}

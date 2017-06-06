@@ -45,10 +45,13 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.10)
   - ImagePicker (2.1.1)
-  - ObjectMapper (2.2.6)
-  - RxCocoa (3.4.1):
+  - ObjectMapper (2.2.7)
+  - RxCocoa (3.5.0):
     - RxSwift (~> 3.4)
-  - RxSwift (3.4.1)
+  - RxDataSources (1.0.3):
+    - RxCocoa (~> 3.0)
+    - RxSwift (~> 3.0)
+  - RxSwift (3.5.0)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
@@ -64,6 +67,7 @@ DEPENDENCIES:
   - ImagePicker
   - ObjectMapper (~> 2.2)
   - RxCocoa
+  - RxDataSources
   - RxSwift
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
 
@@ -90,12 +94,13 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
   ImagePicker: fe4c699abb56ff03994fa98d8b02e3883ee118be
-  ObjectMapper: 042708195cc46c20871cbcbec0453826398273fd
-  RxCocoa: a8a5f1d061d0043e28f56976829f31ce63e8eb09
-  RxSwift: 656f8fbeca5bc372121a72d9ebdd3cd3bc0ffade
+  ObjectMapper: 65abcfd9a61cf7396cbd14a4fb22fddfcc46577e
+  RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
+  RxDataSources: a021a0e944ba5f7991259829d973afdbfa719c0b
+  RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
 
-PODFILE CHECKSUM: 6129c05c84cf539a7e5a19ab632bd4879f7a0862
+PODFILE CHECKSUM: 0ff0bc8283669b55cf8af05acdb700c6cb2a8d66
 
 COCOAPODS: 1.2.1

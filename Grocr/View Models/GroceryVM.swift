@@ -37,8 +37,7 @@ final class GroceryVM: GroceryVMType {
     
     refItems.observe(.value, with:{ snapshot in
 
-        self.itemsVar.value = snapshot.children.allObjects
-          .map{ $0 as! DataSnapshot}
+        self.itemsVar.value = snapshot.children.allObjects.map{ $0 as! DataSnapshot}
           .flatMap{GroceryItemVM($0.key)}
 
     })

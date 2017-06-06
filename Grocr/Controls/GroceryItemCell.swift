@@ -11,14 +11,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class GroceryItemCell: UITableViewCell {
+class GroceryItemCell: GenericCell<GroceryItemVMType> {
   
   fileprivate var disposeBag = DisposeBag()
-  var viewModel:GroceryItemVMType!{
+  override var viewModel:GroceryItemVMType! {
     didSet {
       guard let vm = viewModel else {
         return
-      
       }
       vm.title.drive(nameLab.rx.text).disposed(by: disposeBag)
       vm.completed.drive(checkBut.driveChecked).disposed(by: disposeBag)

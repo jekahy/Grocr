@@ -44,7 +44,7 @@ final class GroceryListItemVM: GroceryListItemVMType {
       if let groc = Grocery(snapshot: snapshot){
         self?.titleVar.value = groc.name
         let completedItems = groc.items.filter{$0.value}.count
-        self?.countVar.value = "\(completedItems)"
+        self?.countVar.value = "\(completedItems)/\(groc.items.count)"
       }
       
     })

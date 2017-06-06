@@ -24,6 +24,7 @@
 		E115FB281EDC13A2003C1C50 /* GroceryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB271EDC13A2003C1C50 /* GroceryCell.swift */; };
 		E115FB2A1EDC14AA003C1C50 /* GroceryListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB291EDC14AA003C1C50 /* GroceryListVC.swift */; };
 		E115FB2C1EDC17AA003C1C50 /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB2B1EDC17AA003C1C50 /* Grocery.swift */; };
+		E139E1C21EE6C62300E5CF3C /* GenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E139E1C11EE6C62300E5CF3C /* GenericCell.swift */; };
 		E145A51B1ED87CE000A1179E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */; };
 		E16068981EDDC8BE00C522D8 /* GroceryItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */; };
 		E19ADEA11EDC468200F18BB7 /* FRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19ADEA01EDC468200F18BB7 /* FRModel.swift */; };
@@ -65,6 +66,7 @@
 		E115FB271EDC13A2003C1C50 /* GroceryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryCell.swift; path = Controls/GroceryCell.swift; sourceTree = "<group>"; };
 		E115FB291EDC14AA003C1C50 /* GroceryListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListVC.swift; sourceTree = "<group>"; };
 		E115FB2B1EDC17AA003C1C50 /* Grocery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Grocery.swift; path = Models/Grocery.swift; sourceTree = "<group>"; };
+		E139E1C11EE6C62300E5CF3C /* GenericCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenericCell.swift; path = Controls/GenericCell.swift; sourceTree = "<group>"; };
 		E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E157370A1ED88BC600DDBB82 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
 		E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItemVC.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 			children = (
 				E115FB271EDC13A2003C1C50 /* GroceryCell.swift */,
 				E1F113111EE06A790055621C /* GroceryItemCell.swift */,
+				E139E1C11EE6C62300E5CF3C /* GenericCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				E115FB261EDC11A3003C1C50 /* OnlineUsersTableViewController.swift in Sources */,
 				BB7DA5111B42C8100018B530 /* User.swift in Sources */,
 				BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */,
+				E139E1C21EE6C62300E5CF3C /* GenericCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

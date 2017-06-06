@@ -59,3 +59,11 @@ final class GroceryVM: GroceryVMType {
   }
   
 }
+
+
+//extension GroceryVM:VariableProvidable {
+//  
+//  var variable: Variable<GroceryVM> {
+//    return Variable(self)
+//  }
+//}

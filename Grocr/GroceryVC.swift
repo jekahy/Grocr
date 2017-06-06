@@ -54,18 +54,13 @@ class GroceryVC: UIViewController {
     tableView.allowsMultipleSelectionDuringEditing = false
     
     viewModel.itemVMs.bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: GroceryItemCell.self)){
-      (index, groceryItemModel: GroceryItemVMType, cell) in
+      (index, groceryItemModel, cell) in
+      
       cell.viewModel = groceryItemModel
+
+      
     }.disposed(by: disposeBag)
     
-
-    
-//    ref.observe(.value, with: {[weak self] snapshot in
-//      
-//      self?.items = snapshot.children.flatMap{GroceryItem(snapshot: $0 as! DataSnapshot)}
-//      self?.tableView.reloadData()
-//      
-//    })
   }
   
   // MARK: Add Item
@@ -80,17 +75,6 @@ class GroceryVC: UIViewController {
                                    style: .default) { [unowned self] _ in
         guard let textField = alert.textFields?.first,
           let text = textField.text else { return }
-        
-//        let groceryItemRef = self.ref.childByAutoId()
-//
-//        let groceryItem = GroceryItem(name: text,
-//                                      addedByUser: Auth.auth().currentUser?.email,
-//                                      groceryID:self.grocery.key,
-//                                      ref: groceryItemRef)
-//        
-//        groceryItemRef.setValue(groceryItem.jsonStr)
-//        let itemsRef = self.grocery.ref.child("items")
-//        itemsRef.updateChildValues([groceryItem.key : true])
           self.viewModel.addItem(text)
     }
     
@@ -109,59 +93,5 @@ class GroceryVC: UIViewController {
     }
   }
   
-}
-
-
-extension GroceryVC {
-  
-//  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//    return items.count
-//  }
-//  
-//  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//    let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath)
-//    let groceryItem = items[indexPath.row]
-//    
-//    cell.textLabel?.text = groceryItem.name
-//    cell.detailTextLabel?.text = groceryItem.addedByUser
-//    
-//    toggleCellCheckbox(cell, isCompleted: groceryItem.completed)
-//    
-//    return cell
-//  }
-//  
-//  override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//    return true
-//  }
-//  
-//  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//    
-//    if editingStyle == .delete {
-//      let groceryItem = items[indexPath.row]
-//      groceryItem.ref?.removeValue()
-//    }
-//  }
-//  
-//  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//    tableView.deselectRow(at: indexPath, animated: true)
-//    let groceryItem = items[indexPath.row]
-//    
-//    self.performSegue(withIdentifier: toGroceryItemVC, sender: groceryItem)
-//   
-//  }
-//  
-//  fileprivate func toggleCellCheckbox(_ cell: UITableViewCell, isCompleted: Bool)
-//  {
-//    if !isCompleted {
-//      cell.accessoryType = .none
-//      cell.textLabel?.textColor = UIColor.black
-//      cell.detailTextLabel?.textColor = UIColor.black
-//    } else {
-//      cell.accessoryType = .checkmark
-//      cell.textLabel?.textColor = UIColor.gray
-//      cell.detailTextLabel?.textColor = UIColor.gray
-//    }
-//  }
 }
 

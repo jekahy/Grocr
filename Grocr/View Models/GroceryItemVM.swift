@@ -15,12 +15,15 @@ protocol GroceryItemVMType:AnyObject {
   var title:Driver<String>{get}
   var completed:Driver<Bool>{get}
   var updateCompleted:PublishSubject<Bool>{get}
+  var itemID:String{get}
+  func removeFromDB()
 }
 
-final class GroceryItemVM: GroceryItemVMType, Equatable {
+final class GroceryItemVM: GroceryItemVMType {
   
   
   fileprivate let groceriesRef = Database.database().reference(withPath: "grocery-lists")
+  fileprivate let itemRef:DatabaseReference
   fileprivate let titleSubj = PublishSubject<String>()
   fileprivate let completedSubj = PublishSubject<Bool>()
   fileprivate (set) lazy var title:Driver<String> = self.titleSubj.asDriver(onErrorJustReturn: "")
@@ -29,14 +32,16 @@ final class GroceryItemVM: GroceryItemVMType, Equatable {
 
   fileprivate var groceryItem:GroceryItem?
   fileprivate var disposeBag:DisposeBag! = DisposeBag()
-  fileprivate let groceryItemID:String
+  
+  let itemID: String
+  
   
   init(_ groceryItemID:String) {
 
-    self.groceryItemID = groceryItemID
-    let ref = Database.database().reference(withPath: "grocery-items/\(groceryItemID)")
+    itemID = groceryItemID
+    self.itemRef = Database.database().reference(withPath: "grocery-items/\(groceryItemID)")
     
-    ref.observe(.value, with: {[weak self] snapshot in
+    itemRef.observe(.value, with: {[weak self] snapshot in
       
       if let item = GroceryItem(snapshot: snapshot){
         self?.groceryItem = item
@@ -46,25 +51,26 @@ final class GroceryItemVM: GroceryItemVMType, Equatable {
     })
     
     updateCompleted.asObservable()
-      .subscribe(onNext: {[weak self]  newVal in
+      .subscribe(onNext: {[weak self, weak itemRef]  newVal in
         if let item = self?.groceryItem{
-          ref.child("completed").setValue(newVal)
+          itemRef?.child("completed").setValue(newVal)
           self?.groceriesRef.child("\(item.groceryID!)/items").updateChildValues([item.key:newVal])
         }
         
       }).disposed(by: disposeBag)
   }
   
+  
+  func removeFromDB()
+  {
+    itemRef.removeValue()
+  }
+  
+  
   deinit {
     
     updateCompleted.onCompleted()
     disposeBag = nil
-  }
-  
-  
-  public static func ==(lhs: GroceryItemVM, rhs: GroceryItemVM) -> Bool
-  {
-    return lhs.groceryItemID == rhs.groceryItemID
   }
 }
 

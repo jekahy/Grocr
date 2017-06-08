@@ -11,7 +11,7 @@ import FirebaseDatabase
 
 protocol GroceryListType {
   
-  var groceryVMs:Observable<[GroceryListItemVM]>{get}
+  var groceryVMs:Observable<[GroceryVM]>{get}
   func addGrocery(_ name:String)
   func removeGrocery(atIndex index:Int)
 }
@@ -21,8 +21,8 @@ final class GroceryListVM : GroceryListType {
   
   fileprivate let ref = Database.database().reference(withPath: "grocery-lists")
 
-  fileprivate let groceriesVar = Variable<[GroceryListItemVM]>([])
-  lazy var groceryVMs: Observable<[GroceryListItemVM]> = self.groceriesVar.asObservable()
+  fileprivate let groceriesVar = Variable<[GroceryVM]>([])
+  lazy var groceryVMs: Observable<[GroceryVM]> = self.groceriesVar.asObservable()
   
   init()
   {
@@ -30,8 +30,8 @@ final class GroceryListVM : GroceryListType {
     ref.observe(.childAdded, with: { [unowned self] snapshot in
       
       if let grocery = Grocery(snapshot:snapshot){
-        let groceryListItem = GroceryListItemVM(grocery: grocery)
-        self.groceriesVar.value.append(groceryListItem)
+        let groceryVM = GroceryVM(grocery.key)
+        self.groceriesVar.value.append(groceryVM)
       }
       
     })
@@ -39,9 +39,8 @@ final class GroceryListVM : GroceryListType {
     ref.observe(.childRemoved, with: { [unowned self] snapshot in
       
       if let grocery = Grocery(snapshot:snapshot){
-        let groceryListItem = GroceryListItemVM(grocery: grocery)
         
-        if let idxToDelete = self.groceriesVar.value.index(where: {$0 == groceryListItem}){
+        if let idxToDelete = self.groceriesVar.value.index(where: {$0.groceryID == grocery.key}){
           self.groceriesVar.value.remove(at: idxToDelete)
         }
       }

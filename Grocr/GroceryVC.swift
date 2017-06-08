@@ -27,7 +27,7 @@ import FirebaseAuth
 import RxSwift
 import RxCocoa
 
-class GroceryVC: UIViewController {
+class GroceryVC: UIViewController,UITableViewDelegate {
   
   // MARK: Constants
   fileprivate let ref = Database.database().reference(withPath: "grocery-items")
@@ -39,8 +39,7 @@ class GroceryVC: UIViewController {
       self.viewModel = GroceryVM(self.groceryID)
     }
   }
-  
-  fileprivate var viewModel:GroceryVMType!
+  fileprivate (set) var viewModel:GroceryVMType!
   fileprivate var disposeBag:DisposeBag! = DisposeBag()
 
   @IBOutlet weak var tableView: UITableView!
@@ -60,6 +59,8 @@ class GroceryVC: UIViewController {
 
       
     }.disposed(by: disposeBag)
+    
+    tableView.rx.setDelegate(self).disposed(by: disposeBag)
     
   }
   
@@ -92,6 +93,19 @@ class GroceryVC: UIViewController {
       itemVC.item = item
     }
   }
+  
+//  MARK: TableView delegate method
+  
+  func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    
+    let deleteAction = UITableViewRowAction(style: .destructive, title: "Remove") {
+      [weak self] _, indexPath in
+      
+      self?.viewModel.removeItem(atIndex: indexPath.row)
+    }
+    return [deleteAction]
+  }
+
  
   deinit {
     disposeBag = nil

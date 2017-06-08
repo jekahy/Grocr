@@ -25,11 +25,11 @@ class GroceryListVC:UIViewController {
     super.viewDidLoad()
     
     
-    viewModel.groceryVMs.bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: GroceryCell.self)) { (index, groceryModel: GroceryListItemVMType, cell) in
+    viewModel.groceryVMs.bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: GroceryCell.self)) { (index, groceryModel: GroceryVMType, cell) in
       cell.viewModel = groceryModel
       }.addDisposableTo(disposeBag)
     
-    tableView.rx.modelSelected(GroceryListItemVMType.self).asDriver().drive(onNext: { [weak self] itemVM in
+    tableView.rx.modelSelected(GroceryVMType.self).asDriver().drive(onNext: { [weak self] itemVM in
       
       if let selectedRowIndexPath = self?.tableView.indexPathForSelectedRow {
         self?.tableView.deselectRow(at: selectedRowIndexPath, animated: true)
@@ -67,7 +67,7 @@ class GroceryListVC:UIViewController {
 //  MARK: Prepare for segue
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
-    if let listVC = segue.destination as? GroceryVC, let item = sender as? GroceryListItemVM {
+    if let listVC = segue.destination as? GroceryVC, let item = sender as? GroceryVM {
       listVC.groceryID = item.groceryID
     }
   }

@@ -13,7 +13,7 @@ import RxCocoa
 
 class GroceryCell: UITableViewCell, ViewModelAvailable {
   
-  typealias VM = GroceryListItemVMType
+  typealias VM = GroceryVMType
   fileprivate var disposeBag = DisposeBag()
   
   @IBOutlet weak var titleLab: UILabel!

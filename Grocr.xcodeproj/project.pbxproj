@@ -37,7 +37,6 @@
 		E1DD64DE1ED8ACD100D596A5 /* EasyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64DD1ED8ACD100D596A5 /* EasyAlert.swift */; };
 		E1F113081EE0033C0055621C /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F113071EE0033C0055621C /* LoginVM.swift */; };
 		E1F1130A1EE02B4F0055621C /* GroceryListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F113091EE02B4F0055621C /* GroceryListVM.swift */; };
-		E1F1130C1EE02F890055621C /* GroceryListItemVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1130B1EE02F890055621C /* GroceryListItemVM.swift */; };
 		E1F1130E1EE03F390055621C /* GroceryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1130D1EE03F390055621C /* GroceryVM.swift */; };
 		E1F113101EE063FA0055621C /* GroceryItemVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1130F1EE063FA0055621C /* GroceryItemVM.swift */; };
 		E1F113121EE06A790055621C /* GroceryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F113111EE06A790055621C /* GroceryItemCell.swift */; };
@@ -81,7 +80,6 @@
 		E1DD64DD1ED8ACD100D596A5 /* EasyAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EasyAlert.swift; path = Protocols/EasyAlert.swift; sourceTree = "<group>"; };
 		E1F113071EE0033C0055621C /* LoginVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginVM.swift; path = "View Models/LoginVM.swift"; sourceTree = "<group>"; };
 		E1F113091EE02B4F0055621C /* GroceryListVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryListVM.swift; path = "View Models/GroceryListVM.swift"; sourceTree = "<group>"; };
-		E1F1130B1EE02F890055621C /* GroceryListItemVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryListItemVM.swift; path = "View Models/GroceryListItemVM.swift"; sourceTree = "<group>"; };
 		E1F1130D1EE03F390055621C /* GroceryVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryVM.swift; path = "View Models/GroceryVM.swift"; sourceTree = "<group>"; };
 		E1F1130F1EE063FA0055621C /* GroceryItemVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryItemVM.swift; path = "View Models/GroceryItemVM.swift"; sourceTree = "<group>"; };
 		E1F113111EE06A790055621C /* GroceryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryItemCell.swift; path = Controls/GroceryItemCell.swift; sourceTree = "<group>"; };
@@ -254,7 +252,6 @@
 			children = (
 				E1F113071EE0033C0055621C /* LoginVM.swift */,
 				E1F113091EE02B4F0055621C /* GroceryListVM.swift */,
-				E1F1130B1EE02F890055621C /* GroceryListItemVM.swift */,
 				E1F1130D1EE03F390055621C /* GroceryVM.swift */,
 				E1F1130F1EE063FA0055621C /* GroceryItemVM.swift */,
 			);
@@ -401,7 +398,6 @@
 				E1744D0D1EE7DAE100A17A27 /* ViewModelAvailable.swift in Sources */,
 				E1F1130E1EE03F390055621C /* GroceryVM.swift in Sources */,
 				E1F113081EE0033C0055621C /* LoginVM.swift in Sources */,
-				E1F1130C1EE02F890055621C /* GroceryListItemVM.swift in Sources */,
 				E115FB1E1ED9BB85003C1C50 /* AlertActionExtension.swift in Sources */,
 				E1DD64DE1ED8ACD100D596A5 /* EasyAlert.swift in Sources */,
 				E115FB2A1EDC14AA003C1C50 /* GroceryListVC.swift in Sources */,

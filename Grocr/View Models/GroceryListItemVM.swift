@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import FirebaseDatabase
 
-protocol GroceryListItemVMType {
+protocol GroceryListItemVMType:class {
   
   var title: Driver<String>{get}
   var count: Driver<String>{get}
@@ -19,7 +19,7 @@ protocol GroceryListItemVMType {
 
 }
 
-final class GroceryListItemVM: GroceryListItemVMType {
+final class GroceryListItemVM: GroceryListItemVMType, Equatable {
   
   fileprivate let refItems = Database.database().reference(withPath: "grocery-items")
 
@@ -29,7 +29,7 @@ final class GroceryListItemVM: GroceryListItemVMType {
   fileprivate let titleVar = Variable<String>("")
   fileprivate let countVar = Variable<String>("")
   
-  fileprivate let disposeBag = DisposeBag()
+  fileprivate var disposeBag:DisposeBag! = DisposeBag()
   fileprivate var grocery:Grocery
   
   var groceryID: String {
@@ -57,5 +57,15 @@ final class GroceryListItemVM: GroceryListItemVMType {
     var itemsToRemove = [String:AnyObject]()
     grocery.items.keys.forEach{itemsToRemove[$0]=nil}
     refItems.updateChildValues(itemsToRemove)
+  }
+  
+  deinit {
+    disposeBag = nil
+  }
+  
+  
+  public static func ==(lhs: GroceryListItemVM, rhs: GroceryListItemVM) -> Bool
+  {
+    return lhs.groceryID == rhs.groceryID
   }
 }

@@ -11,14 +11,19 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class GroceryItemCell: GenericCell<GroceryItemVMType> {
+class GroceryItemCell: UITableViewCell, ViewModelAvailable{
   
-  fileprivate var disposeBag = DisposeBag()
-  override var viewModel:GroceryItemVMType! {
+  typealias VM = GroceryItemVMType
+  
+  fileprivate var disposeBag:DisposeBag! = DisposeBag()
+  
+  weak var viewModel:VM? {
     didSet {
       guard let vm = viewModel else {
         return
       }
+      disposeBag = DisposeBag()
+
       vm.title.drive(nameLab.rx.text).disposed(by: disposeBag)
       vm.completed.drive(checkBut.driveChecked).disposed(by: disposeBag)
       checkBut.updateCompleted.bind(to: vm.updateCompleted).disposed(by: disposeBag)
@@ -30,6 +35,15 @@ class GroceryItemCell: GenericCell<GroceryItemVMType> {
 
   override func prepareForReuse()
   {
+    super.prepareForReuse()
+
     disposeBag = DisposeBag()
+    viewModel = nil
+    
+  }
+  
+  deinit {
+    disposeBag = nil
+    viewModel = nil
   }
 }

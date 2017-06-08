@@ -11,37 +11,37 @@ import RxCocoa
 import FirebaseDatabase
 
 
-protocol GroceryItemVMType {
+protocol GroceryItemVMType:AnyObject {
   var title:Driver<String>{get}
   var completed:Driver<Bool>{get}
   var updateCompleted:PublishSubject<Bool>{get}
 }
 
-final class GroceryItemVM: GroceryItemVMType {
+final class GroceryItemVM: GroceryItemVMType, Equatable {
   
   
   fileprivate let groceriesRef = Database.database().reference(withPath: "grocery-lists")
-  fileprivate let titleVar = Variable("")
-  fileprivate let completedVar = Variable(false)
-  fileprivate (set) lazy var title:Driver<String> = self.titleVar.asDriver()
-  fileprivate (set) lazy var completed:Driver<Bool> = self.completedVar.asDriver()
+  fileprivate let titleSubj = PublishSubject<String>()
+  fileprivate let completedSubj = PublishSubject<Bool>()
+  fileprivate (set) lazy var title:Driver<String> = self.titleSubj.asDriver(onErrorJustReturn: "")
+  fileprivate (set) lazy var completed:Driver<Bool> = self.completedSubj.asDriver(onErrorJustReturn: false)
   fileprivate (set) var updateCompleted = PublishSubject<Bool>()
 
   fileprivate var groceryItem:GroceryItem?
-  fileprivate let disposeBag = DisposeBag()
- 
+  fileprivate var disposeBag:DisposeBag! = DisposeBag()
+  fileprivate let groceryItemID:String
   
   init(_ groceryItemID:String) {
 
-    
+    self.groceryItemID = groceryItemID
     let ref = Database.database().reference(withPath: "grocery-items/\(groceryItemID)")
     
     ref.observe(.value, with: {[weak self] snapshot in
       
       if let item = GroceryItem(snapshot: snapshot){
         self?.groceryItem = item
-        self?.completedVar.value = item.completed
-        self?.titleVar.value = item.name
+        self?.titleSubj.onNext(item.name)
+        self?.completedSubj.onNext(item.completed)
       }
     })
     
@@ -54,11 +54,18 @@ final class GroceryItemVM: GroceryItemVMType {
         
       }).disposed(by: disposeBag)
   }
+  
+  deinit {
+    
+    updateCompleted.onCompleted()
+    disposeBag = nil
+  }
+  
+  
+  public static func ==(lhs: GroceryItemVM, rhs: GroceryItemVM) -> Bool
+  {
+    return lhs.groceryItemID == rhs.groceryItemID
+  }
 }
 
-//extension GroceryItemVM:VariableProvidable {
-//  
-//  var variable: Variable<GroceryItemVM> {
-//    return Variable(self)
-//  }
-//}
+

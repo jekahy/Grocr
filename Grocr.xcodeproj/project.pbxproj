@@ -27,6 +27,7 @@
 		E139E1C21EE6C62300E5CF3C /* GenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E139E1C11EE6C62300E5CF3C /* GenericCell.swift */; };
 		E145A51B1ED87CE000A1179E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */; };
 		E16068981EDDC8BE00C522D8 /* GroceryItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */; };
+		E1744D0D1EE7DAE100A17A27 /* ViewModelAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1744D0C1EE7DAE100A17A27 /* ViewModelAvailable.swift */; };
 		E19ADEA11EDC468200F18BB7 /* FRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19ADEA01EDC468200F18BB7 /* FRModel.swift */; };
 		E1AB38C11EDED5CC00E88E67 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AB38C01EDED5CC00E88E67 /* UIImageExtension.swift */; };
 		E1DD64D31ED8A4FA00D596A5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64D21ED8A4FA00D596A5 /* TextField.swift */; };
@@ -70,6 +71,7 @@
 		E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E157370A1ED88BC600DDBB82 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
 		E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItemVC.swift; sourceTree = "<group>"; };
+		E1744D0C1EE7DAE100A17A27 /* ViewModelAvailable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModelAvailable.swift; path = Protocols/ViewModelAvailable.swift; sourceTree = "<group>"; };
 		E19ADEA01EDC468200F18BB7 /* FRModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FRModel.swift; path = Protocols/FRModel.swift; sourceTree = "<group>"; };
 		E1AB38C01EDED5CC00E88E67 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageExtension.swift; path = Extensions/UIImageExtension.swift; sourceTree = "<group>"; };
 		E1DD64D21ED8A4FA00D596A5 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextField.swift; path = Controls/TextField.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				E1DD64D81ED8A7EA00D596A5 /* Validatable.swift */,
 				E1DD64DD1ED8ACD100D596A5 /* EasyAlert.swift */,
 				E19ADEA01EDC468200F18BB7 /* FRModel.swift */,
+				E1744D0C1EE7DAE100A17A27 /* ViewModelAvailable.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				E1DD64D91ED8A7EA00D596A5 /* Validatable.swift in Sources */,
 				BB2385841B3DD8660079CD01 /* GroceryVC.swift in Sources */,
 				BB23858A1B3DD9640079CD01 /* GroceryItem.swift in Sources */,
+				E1744D0D1EE7DAE100A17A27 /* ViewModelAvailable.swift in Sources */,
 				E1F1130E1EE03F390055621C /* GroceryVM.swift in Sources */,
 				E1F113081EE0033C0055621C /* LoginVM.swift in Sources */,
 				E1F1130C1EE02F890055621C /* GroceryListItemVM.swift in Sources */,

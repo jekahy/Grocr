@@ -48,9 +48,6 @@ PODS:
   - ObjectMapper (2.2.7)
   - RxCocoa (3.5.0):
     - RxSwift (~> 3.4)
-  - RxDataSources (1.0.3):
-    - RxCocoa (~> 3.0)
-    - RxSwift (~> 3.0)
   - RxSwift (3.5.0)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
@@ -67,7 +64,6 @@ DEPENDENCIES:
   - ImagePicker
   - ObjectMapper (~> 2.2)
   - RxCocoa
-  - RxDataSources
   - RxSwift
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
 
@@ -96,11 +92,10 @@ SPEC CHECKSUMS:
   ImagePicker: fe4c699abb56ff03994fa98d8b02e3883ee118be
   ObjectMapper: 65abcfd9a61cf7396cbd14a4fb22fddfcc46577e
   RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
-  RxDataSources: a021a0e944ba5f7991259829d973afdbfa719c0b
   RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
 
-PODFILE CHECKSUM: 0ff0bc8283669b55cf8af05acdb700c6cb2a8d66
+PODFILE CHECKSUM: 93c2b4b7ceaeb503c0cc5de7c491893aad675e6a
 
 COCOAPODS: 1.2.1

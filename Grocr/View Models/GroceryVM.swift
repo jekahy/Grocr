@@ -14,7 +14,6 @@ protocol GroceryVMType {
   
   func addItem(_ name:String)
   var itemVMs:Observable<[GroceryItemVM]> {get}
-
 }
 
 
@@ -27,20 +26,27 @@ final class GroceryVM: GroceryVMType {
   fileprivate let itemsVar = Variable<[GroceryItemVM]>([])
   lazy var itemVMs:Observable<[GroceryItemVM]> = self.itemsVar.asObservable()
 
-  fileprivate let disposeBag = DisposeBag()
+
 
   init(_ groceryID:String)
   {
-    
     self.groceryID = groceryID
     let refItems = grocRef.child("\(groceryID)/items")
-    
-    refItems.observe(.value, with:{ snapshot in
-
-        self.itemsVar.value = snapshot.children.allObjects.map{ $0 as! DataSnapshot}
-          .flatMap{GroceryItemVM($0.key)}
-
+   
+    refItems.observe(.childRemoved, with: { snapshot in
+      
+      let item = GroceryItemVM(snapshot.key)
+      if let idxToDelete = self.itemsVar.value.index(where: {$0 == item}){
+          self.itemsVar.value.remove(at: idxToDelete)
+      }
     })
+    
+    refItems.observe(.childAdded, with: { snapshot in
+      
+      let item = GroceryItemVM(snapshot.key)
+      self.itemsVar.value.append(item)
+    })
+    
     
   }
   
@@ -54,16 +60,8 @@ final class GroceryVM: GroceryVMType {
                                   ref: groceryItemRef)
     
     groceryItemRef.setValue(groceryItem.jsonStr)
-    grocRef.child("\(groceryID!)/items").updateChildValues([groceryItem.key : true])
+    grocRef.child("\(groceryID!)/items").updateChildValues([groceryItem.key : false])
   
   }
   
 }
-
-
-//extension GroceryVM:VariableProvidable {
-//  
-//  var variable: Variable<GroceryVM> {
-//    return Variable(self)
-//  }
-//}

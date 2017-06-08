@@ -6,7 +6,12 @@
 //  Copyright © 2017 Eugene. All rights reserved.
 //
 
-class GenericCell<V>: UITableViewCell {
-    
-  var viewModel:V!
+import UIKit
+
+class GenericCell: UITableViewCell, ViewModelAvailable  {
+
+  
+  typealias VM = AnyObject
+  
+  weak var viewModel:VM?
 }

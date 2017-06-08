@@ -41,9 +41,9 @@ class GroceryVC: UIViewController {
   }
   
   fileprivate var viewModel:GroceryVMType!
-  fileprivate let disposeBag = DisposeBag()
+  fileprivate var disposeBag:DisposeBag! = DisposeBag()
 
-    @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var tableView: UITableView!
 
   // MARK: UIViewController Lifecycle
   
@@ -92,6 +92,9 @@ class GroceryVC: UIViewController {
       itemVC.item = item
     }
   }
-  
+ 
+  deinit {
+    disposeBag = nil
+  }
 }
 

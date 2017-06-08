@@ -27,7 +27,7 @@ class CheckButton: UIButton {
     didSet{ self.layer.cornerRadius = self.cornerRadius }}
 
   
-  fileprivate let disposeBag = DisposeBag()
+  fileprivate var disposeBag:DisposeBag! = DisposeBag()
   
   var checked = false {
     didSet {
@@ -46,11 +46,10 @@ class CheckButton: UIButton {
     guard let strSelf = self else{
       return Disposables.create()
     }
-    strSelf.rx.controlEvent(.touchUpInside).subscribe(onNext: {
+    strSelf.rx.controlEvent(.touchUpInside).subscribe(onNext: {[unowned strSelf] in
       
       strSelf.checked = !strSelf.checked
       observer.onNext(strSelf.checked)
-      observer.onCompleted()
     }).disposed(by: strSelf.disposeBag)
     return Disposables.create()
   })
@@ -64,6 +63,10 @@ class CheckButton: UIButton {
     
   }
   
+  deinit {
+    disposeBag = nil
+  }
+  
 }
 
 extension CheckButton {
@@ -73,61 +76,3 @@ extension CheckButton {
       }.asObserver()
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//extension Reactive where Base: CheckButton {
-//  
-//  var isChecked: ControlProperty<Bool> {
-//    return value
-//  }
-//  
-//  var value: ControlProperty<Bool> {
-//    return UIControl.valuePublic(
-//      control: self.base,
-//      getter: { button in
-//        button.checked
-//    }, setter: { button, value in
-//      button.checked = value
-//    })
-//  }
-//
-//  
-//  
-//}
-//
-//extension UIControl {
-//  static func valuePublic<T, ControlType: UIControl>(control: ControlType, getter: @escaping (ControlType) -> T, setter: @escaping (ControlType, T) -> ()) -> ControlProperty<T> {
-//    let values: Observable<T> = Observable.deferred { [weak control] in
-//      guard let existingSelf = control else {
-//        return Observable.empty()
-//      }
-//      
-//      return existingSelf.rx.controlEvent([ .touchUpInside])
-//        .flatMap { _ in
-//          return control.map { Observable.just(getter($0)) } ?? Observable.empty()
-//        }
-//        .startWith(getter(existingSelf))
-//    }
-//    return ControlProperty(values: values, valueSink: UIBindingObserver(UIElement: control) { control, value in
-//      setter(control, value)
-//    })
-//  }
-//}

@@ -26,7 +26,7 @@ class GroceryListVC:UIViewController {
     
     
     viewModel.groceryVMs.bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: GroceryCell.self)) { (index, groceryModel: GroceryListItemVMType, cell) in
-      cell.groceryVM = groceryModel
+      cell.viewModel = groceryModel
       }.addDisposableTo(disposeBag)
     
     tableView.rx.modelSelected(GroceryListItemVMType.self).asDriver().drive(onNext: { [weak self] itemVM in

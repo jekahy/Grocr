@@ -11,22 +11,29 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class GroceryCell: UITableViewCell {
+class GroceryCell: UITableViewCell, ViewModelAvailable {
   
-  fileprivate let diposeBag = DisposeBag()
+  typealias VM = GroceryListItemVMType
+  fileprivate var disposeBag = DisposeBag()
   
   @IBOutlet weak var titleLab: UILabel!
   @IBOutlet weak var itemCountLab: UILabel!
   
-  var groceryVM: GroceryListItemVMType? {
+  weak var viewModel: VM? {
     
     didSet{
-      guard let grItemModel = groceryVM else {
+      guard let grItemModel = viewModel else {
         return
       }
-      grItemModel.title.drive(titleLab.rx.text).disposed(by:self.diposeBag)
-      grItemModel.count.drive(itemCountLab.rx.text).disposed(by:self.diposeBag)
+      grItemModel.title.drive(titleLab.rx.text).disposed(by:self.disposeBag)
+      grItemModel.count.drive(itemCountLab.rx.text).disposed(by:self.disposeBag)
     }
   }
   
+  override func prepareForReuse()
+  {
+    super.prepareForReuse()
+    viewModel = nil
+    disposeBag = DisposeBag()
+  }
 }

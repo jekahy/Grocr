@@ -26,24 +26,22 @@ final class GroceryListVM : GroceryListType {
   
   init()
   {
-    
-    ref.observe(.childAdded, with: { [unowned self] snapshot in
+    ref.observe(.childAdded, with: { [weak self] snapshot in
       
       if let grocery = Grocery(snapshot:snapshot){
-        let groceryVM = GroceryVM(grocery.key)
-        self.groceriesVar.value.append(groceryVM)
+        
+        self?.groceriesVar.value.append(GroceryVM(grocery.key))
       }
       
     })
     
-    ref.observe(.childRemoved, with: { [unowned self] snapshot in
+    ref.observe(.childRemoved, with: { [weak self] snapshot in
       
-      if let grocery = Grocery(snapshot:snapshot){
-        
-        if let idxToDelete = self.groceriesVar.value.index(where: {$0.groceryID == grocery.key}){
-          self.groceriesVar.value.remove(at: idxToDelete)
+      
+        if let idxToDelete = self?.groceriesVar.value.index(where: {$0.groceryID == snapshot.key}){
+          self?.groceriesVar.value.remove(at: idxToDelete)
         }
-      }
+      
     })
   }
   
@@ -62,4 +60,8 @@ final class GroceryListVM : GroceryListType {
     groceriesVar.value[index].removeFromDB()
   }
 
+  deinit {
+    
+    ref.removeAllObservers()
+  }
 }

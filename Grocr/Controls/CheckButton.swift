@@ -41,30 +41,21 @@ class CheckButton: UIButton {
   
   let setCompleted = Variable(false)
  
-  fileprivate(set) lazy var updateCompleted:Observable<Bool> = Observable<Bool>.create({[weak self] observer -> Disposable in
-    
-    guard let strSelf = self else{
-      return Disposables.create()
-    }
-    strSelf.rx.controlEvent(.touchUpInside).subscribe(onNext: {[unowned strSelf] in
-      
-      strSelf.checked = !strSelf.checked
-      observer.onNext(strSelf.checked)
-    }).disposed(by: strSelf.disposeBag)
-    return Disposables.create()
-  })
-
+  fileprivate let updateCheckedSubj = PublishSubject<Bool>()
+  lazy var updateCompleted:Observable<Bool> = self.updateCheckedSubj.asObservable()
+ 
   
   override func awakeFromNib()
   {
     setCompleted.asObservable().subscribe(onNext: {[weak self] newVal in
       self?.checked = newVal
     }).disposed(by: disposeBag)
-    
-  }
-  
-  deinit {
-    disposeBag = nil
+   
+    rx.controlEvent(.touchUpInside).subscribe(onNext: { [unowned self] in
+      
+      self.checked = !self.checked
+      self.updateCheckedSubj.onNext(self.checked)
+    }).disposed(by: self.disposeBag)
   }
   
 }

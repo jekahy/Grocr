@@ -6,31 +6,31 @@
 //  Copyright © 2017 Razeware LLC. All rights reserved.
 //
 
-import RxSwift
 import FirebaseAuth
 
 
 protocol LoginVMType {
   
+  associatedtype H
+  
   func createUser(_ username:String, password:String, handler:@escaping (Error?)->())
   func signIn(_ username:String, password:String)
-  var signInObservable: Observable<Bool> {get}
+  var signInHandler:H {get}
 }
 
 final class LoginVM:LoginVMType{
 
-  lazy var signInObservable: Observable<Bool> =  self.signInVariable.asObservable()
-  fileprivate let signInVariable = Variable<Bool>(false)
+  typealias H = (Bool)->()
   
-  init()
+  let signInHandler: H
+  
+  init(signInHandler:@escaping H)
   {
+    self.signInHandler = signInHandler
+    
     Auth.auth().addStateDidChangeListener() { auth, user in
       
-      if user != nil {
-        
-        self.signInVariable.value = true
-        
-      }
+      signInHandler(user != nil)
     }
   }
   

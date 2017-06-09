@@ -24,8 +24,8 @@ final class GroceryItemVM: GroceryItemVMType {
   
   fileprivate let groceriesRef = Database.database().reference(withPath: "grocery-lists")
   fileprivate let itemRef:DatabaseReference
-  fileprivate let titleSubj = PublishSubject<String>()
-  fileprivate let completedSubj = PublishSubject<Bool>()
+  fileprivate let titleSubj = BehaviorSubject<String>(value: "")
+  fileprivate let completedSubj = BehaviorSubject<Bool>(value: false)
   fileprivate (set) lazy var title:Driver<String> = self.titleSubj.asDriver(onErrorJustReturn: "")
   fileprivate (set) lazy var completed:Driver<Bool> = self.completedSubj.asDriver(onErrorJustReturn: false)
   fileprivate (set) var updateCompleted = PublishSubject<Bool>()
@@ -38,8 +38,9 @@ final class GroceryItemVM: GroceryItemVMType {
   
   init(_ groceryItemID:String) {
 
+
     itemID = groceryItemID
-    self.itemRef = Database.database().reference(withPath: "grocery-items/\(groceryItemID)")
+    itemRef = Database.database().reference(withPath: "grocery-items/\(groceryItemID)")
     
     itemRef.observe(.value, with: {[weak self] snapshot in
       
@@ -68,8 +69,9 @@ final class GroceryItemVM: GroceryItemVMType {
   
   
   deinit {
-    
+    itemRef.removeAllObservers()
     updateCompleted.onCompleted()
+    updateCompleted.dispose()
     disposeBag = nil
   }
 }

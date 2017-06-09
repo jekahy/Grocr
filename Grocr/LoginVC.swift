@@ -29,13 +29,13 @@ class LoginVC: UIViewController, Validatable, EasyAlert {
   fileprivate typealias EmptyClosure = ()->()
   
   // MARK: Constants
-  fileprivate let loginToList = "LoginToList"
+  fileprivate static let loginToList = "LoginToList"
   fileprivate let validationFailedMess = "It looks like something is wrong with the input data. Here what we've found: "
   fileprivate let willCheckTitle = "OK, I'll check it out"
   
   let validator = Validator()
   
-  let viewModel = LoginVM()
+  fileprivate var viewModel:LoginVM!
   private let disposeBag = DisposeBag()
   
   // MARK: Outlets
@@ -65,7 +65,11 @@ class LoginVC: UIViewController, Validatable, EasyAlert {
   override func viewDidLoad()
   {
     super.viewDidLoad()
-    addAuthListener()
+    viewModel = LoginVM(signInHandler: { [weak self] succeded in
+      if succeded {
+        self?.performSegue(withIdentifier: LoginVC.loginToList, sender: nil)
+      }
+    })
     setupValidator()
   }
   
@@ -90,16 +94,6 @@ class LoginVC: UIViewController, Validatable, EasyAlert {
   }
   
   //MARK: Methods
-  
-  
-  fileprivate func addAuthListener()
-  {
-    viewModel.signInObservable.subscribe { didSingIn in
-      
-      self.performSegue(withIdentifier: self.loginToList, sender: nil)
-      }
-      .disposed(by: disposeBag)
-  }
   
   func setupValidator()
   {

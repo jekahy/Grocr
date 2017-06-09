@@ -23,7 +23,7 @@ class GroceryItemCell: UITableViewCell, ViewModelAvailable{
         return
       }
       disposeBag = DisposeBag()
-
+    
       vm.title.drive(nameLab.rx.text).disposed(by: disposeBag)
       vm.completed.drive(checkBut.driveChecked).disposed(by: disposeBag)
       checkBut.updateCompleted.bind(to: vm.updateCompleted).disposed(by: disposeBag)
@@ -37,13 +37,7 @@ class GroceryItemCell: UITableViewCell, ViewModelAvailable{
   {
     super.prepareForReuse()
 
-    disposeBag = DisposeBag()
-    viewModel = nil
-    
+    disposeBag = DisposeBag()    
   }
-  
-  deinit {
-    disposeBag = nil
-    viewModel = nil
-  }
+
 }

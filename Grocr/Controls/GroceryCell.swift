@@ -33,7 +33,6 @@ class GroceryCell: UITableViewCell, ViewModelAvailable {
   override func prepareForReuse()
   {
     super.prepareForReuse()
-    viewModel = nil
     disposeBag = DisposeBag()
   }
 }

@@ -229,7 +229,7 @@ class GroceryItemVC: UIViewController {
     present(imagePickerController, animated: true, completion: nil)
   }
   
-  }
+}
 
 
 extension GroceryItemVC:ImagePickerDelegate {

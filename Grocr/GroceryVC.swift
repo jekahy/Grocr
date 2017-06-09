@@ -34,12 +34,12 @@ class GroceryVC: UIViewController,UITableViewDelegate {
   fileprivate let toGroceryItemVC = "toGroceryItemVC"
   fileprivate let cellIdentifier = "itemCell"
   // MARK: Properties
-  var groceryID:String!{
-    didSet{
-      self.viewModel = GroceryVM(self.groceryID)
-    }
-  }
-  fileprivate (set) var viewModel:GroceryVMType!
+//  var groceryID:String!{
+//    didSet{
+//      self.viewModel = GroceryVM(self.groceryID)
+//    }
+//  }
+  var viewModel:GroceryVMType!
   fileprivate var disposeBag:DisposeBag! = DisposeBag()
 
   @IBOutlet weak var tableView: UITableView!
@@ -62,6 +62,8 @@ class GroceryVC: UIViewController,UITableViewDelegate {
     
     tableView.rx.setDelegate(self).disposed(by: disposeBag)
     
+    
+    viewModel.title.drive(self.navigationItem.rx.title).disposed(by: disposeBag)
   }
   
   // MARK: Add Item

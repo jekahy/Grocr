@@ -15,7 +15,7 @@ class GroceryListVC:UIViewController {
   fileprivate let cellIdentifier = "listCell"
   fileprivate static let toGRVCSegueID = "toGRListVC"
   fileprivate let viewModel:GroceryListType = GroceryListVM()
-  fileprivate let disposeBag = DisposeBag()
+  fileprivate var disposeBag:DisposeBag! = DisposeBag()
   
   @IBOutlet weak var tableView: UITableView!
   
@@ -29,12 +29,12 @@ class GroceryListVC:UIViewController {
       cell.viewModel = groceryModel
       }.addDisposableTo(disposeBag)
     
-    tableView.rx.modelSelected(GroceryVMType.self).asDriver().drive(onNext: { [weak self] itemVM in
+    tableView.rx.modelSelected(GroceryVMType.self).asDriver().drive(onNext: { [weak self] groceryVM in
       
       if let selectedRowIndexPath = self?.tableView.indexPathForSelectedRow {
         self?.tableView.deselectRow(at: selectedRowIndexPath, animated: true)
       }
-      self?.performSegue(withIdentifier:GroceryListVC.toGRVCSegueID , sender: itemVM)
+      self?.performSegue(withIdentifier:GroceryListVC.toGRVCSegueID , sender: groceryVM)
       
     }).disposed(by: disposeBag)
     
@@ -67,8 +67,8 @@ class GroceryListVC:UIViewController {
 //  MARK: Prepare for segue
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
-    if let listVC = segue.destination as? GroceryVC, let item = sender as? GroceryVM {
-      listVC.groceryID = item.groceryID
+    if let groceryVC = segue.destination as? GroceryVC, let groceryVM = sender as? GroceryVM {
+      groceryVC.viewModel = groceryVM
     }
   }
 

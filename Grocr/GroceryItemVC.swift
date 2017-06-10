@@ -11,8 +11,10 @@ import ImagePicker
 import FirebaseStorage
 import FirebaseStorageUI
 import DownloadButton
+import RxCocoa
+import RxSwift
 
-class GroceryItemVC: UIViewController {
+class GroceryItemVC: UIViewController, EasyAlert {
 
   @IBOutlet weak var titleLab: UILabel!
   @IBOutlet weak var imgView: UIImageView!
@@ -30,24 +32,10 @@ class GroceryItemVC: UIViewController {
   fileprivate var isEditMode = false
   fileprivate let storageRef = Storage.storage().reference().child("grocery-items-images")
   
-  fileprivate var uploadTask:StorageUploadTask?{
-    didSet{
-      imgUploadBut.state = .downloading
-      uploadTask?.observe(.progress) {[unowned self] snapshot in
-        if let progress = snapshot.progress?.fractionCompleted {
-          self.imgUploadBut.stopDownloadButton.progress = CGFloat(progress)
-        }
-      }
-      
-      uploadTask?.observe(.failure){[unowned self] snapshot in
-        self.imgUploadBut.state = .startDownload
-        
-      }
-    }
-  }
   
+  fileprivate let disposeBag = DisposeBag()
   
-  var item:GroceryItem!
+  var viewModel:GroceryItemVM!
  
 //  MARK: VC lifecycle
   
@@ -58,6 +46,36 @@ class GroceryItemVC: UIViewController {
     setupDownloadButton(imgUploadBut)
     setupImgViewGR(imgView: imgView)
     setupEditBut()
+    
+    viewModel.title.drive(titleLab.rx.text).disposed(by: disposeBag)
+    
+    viewModel.imgUpload.subscribe(onNext: { [weak self] progress in
+      
+      self?.imgUploadBut.stopDownloadButton.progress = CGFloat(progress)
+      
+      
+    }, onError: {[weak self] error in
+      self?.imgView.image = UIImage.placeholderImage
+      self?.imgUploadBut.state = .startDownload
+      var mess = "Failed to upload image."
+      if case ImageUploadError.failedWithMessage(let errorMess) = error{
+        mess += " The error is: \(errorMess)"
+      }
+      self?.showAlert("Warning", message: mess, alertActions: [.ok])
+    }, onCompleted: { [weak self] in
+      self?.imgUploadBut.state = .startDownload
+    }).disposed(by: disposeBag)
+    
+    viewModel.imgURL.drive(onNext: { [weak self] imgURL in
+      
+      self?.imgView.sd_setImage(with: imgURL, placeholderImage: .placeholderImage, options:[.progressiveDownload])
+      { [weak self] img,err,_,_ in
+        if let img = img{
+          self?.updateImgViewConstraint(forImage: img)
+        }
+      }
+
+    }).disposed(by: disposeBag)
   }
   
   
@@ -65,7 +83,6 @@ class GroceryItemVC: UIViewController {
   {
     super.viewWillAppear(animated)
     updateImgViewConstraint(forImage: .placeholderImage)
-    fillDataFrom(item)
     updateTextViewContraint(descriptionTextView)
     
   }
@@ -77,7 +94,6 @@ class GroceryItemVC: UIViewController {
     but.stopDownloadButton.tintColor = UIColor.blue
     but.stopDownloadButton.filledLineStyleOuter = true
     but.stopDownloadButton.filledLineWidth = 3
-    
     
     but.startDownloadButton.cleanDefaultAppearance()
     but.startDownloadButton.backgroundColor = UIColor.clear
@@ -96,22 +112,7 @@ class GroceryItemVC: UIViewController {
   fileprivate func setupEditBut()
   {
     let editBut = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action:  #selector(editTapped))
-    
     navigationItem.rightBarButtonItem = editBut
-  }
-  
-  fileprivate func fillDataFrom(_ model:GroceryItem)
-  {
-    titleLab.text = model.name
-    //    descriptionTextView.text = model.description
-    amountLab.text = model.amount
-    imgView.sd_setImage(with: item.titleImageURL, placeholderImage: .placeholderImage, options:[.progressiveDownload])
-    { [weak self] img,err,_,_ in
-      if let img = img{
-        self?.updateImgViewConstraint(forImage: img)
-      }
-    }
-
   }
 
   
@@ -187,28 +188,9 @@ class GroceryItemVC: UIViewController {
   
   fileprivate func uploadImage(_ image:UIImage)
   {
-    let imgItemRef = item.ref.child("imageID")
-    
-    let imgID = imgItemRef.childByAutoId().key
-    let imgStoreRef = storageRef.child(imgID + ".png")
-    
-    guard let png = UIImagePNGRepresentation(image) else{
-      return
-    }
-    uploadTask = imgStoreRef.putData(png, metadata: nil) { [weak self](metadata, error) in
-      guard let metadata = metadata else {
-        return
-      }
-      // Metadata contains file metadata such as size, content-type, and download URL.
-      if let downloadURL = metadata.downloadURL(){
-        
-        imgItemRef.setValue(downloadURL.absoluteString)
-      }
-      self?.imgView.image = image
-      self?.imgUploadBut.state = .startDownload
-      self?.imgUploadBut.isHidden = true
-    }
-    
+    viewModel.uploadImage(image)
+    imgView.image = image
+    imgUploadBut.state = .downloading
   }
   
   fileprivate func showImagePickerVC()
@@ -267,7 +249,10 @@ extension GroceryItemVC:PKDownloadButtonDelegate {
       showImagePickerVC()
       break
     case .downloading:
-      uploadTask?.cancel()
+      viewModel.cancelUpload()
+      downloadButton.state = .startDownload
+      imgView.image = UIImage.placeholderImage
+      
       break
     case .downloaded:
       break

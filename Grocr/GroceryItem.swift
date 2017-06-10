@@ -38,7 +38,7 @@ struct GroceryItem:FRModel {
   var completed = false
   var imageID:String?
   
-  var titleImageURL:URL? {
+  var imageURL:URL? {
     if let urlAddr = imageID{
       return URL(string: urlAddr)
     }

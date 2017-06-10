@@ -33,12 +33,8 @@ class GroceryVC: UIViewController,UITableViewDelegate {
   fileprivate let ref = Database.database().reference(withPath: "grocery-items")
   fileprivate let toGroceryItemVC = "toGroceryItemVC"
   fileprivate let cellIdentifier = "itemCell"
+
   // MARK: Properties
-//  var groceryID:String!{
-//    didSet{
-//      self.viewModel = GroceryVM(self.groceryID)
-//    }
-//  }
   var viewModel:GroceryVMType!
   fileprivate var disposeBag:DisposeBag! = DisposeBag()
 
@@ -60,8 +56,15 @@ class GroceryVC: UIViewController,UITableViewDelegate {
       
     }.disposed(by: disposeBag)
     
+
+    tableView.rx.modelSelected(GroceryItemVM.self).subscribe {[unowned self] next in
+      
+      self.performSegue(withIdentifier: self.toGroceryItemVC, sender: next.element)
+      
+    }.disposed(by: disposeBag)
+  
     tableView.rx.setDelegate(self).disposed(by: disposeBag)
-    
+
     
     viewModel.title.drive(self.navigationItem.rx.title).disposed(by: disposeBag)
   }
@@ -91,8 +94,8 @@ class GroceryVC: UIViewController,UITableViewDelegate {
 //  MARK: Prepare for segue
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
-    if segue.identifier == toGroceryItemVC, let itemVC = segue.destination as? GroceryItemVC, let item = sender as? GroceryItem {
-      itemVC.item = item
+    if segue.identifier == toGroceryItemVC, let itemVC = segue.destination as? GroceryItemVC, let vm = sender as? GroceryItemVM {
+      itemVC.viewModel = vm
     }
   }
   

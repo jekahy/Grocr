@@ -19,7 +19,7 @@ protocol GroceryVMType:class {
 
   func addItem(_ name:String)
   func removeItem(atIndex index:Int)
-  var itemVMs:Observable<[GroceryItemVM]> {get}  
+  var itemVMs:Observable<[GroceryItemVMType]> {get}
 }
 
 
@@ -31,8 +31,8 @@ final class GroceryVM: GroceryVMType {
   fileprivate let groceryItemsRef:DatabaseReference
   fileprivate let itemsRef = Database.database().reference(withPath: itemsPath)
 
-  fileprivate let itemsVar = Variable<[GroceryItemVM]>([])
-  lazy var itemVMs:Observable<[GroceryItemVM]> = self.itemsVar.asObservable()
+  fileprivate let itemsVar = Variable<[GroceryItemVMType]>([])
+  lazy var itemVMs:Observable<[GroceryItemVMType]> = self.itemsVar.asObservable()
 
   fileprivate (set) lazy var title: Driver<String> = self.titleSubj.asDriver(onErrorJustReturn: "")
   fileprivate (set) lazy var count: Driver<String> = self.countSubj.asDriver(onErrorJustReturn: "")

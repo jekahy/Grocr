@@ -16,11 +16,11 @@ import RxSwift
 
 class GroceryItemVC: UIViewController, EasyAlert {
 
-  @IBOutlet weak var titleLab: UILabel!
+  @IBOutlet weak var titleLab: EditableLabel!
   @IBOutlet weak var imgView: UIImageView!
   @IBOutlet weak var imgUploadBut: PKDownloadButton!
-  @IBOutlet weak var amountLab: UILabel!
-  @IBOutlet weak var descriptionTextView: UITextView!
+  @IBOutlet weak var amountLab: EditableLabel!
+  @IBOutlet weak var descriptionTextView: TextView!
   @IBOutlet weak var detailView: UIView!
   
   @IBOutlet var imgConstrNormal: [NSLayoutConstraint]!
@@ -30,10 +30,10 @@ class GroceryItemVC: UIViewController, EasyAlert {
   @IBOutlet weak var  imgHeightConstr: NSLayoutConstraint!
   
   fileprivate var isEditMode = false
-  fileprivate let storageRef = Storage.storage().reference().child("grocery-items-images")
-  
   
   fileprivate let disposeBag = DisposeBag()
+  
+  fileprivate let uploadImgSubj = PublishSubject<UIImage>()
   
   var viewModel:GroceryItemVM!
  
@@ -47,24 +47,16 @@ class GroceryItemVC: UIViewController, EasyAlert {
     setupImgViewGR(imgView: imgView)
     setupEditBut()
     
-    viewModel.title.drive(titleLab.rx.text).disposed(by: disposeBag)
+    viewModel.title.drive(titleLab.rx.texttt).disposed(by: disposeBag)
+    viewModel.amount.drive(amountLab.rx.texttt).disposed(by: disposeBag)
+    viewModel.description.drive(descriptionTextView.rx.text).disposed(by: disposeBag)
     
-    viewModel.imgUpload.subscribe(onNext: { [weak self] progress in
+    let tapGR = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
+    detailView.addGestureRecognizer(tapGR)
+    
+    titleLab.textInput.subscribe{ t in
       
-      self?.imgUploadBut.stopDownloadButton.progress = CGFloat(progress)
-      
-      
-    }, onError: {[weak self] error in
-      self?.imgView.image = UIImage.placeholderImage
-      self?.imgUploadBut.state = .startDownload
-      var mess = "Failed to upload image."
-      if case ImageUploadError.failedWithMessage(let errorMess) = error{
-        mess += " The error is: \(errorMess)"
-      }
-      self?.showAlert("Warning", message: mess, alertActions: [.ok])
-    }, onCompleted: { [weak self] in
-      self?.imgUploadBut.state = .startDownload
-    }).disposed(by: disposeBag)
+    }.disposed(by: disposeBag)
     
     viewModel.imgURL.drive(onNext: { [weak self] imgURL in
       
@@ -74,8 +66,10 @@ class GroceryItemVC: UIViewController, EasyAlert {
           self?.updateImgViewConstraint(forImage: img)
         }
       }
-
+      
     }).disposed(by: disposeBag)
+    
+
   }
   
   
@@ -183,12 +177,53 @@ class GroceryItemVC: UIViewController, EasyAlert {
     updateRightBarBut()
     imgUploadBut.isHidden = !isEditMode
     
+    if isEditMode {
+        bindEditingStaff()
+        titleLab.enableEditMode()
+        amountLab.enableEditMode()
+        descriptionTextView.enableEditMode()
+      
+    }else{
+        viewModel.saveEditedData()
+        view.endEditing(true)
+        titleLab.disableEditMode()
+        amountLab.disableEditMode()
+        descriptionTextView.disableEditMode()
+    }
+    
+  }
+  
+  fileprivate func bindEditingStaff()
+  {
+    
+    let uploadImgProgressObservable = viewModel.startEditing(title: titleLab.textInput, amount: amountLab.textInput, description: descriptionTextView.rx.text.asObservable(), imageUploadEvent: uploadImgSubj.asObservable())
+    
+    uploadImgProgressObservable.subscribe(onNext: { progress in
+      
+        self.imgUploadBut.stopDownloadButton.progress = CGFloat(progress)
+      
+      }, onError: { error in
+        
+        self.imgView.image = UIImage.placeholderImage
+        self.imgUploadBut.state = .startDownload
+        var mess = "Failed to upload image."
+        if case ImageUploadError.failedWithMessage(let errorMess) = error{
+          mess += " The error is: \(errorMess)"
+        }
+        self.showAlert("Warning", message: mess, alertActions: [.ok])
+        
+      }, onCompleted: {
+        
+        self.imgUploadBut.state = .startDownload
+        
+    }).disposed(by: disposeBag)
+
   }
   
   
   fileprivate func uploadImage(_ image:UIImage)
   {
-    viewModel.uploadImage(image)
+    uploadImgSubj.onNext(image)
     imgView.image = image
     imgUploadBut.state = .downloading
   }
@@ -243,19 +278,17 @@ extension GroceryItemVC:PKDownloadButtonDelegate {
   func downloadButtonTapped(_ downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState)
   {
     switch state {
-    case .pending:
-      break
-    case .startDownload:
-      showImagePickerVC()
-      break
-    case .downloading:
-      viewModel.cancelUpload()
-      downloadButton.state = .startDownload
-      imgView.image = UIImage.placeholderImage
       
-      break
-    case .downloaded:
-      break
+      case .startDownload:
+        showImagePickerVC()
+        
+      case .downloading:
+        uploadImgSubj.onError(ImageUploadError.cancelled)
+        downloadButton.state = .startDownload
+        imgView.image = UIImage.placeholderImage
+      
+      default:
+        break
     }
   }
 }

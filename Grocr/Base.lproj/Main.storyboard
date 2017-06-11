@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -329,7 +329,7 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Super Mega Party ever oncampus Only today The Best Girls Boys Free Beer Best Girls Boys Free Beer Best Girls " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpf-B4-yjD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Super Mega Party ever oncampus Only today The Best Girls Boys Free Beer Best Girls Boys Free Beer Best Girls " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpf-B4-yjD" customClass="EditableLabel" customModule="Grocr" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="ACa-Ws-cbn"/>
@@ -343,7 +343,7 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="531"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2M7-X6-7Eb" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="425"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
                                         <subviews>
                                             <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="burger" translatesAutoresizingMaskIntoConstraints="NO" id="vS6-kP-HNL">
                                                 <rect key="frame" x="0.0" y="-5" width="375" height="155"/>
@@ -356,11 +356,19 @@
                                                     </mask>
                                                 </variation>
                                             </imageView>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N37-4K-o7h" customClass="PKDownloadButton">
+                                                <rect key="frame" x="162" y="47" width="50" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="0EV-lP-Ruk"/>
+                                                    <constraint firstAttribute="height" constant="50" id="890-FV-t5p"/>
+                                                </constraints>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bB-yn-zYZ">
-                                                <rect key="frame" x="0.0" y="150" width="375" height="275"/>
+                                                <rect key="frame" x="0.0" y="150" width="375" height="381"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcx-Pe-ASG">
-                                                        <rect key="frame" x="61" y="10" width="42" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcx-Pe-ASG" customClass="EditableLabel" customModule="Grocr" customModuleProvider="target">
+                                                        <rect key="frame" x="61" y="10" width="304" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -377,11 +385,11 @@
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="twB-9c-gk1">
-                                                        <rect key="frame" x="8" y="68" width="359" height="207"/>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="twB-9c-gk1" customClass="TextView" customModule="Grocr" customModuleProvider="target">
+                                                        <rect key="frame" x="8" y="68" width="359" height="313"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="207" id="KAG-XA-G2g"/>
+                                                            <constraint firstAttribute="height" priority="200" constant="207" id="KAG-XA-G2g"/>
                                                         </constraints>
                                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -393,6 +401,7 @@
                                                     <constraint firstItem="Q6c-dn-l52" firstAttribute="leading" secondItem="lpV-kM-G28" secondAttribute="leading" id="2lg-V3-31O"/>
                                                     <constraint firstItem="lpV-kM-G28" firstAttribute="top" secondItem="Q6c-dn-l52" secondAttribute="bottom" constant="9" id="4Kk-Wo-LA7"/>
                                                     <constraint firstItem="lpV-kM-G28" firstAttribute="leading" secondItem="4bB-yn-zYZ" secondAttribute="leading" constant="8" id="QBe-WY-kya"/>
+                                                    <constraint firstAttribute="trailing" secondItem="pcx-Pe-ASG" secondAttribute="trailing" constant="10" id="a9Z-qp-jfT"/>
                                                     <constraint firstItem="pcx-Pe-ASG" firstAttribute="leading" secondItem="Q6c-dn-l52" secondAttribute="trailing" constant="5" id="cC8-hY-KZx"/>
                                                     <constraint firstAttribute="trailing" secondItem="twB-9c-gk1" secondAttribute="trailing" constant="8" id="dKx-Rn-hhL"/>
                                                     <constraint firstAttribute="bottom" secondItem="twB-9c-gk1" secondAttribute="bottom" id="fYA-Kt-3es"/>
@@ -416,14 +425,6 @@
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="NO"/>
                                                 </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N37-4K-o7h" customClass="PKDownloadButton">
-                                                <rect key="frame" x="162" y="47" width="50" height="50"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="0EV-lP-Ruk"/>
-                                                    <constraint firstAttribute="height" constant="50" id="890-FV-t5p"/>
-                                                </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -466,6 +467,7 @@
                             <constraint firstAttribute="trailing" secondItem="gpf-B4-yjD" secondAttribute="trailing" id="IFu-iV-MOK"/>
                             <constraint firstItem="cG1-Ht-gwA" firstAttribute="top" secondItem="rVP-Fw-4oJ" secondAttribute="bottom" id="IPY-um-03l"/>
                             <constraint firstItem="gpf-B4-yjD" firstAttribute="leading" secondItem="l38-5F-ciG" secondAttribute="leading" id="InS-PV-e7g"/>
+                            <constraint firstItem="cG1-Ht-gwA" firstAttribute="top" relation="lessThanOrEqual" secondItem="2M7-X6-7Eb" secondAttribute="bottom" id="Qct-PY-TQb"/>
                             <constraint firstItem="vS6-kP-HNL" firstAttribute="top" secondItem="gpf-B4-yjD" secondAttribute="bottom" constant="-5" id="kH3-ct-nSY"/>
                             <constraint firstItem="2M7-X6-7Eb" firstAttribute="height" relation="greaterThanOrEqual" secondItem="l38-5F-ciG" secondAttribute="height" id="vhX-I8-8La"/>
                         </constraints>
@@ -477,14 +479,14 @@
                     </view>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="amountLab" destination="pcx-Pe-ASG" id="Rnj-YM-Ojm"/>
+                        <outlet property="amountLab" destination="pcx-Pe-ASG" id="NXF-5M-EI2"/>
                         <outlet property="descriptionHeighConstr" destination="KAG-XA-G2g" id="GAi-RU-9CE"/>
-                        <outlet property="descriptionTextView" destination="twB-9c-gk1" id="EhR-7N-2eh"/>
+                        <outlet property="descriptionTextView" destination="twB-9c-gk1" id="TY3-o8-f3V"/>
                         <outlet property="detailView" destination="4bB-yn-zYZ" id="agp-d9-6cx"/>
                         <outlet property="imgHeightConstr" destination="Rww-5U-aut" id="F9w-Zo-Yyy"/>
                         <outlet property="imgUploadBut" destination="N37-4K-o7h" id="6zk-gt-8NN"/>
                         <outlet property="imgView" destination="vS6-kP-HNL" id="134-Hb-gcz"/>
-                        <outlet property="titleLab" destination="gpf-B4-yjD" id="GGD-Q0-b9C"/>
+                        <outlet property="titleLab" destination="gpf-B4-yjD" id="qnf-gd-K5W"/>
                         <outletCollection property="imgContsrExpanded" destination="mTK-0B-V7T" collectionClass="NSMutableArray" id="uWC-IC-kBR"/>
                         <outletCollection property="imgConstrNormal" destination="kH3-ct-nSY" collectionClass="NSMutableArray" id="ebx-ev-jnF"/>
                         <outletCollection property="imgContsrExpanded" destination="21A-w7-uya" collectionClass="NSMutableArray" id="MLI-cC-Wcf"/>

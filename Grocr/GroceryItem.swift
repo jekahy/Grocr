@@ -22,10 +22,14 @@
 
 import Foundation
 import FirebaseDatabase
+import FirebaseStorage
 import ObjectMapper
+import RxSwift
 
 struct GroceryItem:FRModel {
   
+  fileprivate let storageRef = Storage.storage().reference().child("grocery-items-images")
+
   var ref: DatabaseReference!
   var key: String!
   
@@ -35,12 +39,13 @@ struct GroceryItem:FRModel {
   var createdAt = Date()
   var groceryID:String!
   var amount:String?
+  var itemDescription:String?
   var completed = false
   var imageID:String?
-  
-  var imageURL:URL? {
-    if let urlAddr = imageID{
-      return URL(string: urlAddr)
+  var imageURL:Observable<URL?>?{
+    let storageRef = Storage.storage().reference().child("grocery-items-images")
+    if let imgID = imageID{
+      return storageRef.child(imgID).downloadURL
     }
     return nil
   }
@@ -56,7 +61,7 @@ struct GroceryItem:FRModel {
     self.ref = ref
     self.key = ref.key
     self.createdAt = Date()
-    self.description = description
+    self.itemDescription = description
     self.amount = amount
   }
 
@@ -67,8 +72,10 @@ struct GroceryItem:FRModel {
     addedByUser <- map["addedByUser"]
     groceryID <- map["groceryID"]
     completed <- map["completed"]
-    description <- map["description"]
+    itemDescription <- map["description"]
     amount <- map["amount"]
     imageID <- map["imageID"]
+    
   }
+
 }

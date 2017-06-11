@@ -20,14 +20,17 @@
 		E103D9F61EE2C7FA00ECC881 /* BoolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E103D9F51EE2C7FA00ECC881 /* BoolExtension.swift */; };
 		E115FB1E1ED9BB85003C1C50 /* AlertActionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB1D1ED9BB85003C1C50 /* AlertActionExtension.swift */; };
 		E115FB201ED9C19A003C1C50 /* AlertVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB1F1ED9C19A003C1C50 /* AlertVCExtension.swift */; };
-		E115FB261EDC11A3003C1C50 /* OnlineUsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB251EDC11A3003C1C50 /* OnlineUsersTableViewController.swift */; };
 		E115FB281EDC13A2003C1C50 /* GroceryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB271EDC13A2003C1C50 /* GroceryCell.swift */; };
 		E115FB2A1EDC14AA003C1C50 /* GroceryListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB291EDC14AA003C1C50 /* GroceryListVC.swift */; };
 		E115FB2C1EDC17AA003C1C50 /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB2B1EDC17AA003C1C50 /* Grocery.swift */; };
 		E139E1C21EE6C62300E5CF3C /* GenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E139E1C11EE6C62300E5CF3C /* GenericCell.swift */; };
 		E145A51B1ED87CE000A1179E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */; };
 		E16068981EDDC8BE00C522D8 /* GroceryItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */; };
+		E16A76651EED614F004050E3 /* StorageReferenceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16A76641EED614F004050E3 /* StorageReferenceExtension.swift */; };
 		E1744D0D1EE7DAE100A17A27 /* ViewModelAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1744D0C1EE7DAE100A17A27 /* ViewModelAvailable.swift */; };
+		E18FC71A1EEBF8120032316E /* Editable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18FC7191EEBF8120032316E /* Editable.swift */; };
+		E18FC71C1EEBF9050032316E /* EditableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18FC71B1EEBF9050032316E /* EditableLabel.swift */; };
+		E18FC71E1EEC07C90032316E /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18FC71D1EEC07C90032316E /* TextView.swift */; };
 		E19ADEA11EDC468200F18BB7 /* FRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19ADEA01EDC468200F18BB7 /* FRModel.swift */; };
 		E1AB38C11EDED5CC00E88E67 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AB38C01EDED5CC00E88E67 /* UIImageExtension.swift */; };
 		E1DD64D31ED8A4FA00D596A5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64D21ED8A4FA00D596A5 /* TextField.swift */; };
@@ -41,6 +44,7 @@
 		E1F113101EE063FA0055621C /* GroceryItemVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1130F1EE063FA0055621C /* GroceryItemVM.swift */; };
 		E1F113121EE06A790055621C /* GroceryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F113111EE06A790055621C /* GroceryItemCell.swift */; };
 		E1F113141EE071290055621C /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F113131EE071290055621C /* CheckButton.swift */; };
+		E1F6D0A01EEC2FC00040B7E4 /* GroceryItemEditVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F6D09F1EEC2FC00040B7E4 /* GroceryItemEditVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,7 +66,6 @@
 		E103D9F51EE2C7FA00ECC881 /* BoolExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoolExtension.swift; path = Extensions/BoolExtension.swift; sourceTree = "<group>"; };
 		E115FB1D1ED9BB85003C1C50 /* AlertActionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertActionExtension.swift; path = Extensions/AlertActionExtension.swift; sourceTree = "<group>"; };
 		E115FB1F1ED9C19A003C1C50 /* AlertVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertVCExtension.swift; path = Extensions/AlertVCExtension.swift; sourceTree = "<group>"; };
-		E115FB251EDC11A3003C1C50 /* OnlineUsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineUsersTableViewController.swift; sourceTree = "<group>"; };
 		E115FB271EDC13A2003C1C50 /* GroceryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryCell.swift; path = Controls/GroceryCell.swift; sourceTree = "<group>"; };
 		E115FB291EDC14AA003C1C50 /* GroceryListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListVC.swift; sourceTree = "<group>"; };
 		E115FB2B1EDC17AA003C1C50 /* Grocery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Grocery.swift; path = Models/Grocery.swift; sourceTree = "<group>"; };
@@ -70,7 +73,11 @@
 		E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E157370A1ED88BC600DDBB82 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
 		E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItemVC.swift; sourceTree = "<group>"; };
+		E16A76641EED614F004050E3 /* StorageReferenceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StorageReferenceExtension.swift; path = Extensions/StorageReferenceExtension.swift; sourceTree = "<group>"; };
 		E1744D0C1EE7DAE100A17A27 /* ViewModelAvailable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModelAvailable.swift; path = Protocols/ViewModelAvailable.swift; sourceTree = "<group>"; };
+		E18FC7191EEBF8120032316E /* Editable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Editable.swift; path = Protocols/Editable.swift; sourceTree = "<group>"; };
+		E18FC71B1EEBF9050032316E /* EditableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditableLabel.swift; path = Controls/EditableLabel.swift; sourceTree = "<group>"; };
+		E18FC71D1EEC07C90032316E /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextView.swift; path = Controls/TextView.swift; sourceTree = "<group>"; };
 		E19ADEA01EDC468200F18BB7 /* FRModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FRModel.swift; path = Protocols/FRModel.swift; sourceTree = "<group>"; };
 		E1AB38C01EDED5CC00E88E67 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageExtension.swift; path = Extensions/UIImageExtension.swift; sourceTree = "<group>"; };
 		E1DD64D21ED8A4FA00D596A5 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextField.swift; path = Controls/TextField.swift; sourceTree = "<group>"; };
@@ -84,6 +91,7 @@
 		E1F1130F1EE063FA0055621C /* GroceryItemVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryItemVM.swift; path = "View Models/GroceryItemVM.swift"; sourceTree = "<group>"; };
 		E1F113111EE06A790055621C /* GroceryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryItemCell.swift; path = Controls/GroceryItemCell.swift; sourceTree = "<group>"; };
 		E1F113131EE071290055621C /* CheckButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckButton.swift; path = Controls/CheckButton.swift; sourceTree = "<group>"; };
+		E1F6D09F1EEC2FC00040B7E4 /* GroceryItemEditVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroceryItemEditVM.swift; path = "View Models/GroceryItemEditVM.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +178,6 @@
 				E115FB291EDC14AA003C1C50 /* GroceryListVC.swift */,
 				BB2385831B3DD8660079CD01 /* GroceryVC.swift */,
 				E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */,
-				E115FB251EDC11A3003C1C50 /* OnlineUsersTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -216,7 +223,9 @@
 			isa = PBXGroup;
 			children = (
 				E1DD64D21ED8A4FA00D596A5 /* TextField.swift */,
+				E18FC71D1EEC07C90032316E /* TextView.swift */,
 				E1F113131EE071290055621C /* CheckButton.swift */,
+				E18FC71B1EEBF9050032316E /* EditableLabel.swift */,
 				E189FC071EE5666D00278F50 /* Cells */,
 			);
 			name = Controls;
@@ -230,6 +239,7 @@
 				E1DD64DD1ED8ACD100D596A5 /* EasyAlert.swift */,
 				E19ADEA01EDC468200F18BB7 /* FRModel.swift */,
 				E1744D0C1EE7DAE100A17A27 /* ViewModelAvailable.swift */,
+				E18FC7191EEBF8120032316E /* Editable.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -243,6 +253,7 @@
 				E1AB38C01EDED5CC00E88E67 /* UIImageExtension.swift */,
 				E103D9F31EE1EB3100ECC881 /* DictionaryExtension.swift */,
 				E103D9F51EE2C7FA00ECC881 /* BoolExtension.swift */,
+				E16A76641EED614F004050E3 /* StorageReferenceExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -254,6 +265,7 @@
 				E1F113091EE02B4F0055621C /* GroceryListVM.swift */,
 				E1F1130D1EE03F390055621C /* GroceryVM.swift */,
 				E1F1130F1EE063FA0055621C /* GroceryItemVM.swift */,
+				E1F6D09F1EEC2FC00040B7E4 /* GroceryItemEditVM.swift */,
 			);
 			name = VIewModels;
 			sourceTree = "<group>";
@@ -395,13 +407,17 @@
 				E1DD64D91ED8A7EA00D596A5 /* Validatable.swift in Sources */,
 				BB2385841B3DD8660079CD01 /* GroceryVC.swift in Sources */,
 				BB23858A1B3DD9640079CD01 /* GroceryItem.swift in Sources */,
+				E16A76651EED614F004050E3 /* StorageReferenceExtension.swift in Sources */,
 				E1744D0D1EE7DAE100A17A27 /* ViewModelAvailable.swift in Sources */,
 				E1F1130E1EE03F390055621C /* GroceryVM.swift in Sources */,
 				E1F113081EE0033C0055621C /* LoginVM.swift in Sources */,
 				E115FB1E1ED9BB85003C1C50 /* AlertActionExtension.swift in Sources */,
 				E1DD64DE1ED8ACD100D596A5 /* EasyAlert.swift in Sources */,
+				E18FC71E1EEC07C90032316E /* TextView.swift in Sources */,
 				E115FB2A1EDC14AA003C1C50 /* GroceryListVC.swift in Sources */,
+				E1F6D0A01EEC2FC00040B7E4 /* GroceryItemEditVM.swift in Sources */,
 				E1F113121EE06A790055621C /* GroceryItemCell.swift in Sources */,
+				E18FC71C1EEBF9050032316E /* EditableLabel.swift in Sources */,
 				E115FB281EDC13A2003C1C50 /* GroceryCell.swift in Sources */,
 				E1F113101EE063FA0055621C /* GroceryItemVM.swift in Sources */,
 				E1DD64D31ED8A4FA00D596A5 /* TextField.swift in Sources */,
@@ -416,7 +432,7 @@
 				E1DD64DC1ED8AA5300D596A5 /* ValidatorExtension.swift in Sources */,
 				E103D9F61EE2C7FA00ECC881 /* BoolExtension.swift in Sources */,
 				E115FB2C1EDC17AA003C1C50 /* Grocery.swift in Sources */,
-				E115FB261EDC11A3003C1C50 /* OnlineUsersTableViewController.swift in Sources */,
+				E18FC71A1EEBF8120032316E /* Editable.swift in Sources */,
 				BB7DA5111B42C8100018B530 /* User.swift in Sources */,
 				BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */,
 				E139E1C21EE6C62300E5CF3C /* GenericCell.swift in Sources */,

@@ -15,65 +15,51 @@ enum ImageUploadError:Error {
   
   case failedWithMessage(String)
   case failed
+  case cancelled
 }
 
 
-protocol GroceryItemVMType:AnyObject {
+protocol GroceryItemVMType:class {
+  
   var title:Driver<String>{get}
   var completed:Driver<Bool>{get}
-  var imgUpload:Observable<Double>{get}
   var imgURL:Driver<URL?>{get}
   var updateCompleted:PublishSubject<Bool>{get}
   var itemID:String{get}
   func removeFromDB()
-  func uploadImage(_ image:UIImage)
-  func cancelUpload()
-
+  
+  func startEditing(title:Observable<String?>, amount:Observable<String?>, description:Observable<String?>, imageUploadEvent:Observable<UIImage>)->Observable<Double>
+  func saveEditedData()
+  
 }
 
-final class GroceryItemVM: GroceryItemVMType {
+final class GroceryItemVM:GroceryItemVMType {
   
   
   fileprivate let groceriesRef = Database.database().reference(withPath: "grocery-lists")
-  fileprivate let storageRef = Storage.storage().reference().child("grocery-items-images")
   fileprivate let itemRef:DatabaseReference
   
   fileprivate let titleSubj = BehaviorSubject<String>(value: "")
   fileprivate let completedSubj = BehaviorSubject<Bool>(value: false)
+  fileprivate let amountSubj = BehaviorSubject<String?>(value: "none")
+  fileprivate let descriptionSubj = BehaviorSubject<String?>(value: "No description.")
   fileprivate let imgURLSubj = BehaviorSubject<URL?>(value:nil)
   fileprivate (set) var updateCompleted = PublishSubject<Bool>()
-  fileprivate let imgUploadSubj = BehaviorSubject<Double>(value:0)
 
   fileprivate (set) lazy var title:Driver<String> = self.titleSubj.asDriver(onErrorJustReturn: "")
+  fileprivate (set) lazy var amount:Driver<String?> = self.amountSubj.asDriver(onErrorJustReturn: "")
+  fileprivate (set) lazy var description:Driver<String?> = self.descriptionSubj.asDriver(onErrorJustReturn: "")
   fileprivate (set) lazy var completed:Driver<Bool> = self.completedSubj.asDriver(onErrorJustReturn: false)
   fileprivate (set) lazy var imgURL:Driver<URL?> = self.imgURLSubj.asDriver(onErrorJustReturn: nil)
-  fileprivate (set) lazy var imgUpload:Observable<Double> = self.imgUploadSubj.asObservable()
 
   fileprivate var disposeBag:DisposeBag! = DisposeBag()
   
   fileprivate var groceryItem:GroceryItem?
   
+  fileprivate var editVM:GroceryItemEditVM?
+  
   let itemID: String
   
-  fileprivate var uploadTask:StorageUploadTask?{
-    didSet{
-      
-      uploadTask?.observe(.progress) {[unowned self] snapshot in
-        if let progress = snapshot.progress?.fractionCompleted {
-          self.imgUploadSubj.onNext(progress)
-        }
-      }
-      
-      uploadTask?.observe(.failure){[unowned self] snapshot in
-        
-        self.imgUploadSubj.onError(ImageUploadError.failed)
-        
-      }
-      uploadTask?.observe(.success, handler: { [weak self] snapshot in
-        self?.imgUploadSubj.onCompleted()
-      })
-    }
-  }
   
   init(_ groceryItemID:String) {
 
@@ -81,13 +67,16 @@ final class GroceryItemVM: GroceryItemVMType {
     itemID = groceryItemID
     itemRef = Database.database().reference(withPath: "grocery-items/\(groceryItemID)")
     
-    itemRef.observe(.value, with: {[weak self] snapshot in
+    itemRef.observe(.value, with: {[unowned self] snapshot in
       
       if let item = GroceryItem(snapshot: snapshot){
-        self?.groceryItem = item
-        self?.titleSubj.onNext(item.name)
-        self?.completedSubj.onNext(item.completed)
-        self?.imgURLSubj.onNext(item.imageURL)
+        self.groceryItem = item
+        self.titleSubj.onNext(item.name)
+        self.amountSubj.onNext(item.amount)
+        self.descriptionSubj.onNext(item.itemDescription)
+        self.completedSubj.onNext(item.completed)
+        self.groceryItem?.imageURL?.bind(to:self.imgURLSubj).disposed(by: self.disposeBag)
+        
       }
     })
     
@@ -102,41 +91,25 @@ final class GroceryItemVM: GroceryItemVMType {
   }
   
   
+  func startEditing(title:Observable<String?>, amount:Observable<String?>, description:Observable<String?>, imageUploadEvent:Observable<UIImage>)->Observable<Double>
+  {
+    if let item = groceryItem {
+      editVM = GroceryItemEditVM(item: item, title: title, amount: amount, description: description, imageUploadEvent: imageUploadEvent)
+      return editVM!.imgUpload
+    }
+   return Observable.empty()
+  }
+  
+  
+  func saveEditedData()
+  {
+    editVM?.save()
+    editVM = nil
+  }
+  
   func removeFromDB()
   {
     itemRef.removeValue()
-  }
-  
-  
-  func uploadImage(_ image:UIImage)
-  {
-    let imgItemRef = itemRef.child("imageID")
-    
-    let imgID = imgItemRef.childByAutoId().key
-    let imgStoreRef = storageRef.child(imgID + ".png")
-    
-    guard let png = UIImagePNGRepresentation(image) else{
-      return
-    }
-    uploadTask = imgStoreRef.putData(png, metadata: nil) {[weak self] (metadata, error) in
-      guard let metadata = metadata else {
-        return
-      }
-      if let downloadURL = metadata.downloadURL(){
-        
-        imgItemRef.setValue(downloadURL.absoluteString)
-      }
-      if let error = error {
-        self?.imgUploadSubj.onError(error)
-      }else{
-        self?.imgUploadSubj.onCompleted()
-      }
-    }
-  }
-  
-  func cancelUpload()
-  {
-    uploadTask?.cancel()
   }
   
   

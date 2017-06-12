@@ -343,7 +343,7 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="531"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2M7-X6-7Eb" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="433"/>
                                         <subviews>
                                             <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="burger" translatesAutoresizingMaskIntoConstraints="NO" id="vS6-kP-HNL">
                                                 <rect key="frame" x="0.0" y="-5" width="375" height="155"/>
@@ -365,7 +365,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bB-yn-zYZ">
-                                                <rect key="frame" x="0.0" y="150" width="375" height="381"/>
+                                                <rect key="frame" x="0.0" y="150" width="375" height="283"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcx-Pe-ASG" customClass="EditableLabel" customModule="Grocr" customModuleProvider="target">
                                                         <rect key="frame" x="61" y="10" width="304" height="21"/>
@@ -386,7 +386,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="twB-9c-gk1" customClass="TextView" customModule="Grocr" customModuleProvider="target">
-                                                        <rect key="frame" x="8" y="68" width="359" height="313"/>
+                                                        <rect key="frame" x="8" y="68" width="359" height="207"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" priority="200" constant="207" id="KAG-XA-G2g"/>
@@ -404,7 +404,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="pcx-Pe-ASG" secondAttribute="trailing" constant="10" id="a9Z-qp-jfT"/>
                                                     <constraint firstItem="pcx-Pe-ASG" firstAttribute="leading" secondItem="Q6c-dn-l52" secondAttribute="trailing" constant="5" id="cC8-hY-KZx"/>
                                                     <constraint firstAttribute="trailing" secondItem="twB-9c-gk1" secondAttribute="trailing" constant="8" id="dKx-Rn-hhL"/>
-                                                    <constraint firstAttribute="bottom" secondItem="twB-9c-gk1" secondAttribute="bottom" id="fYA-Kt-3es"/>
+                                                    <constraint firstAttribute="bottom" secondItem="twB-9c-gk1" secondAttribute="bottom" constant="8" id="fYA-Kt-3es"/>
                                                     <constraint firstItem="pcx-Pe-ASG" firstAttribute="top" secondItem="4bB-yn-zYZ" secondAttribute="top" constant="10" id="ixB-Pv-vlm"/>
                                                     <constraint firstItem="twB-9c-gk1" firstAttribute="top" secondItem="lpV-kM-G28" secondAttribute="bottom" constant="8" id="oSj-lj-HpE"/>
                                                     <constraint firstItem="twB-9c-gk1" firstAttribute="leading" secondItem="4bB-yn-zYZ" secondAttribute="leading" constant="8" id="pWG-yv-MOI"/>
@@ -467,9 +467,9 @@
                             <constraint firstAttribute="trailing" secondItem="gpf-B4-yjD" secondAttribute="trailing" id="IFu-iV-MOK"/>
                             <constraint firstItem="cG1-Ht-gwA" firstAttribute="top" secondItem="rVP-Fw-4oJ" secondAttribute="bottom" id="IPY-um-03l"/>
                             <constraint firstItem="gpf-B4-yjD" firstAttribute="leading" secondItem="l38-5F-ciG" secondAttribute="leading" id="InS-PV-e7g"/>
-                            <constraint firstItem="cG1-Ht-gwA" firstAttribute="top" relation="lessThanOrEqual" secondItem="2M7-X6-7Eb" secondAttribute="bottom" id="Qct-PY-TQb"/>
                             <constraint firstItem="vS6-kP-HNL" firstAttribute="top" secondItem="gpf-B4-yjD" secondAttribute="bottom" constant="-5" id="kH3-ct-nSY"/>
                             <constraint firstItem="2M7-X6-7Eb" firstAttribute="height" relation="greaterThanOrEqual" secondItem="l38-5F-ciG" secondAttribute="height" id="vhX-I8-8La"/>
+                            <constraint firstItem="cG1-Ht-gwA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="2M7-X6-7Eb" secondAttribute="bottom" priority="250" id="wkQ-Rn-u7d"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

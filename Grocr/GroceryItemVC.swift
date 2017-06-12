@@ -73,14 +73,6 @@ class GroceryItemVC: UIViewController, EasyAlert {
   }
   
   
-  override func viewWillAppear(_ animated: Bool)
-  {
-    super.viewWillAppear(animated)
-    updateImgViewConstraint(forImage: .placeholderImage)
-    updateTextViewContraint(descriptionTextView)
-    
-  }
-  
 //  MARK: Methods
   fileprivate func setupDownloadButton(_ but:PKDownloadButton)
   {

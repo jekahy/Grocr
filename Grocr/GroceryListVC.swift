@@ -24,6 +24,7 @@ class GroceryListVC:UIViewController {
   {
     super.viewDidLoad()
     
+    navigationItem.title = "Groceries"
     
     viewModel.groceryVMs.bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: GroceryCell.self)) { (index, groceryModel: GroceryVMType, cell) in
       cell.viewModel = groceryModel

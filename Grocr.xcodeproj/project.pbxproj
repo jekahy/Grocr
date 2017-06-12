@@ -32,6 +32,7 @@
 		E18FC71C1EEBF9050032316E /* EditableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18FC71B1EEBF9050032316E /* EditableLabel.swift */; };
 		E18FC71E1EEC07C90032316E /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18FC71D1EEC07C90032316E /* TextView.swift */; };
 		E19ADEA11EDC468200F18BB7 /* FRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19ADEA01EDC468200F18BB7 /* FRModel.swift */; };
+		E1A629C11EEF152D0042C325 /* Injectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A629C01EEF152D0042C325 /* Injectable.swift */; };
 		E1AB38C11EDED5CC00E88E67 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AB38C01EDED5CC00E88E67 /* UIImageExtension.swift */; };
 		E1DD64D31ED8A4FA00D596A5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64D21ED8A4FA00D596A5 /* TextField.swift */; };
 		E1DD64D71ED8A6B600D596A5 /* ErrorBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD64D61ED8A6B600D596A5 /* ErrorBorder.swift */; };
@@ -79,6 +80,7 @@
 		E18FC71B1EEBF9050032316E /* EditableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditableLabel.swift; path = Controls/EditableLabel.swift; sourceTree = "<group>"; };
 		E18FC71D1EEC07C90032316E /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextView.swift; path = Controls/TextView.swift; sourceTree = "<group>"; };
 		E19ADEA01EDC468200F18BB7 /* FRModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FRModel.swift; path = Protocols/FRModel.swift; sourceTree = "<group>"; };
+		E1A629C01EEF152D0042C325 /* Injectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Injectable.swift; path = Protocols/Injectable.swift; sourceTree = "<group>"; };
 		E1AB38C01EDED5CC00E88E67 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageExtension.swift; path = Extensions/UIImageExtension.swift; sourceTree = "<group>"; };
 		E1DD64D21ED8A4FA00D596A5 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextField.swift; path = Controls/TextField.swift; sourceTree = "<group>"; };
 		E1DD64D61ED8A6B600D596A5 /* ErrorBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorBorder.swift; path = Protocols/ErrorBorder.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				E19ADEA01EDC468200F18BB7 /* FRModel.swift */,
 				E1744D0C1EE7DAE100A17A27 /* ViewModelAvailable.swift */,
 				E18FC7191EEBF8120032316E /* Editable.swift */,
+				E1A629C01EEF152D0042C325 /* Injectable.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				E1DD64DE1ED8ACD100D596A5 /* EasyAlert.swift in Sources */,
 				E18FC71E1EEC07C90032316E /* TextView.swift in Sources */,
 				E115FB2A1EDC14AA003C1C50 /* GroceryListVC.swift in Sources */,
+				E1A629C11EEF152D0042C325 /* Injectable.swift in Sources */,
 				E1F6D0A01EEC2FC00040B7E4 /* GroceryItemEditVM.swift in Sources */,
 				E1F113121EE06A790055621C /* GroceryItemCell.swift in Sources */,
 				E18FC71C1EEBF9050032316E /* EditableLabel.swift in Sources */,

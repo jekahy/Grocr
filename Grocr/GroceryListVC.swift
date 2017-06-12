@@ -19,7 +19,6 @@ class GroceryListVC:UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
   
-  
   override func viewDidLoad()
   {
     super.viewDidLoad()
@@ -68,8 +67,8 @@ class GroceryListVC:UIViewController {
 //  MARK: Prepare for segue
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
-    if let groceryVC = segue.destination as? GroceryVC, let groceryVM = sender as? GroceryVM {
-      groceryVC.viewModel = groceryVM
+    if let groceryVC = segue.destination as? GroceryVC, let groceryVM = sender as? GroceryVMType {
+      groceryVC.inject(groceryVM)
     }
   }
 

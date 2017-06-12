@@ -27,15 +27,16 @@ import FirebaseAuth
 import RxSwift
 import RxCocoa
 
-class GroceryVC: UIViewController,UITableViewDelegate {
+class GroceryVC: UIViewController,UITableViewDelegate, Injectable {
   
+  typealias T = GroceryVMType
   // MARK: Constants
   fileprivate let ref = Database.database().reference(withPath: "grocery-items")
   fileprivate let toGroceryItemVC = "toGroceryItemVC"
   fileprivate let cellIdentifier = "itemCell"
 
   // MARK: Properties
-  var viewModel:GroceryVMType!
+  fileprivate var viewModel:T!
   fileprivate var disposeBag:DisposeBag! = DisposeBag()
 
   @IBOutlet weak var tableView: UITableView!
@@ -45,6 +46,8 @@ class GroceryVC: UIViewController,UITableViewDelegate {
   override func viewDidLoad()
   {
     super.viewDidLoad()
+    
+    assertDependencies()
     
     tableView.allowsMultipleSelectionDuringEditing = false
     
@@ -94,8 +97,8 @@ class GroceryVC: UIViewController,UITableViewDelegate {
 //  MARK: Prepare for segue
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
-    if segue.identifier == toGroceryItemVC, let itemVC = segue.destination as? GroceryItemVC, let vm = sender as? GroceryItemVM {
-      itemVC.viewModel = vm
+    if segue.identifier == toGroceryItemVC, let itemVC = segue.destination as? GroceryItemVC, let vm = sender as? GroceryItemVMType {
+      itemVC.inject(vm)
     }
   }
   
@@ -111,6 +114,18 @@ class GroceryVC: UIViewController,UITableViewDelegate {
     return [deleteAction]
   }
 
+  
+//  MARK: Injectable methods
+  
+  func inject(_ viewModel: T)
+  {
+    self.viewModel = viewModel
+  }
+  
+  func assertDependencies()
+  {
+    assert(viewModel != nil)
+  }
  
   deinit {
     disposeBag = nil

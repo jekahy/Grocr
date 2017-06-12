@@ -24,6 +24,8 @@ protocol GroceryItemVMType:class {
   var title:Driver<String>{get}
   var completed:Driver<Bool>{get}
   var imgURL:Driver<URL?>{get}
+  var amount:Driver<String?>{get}
+  var description:Driver<String?>{get}
   var updateCompleted:PublishSubject<Bool>{get}
   var itemID:String{get}
   func removeFromDB()

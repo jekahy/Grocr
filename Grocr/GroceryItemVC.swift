@@ -14,8 +14,10 @@ import DownloadButton
 import RxCocoa
 import RxSwift
 
-class GroceryItemVC: UIViewController, EasyAlert {
+class GroceryItemVC: UIViewController, EasyAlert, Injectable {
 
+  typealias T = GroceryItemVMType
+  
   @IBOutlet weak var titleLab: EditableLabel!
   @IBOutlet weak var imgView: UIImageView!
   @IBOutlet weak var imgUploadBut: PKDownloadButton!
@@ -35,13 +37,15 @@ class GroceryItemVC: UIViewController, EasyAlert {
   
   fileprivate let uploadImgSubj = PublishSubject<UIImage>()
   
-  var viewModel:GroceryItemVM!
+  fileprivate var viewModel:T!
  
 //  MARK: VC lifecycle
   
   override func viewDidLoad()
   {
     super.viewDidLoad()
+    
+    assertDependencies()
     
     setupDownloadButton(imgUploadBut)
     setupImgViewGR(imgView: imgView)
@@ -236,6 +240,18 @@ class GroceryItemVC: UIViewController, EasyAlert {
     let imagePickerController = ImagePickerController()
     imagePickerController.delegate = self
     present(imagePickerController, animated: true, completion: nil)
+  }
+  
+// MARK: Injectable methods
+  
+  func inject(_ viewModel: GroceryItemVMType)
+  {
+    self.viewModel = viewModel
+  }
+  
+  func assertDependencies()
+  {
+    assert(viewModel != nil)
   }
   
 }

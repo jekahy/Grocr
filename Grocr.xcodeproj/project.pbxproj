@@ -25,6 +25,7 @@
 		E115FB2C1EDC17AA003C1C50 /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB2B1EDC17AA003C1C50 /* Grocery.swift */; };
 		E139E1C21EE6C62300E5CF3C /* GenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E139E1C11EE6C62300E5CF3C /* GenericCell.swift */; };
 		E145A51B1ED87CE000A1179E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */; };
+		E15FC7F91EF04C79005C1625 /* SegueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15FC7F81EF04C79005C1625 /* SegueExtension.swift */; };
 		E16068981EDDC8BE00C522D8 /* GroceryItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */; };
 		E16A76651EED614F004050E3 /* StorageReferenceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16A76641EED614F004050E3 /* StorageReferenceExtension.swift */; };
 		E1744D0D1EE7DAE100A17A27 /* ViewModelAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1744D0C1EE7DAE100A17A27 /* ViewModelAvailable.swift */; };
@@ -73,6 +74,7 @@
 		E139E1C11EE6C62300E5CF3C /* GenericCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenericCell.swift; path = Controls/GenericCell.swift; sourceTree = "<group>"; };
 		E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E157370A1ED88BC600DDBB82 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
+		E15FC7F81EF04C79005C1625 /* SegueExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SegueExtension.swift; path = Extensions/SegueExtension.swift; sourceTree = "<group>"; };
 		E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItemVC.swift; sourceTree = "<group>"; };
 		E16A76641EED614F004050E3 /* StorageReferenceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StorageReferenceExtension.swift; path = Extensions/StorageReferenceExtension.swift; sourceTree = "<group>"; };
 		E1744D0C1EE7DAE100A17A27 /* ViewModelAvailable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModelAvailable.swift; path = Protocols/ViewModelAvailable.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				E103D9F31EE1EB3100ECC881 /* DictionaryExtension.swift */,
 				E103D9F51EE2C7FA00ECC881 /* BoolExtension.swift */,
 				E16A76641EED614F004050E3 /* StorageReferenceExtension.swift */,
+				E15FC7F81EF04C79005C1625 /* SegueExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				E1F113081EE0033C0055621C /* LoginVM.swift in Sources */,
 				E115FB1E1ED9BB85003C1C50 /* AlertActionExtension.swift in Sources */,
 				E1DD64DE1ED8ACD100D596A5 /* EasyAlert.swift in Sources */,
+				E15FC7F91EF04C79005C1625 /* SegueExtension.swift in Sources */,
 				E18FC71E1EEC07C90032316E /* TextView.swift in Sources */,
 				E115FB2A1EDC14AA003C1C50 /* GroceryListVC.swift in Sources */,
 				E1A629C11EEF152D0042C325 /* Injectable.swift in Sources */,

@@ -18,4 +18,7 @@ pod 'DownloadButton'
 
 pod 'RxSwift'
 pod 'RxCocoa'
+
+pod 'Perform', '~> 2.0'
+
 end

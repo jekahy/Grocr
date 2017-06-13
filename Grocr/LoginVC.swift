@@ -29,7 +29,6 @@ class LoginVC: UIViewController, Validatable, EasyAlert {
   fileprivate typealias EmptyClosure = ()->()
   
   // MARK: Constants
-  fileprivate static let loginToList = "LoginToList"
   fileprivate let validationFailedMess = "It looks like something is wrong with the input data. Here what we've found: "
   fileprivate let willCheckTitle = "OK, I'll check it out"
   
@@ -67,7 +66,7 @@ class LoginVC: UIViewController, Validatable, EasyAlert {
     super.viewDidLoad()
     viewModel = LoginVM(signInHandler: { [weak self] succeded in
       if succeded {
-        self?.performSegue(withIdentifier: LoginVC.loginToList, sender: nil)
+        self?.perform(.showGroceryListVC)
       }
     })
     setupValidator()

@@ -1,4 +1,5 @@
 PODS:
+  - Aspects (1.4.1)
   - DownloadButton (0.1.0)
   - Firebase/Auth (4.0.0):
     - Firebase/Core
@@ -46,6 +47,8 @@ PODS:
   - GTMSessionFetcher/Core (1.1.10)
   - ImagePicker (2.1.1)
   - ObjectMapper (2.2.7)
+  - Perform (2.0.0):
+    - Aspects (~> 1.4)
   - RxCocoa (3.5.0):
     - RxSwift (~> 3.4)
   - RxSwift (3.5.0)
@@ -63,6 +66,7 @@ DEPENDENCIES:
   - FirebaseUI/Storage
   - ImagePicker
   - ObjectMapper (~> 2.2)
+  - Perform (~> 2.0)
   - RxCocoa
   - RxSwift
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
@@ -78,6 +82,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/jpotts18/SwiftValidator.git
 
 SPEC CHECKSUMS:
+  Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
   Firebase: 284eea779b73fdff309791817da7c68bff8dd572
   FirebaseAnalytics: 6f08e746f7d66f5452931bc2e822b5df9c66b64a
@@ -91,11 +96,12 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
   ImagePicker: fe4c699abb56ff03994fa98d8b02e3883ee118be
   ObjectMapper: 65abcfd9a61cf7396cbd14a4fb22fddfcc46577e
+  Perform: c36a03be22c9d368e3ce9effaa234e89b12c6970
   RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
   RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
 
-PODFILE CHECKSUM: 93c2b4b7ceaeb503c0cc5de7c491893aad675e6a
+PODFILE CHECKSUM: 85a3cb6281f8a549aa34a39cf39a16e610a0e883
 
 COCOAPODS: 1.2.1

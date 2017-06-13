@@ -13,7 +13,6 @@ import RxCocoa
 class GroceryListVC:UIViewController {
 
   fileprivate let cellIdentifier = "listCell"
-  fileprivate static let toGRVCSegueID = "toGRListVC"
   fileprivate let viewModel:GroceryListType = GroceryListVM()
   fileprivate var disposeBag:DisposeBag! = DisposeBag()
   
@@ -34,7 +33,9 @@ class GroceryListVC:UIViewController {
       if let selectedRowIndexPath = self?.tableView.indexPathForSelectedRow {
         self?.tableView.deselectRow(at: selectedRowIndexPath, animated: true)
       }
-      self?.performSegue(withIdentifier:GroceryListVC.toGRVCSegueID , sender: groceryVM)
+      self?.perform(.showGroceryVC) { destVC in
+        destVC.inject(groceryVM)
+      }
       
     }).disposed(by: disposeBag)
     
@@ -62,14 +63,6 @@ class GroceryListVC:UIViewController {
     
     
     present(alert, animated: true, completion: nil)
-  }
-  
-//  MARK: Prepare for segue
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let groceryVC = segue.destination as? GroceryVC, let groceryVM = sender as? GroceryVMType {
-      groceryVC.inject(groceryVM)
-    }
   }
 
 }

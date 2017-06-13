@@ -31,8 +31,6 @@ class GroceryVC: UIViewController,UITableViewDelegate, Injectable {
   
   typealias T = GroceryVMType
   // MARK: Constants
-  fileprivate let ref = Database.database().reference(withPath: "grocery-items")
-  fileprivate let toGroceryItemVC = "toGroceryItemVC"
   fileprivate let cellIdentifier = "itemCell"
 
   // MARK: Properties
@@ -62,7 +60,9 @@ class GroceryVC: UIViewController,UITableViewDelegate, Injectable {
 
     tableView.rx.modelSelected(GroceryItemVM.self).subscribe {[unowned self] next in
       
-      self.performSegue(withIdentifier: self.toGroceryItemVC, sender: next.element)
+      self.perform(.showGroceryItemVC) { destVC in
+        destVC.inject(next.element!)
+      }
       
     }.disposed(by: disposeBag)
   
@@ -94,13 +94,6 @@ class GroceryVC: UIViewController,UITableViewDelegate, Injectable {
     present(alert, animated: true, completion: nil)
   }
   
-//  MARK: Prepare for segue
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if segue.identifier == toGroceryItemVC, let itemVC = segue.destination as? GroceryItemVC, let vm = sender as? GroceryItemVMType {
-      itemVC.inject(vm)
-    }
-  }
   
 //  MARK: TableView delegate method
   

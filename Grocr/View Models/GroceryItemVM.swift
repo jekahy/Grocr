@@ -9,7 +9,6 @@
 import RxSwift
 import RxCocoa
 import FirebaseDatabase
-import FirebaseStorage
 
 enum ImageUploadError:Error {
   
@@ -77,7 +76,8 @@ final class GroceryItemVM:GroceryItemVMType {
         self.amountSubj.onNext(item.amount)
         self.descriptionSubj.onNext(item.itemDescription)
         self.completedSubj.onNext(item.completed)
-        self.groceryItem?.imageURL?.bind(to:self.imgURLSubj).disposed(by: self.disposeBag)
+        let urlExtractor = FileURLExtractor.imageURL(self.groceryItem?.imageID)
+        urlExtractor?.bind(to:self.imgURLSubj).disposed(by: self.disposeBag)
         
       }
     })

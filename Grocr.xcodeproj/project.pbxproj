@@ -16,6 +16,7 @@
 		BB2385841B3DD8660079CD01 /* GroceryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385831B3DD8660079CD01 /* GroceryVC.swift */; };
 		BB23858A1B3DD9640079CD01 /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385891B3DD9640079CD01 /* GroceryItem.swift */; };
 		BB7DA5111B42C8100018B530 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7DA5101B42C8100018B530 /* User.swift */; };
+		E10335581EF0687E0064072E /* FIRStorageLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10335571EF0687E0064072E /* FIRStorageLocations.swift */; };
 		E103D9F41EE1EB3100ECC881 /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E103D9F31EE1EB3100ECC881 /* DictionaryExtension.swift */; };
 		E103D9F61EE2C7FA00ECC881 /* BoolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E103D9F51EE2C7FA00ECC881 /* BoolExtension.swift */; };
 		E115FB1E1ED9BB85003C1C50 /* AlertActionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB1D1ED9BB85003C1C50 /* AlertActionExtension.swift */; };
@@ -27,6 +28,7 @@
 		E145A51B1ED87CE000A1179E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */; };
 		E15FC7F91EF04C79005C1625 /* SegueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15FC7F81EF04C79005C1625 /* SegueExtension.swift */; };
 		E15FC7FC1EF05F96005C1625 /* FIRDatabaseLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15FC7FB1EF05F96005C1625 /* FIRDatabaseLocations.swift */; };
+		E15FC8011EF0654A005C1625 /* FileURLExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15FC8001EF0654A005C1625 /* FileURLExtractor.swift */; };
 		E16068981EDDC8BE00C522D8 /* GroceryItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */; };
 		E16A76651EED614F004050E3 /* StorageReferenceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16A76641EED614F004050E3 /* StorageReferenceExtension.swift */; };
 		E1744D0D1EE7DAE100A17A27 /* ViewModelAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1744D0C1EE7DAE100A17A27 /* ViewModelAvailable.swift */; };
@@ -65,6 +67,7 @@
 		BB2385851B3DD8820079CD01 /* Grocr-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Grocr-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB2385891B3DD9640079CD01 /* GroceryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItem.swift; sourceTree = "<group>"; };
 		BB7DA5101B42C8100018B530 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E10335571EF0687E0064072E /* FIRStorageLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FIRStorageLocations.swift; path = Enums/FIRStorageLocations.swift; sourceTree = "<group>"; };
 		E103D9F31EE1EB3100ECC881 /* DictionaryExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DictionaryExtension.swift; path = Extensions/DictionaryExtension.swift; sourceTree = "<group>"; };
 		E103D9F51EE2C7FA00ECC881 /* BoolExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoolExtension.swift; path = Extensions/BoolExtension.swift; sourceTree = "<group>"; };
 		E115FB1D1ED9BB85003C1C50 /* AlertActionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertActionExtension.swift; path = Extensions/AlertActionExtension.swift; sourceTree = "<group>"; };
@@ -77,6 +80,7 @@
 		E157370A1ED88BC600DDBB82 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
 		E15FC7F81EF04C79005C1625 /* SegueExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SegueExtension.swift; path = Extensions/SegueExtension.swift; sourceTree = "<group>"; };
 		E15FC7FB1EF05F96005C1625 /* FIRDatabaseLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FIRDatabaseLocations.swift; path = Enums/FIRDatabaseLocations.swift; sourceTree = "<group>"; };
+		E15FC8001EF0654A005C1625 /* FileURLExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileURLExtractor.swift; sourceTree = "<group>"; };
 		E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItemVC.swift; sourceTree = "<group>"; };
 		E16A76641EED614F004050E3 /* StorageReferenceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StorageReferenceExtension.swift; path = Extensions/StorageReferenceExtension.swift; sourceTree = "<group>"; };
 		E1744D0C1EE7DAE100A17A27 /* ViewModelAvailable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModelAvailable.swift; path = Protocols/ViewModelAvailable.swift; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				E157370A1ED88BC600DDBB82 /* Grocr.entitlements */,
+				E15FC7FD1EF06347005C1625 /* Firebase */,
 				E15FC7FA1EF05F54005C1625 /* Enums */,
 				E1DD64DA1ED8AA3500D596A5 /* Extensions */,
 				E1DD64D51ED8A69700D596A5 /* Protocols */,
@@ -220,8 +225,17 @@
 			isa = PBXGroup;
 			children = (
 				E15FC7FB1EF05F96005C1625 /* FIRDatabaseLocations.swift */,
+				E10335571EF0687E0064072E /* FIRStorageLocations.swift */,
 			);
 			name = Enums;
+			sourceTree = "<group>";
+		};
+		E15FC7FD1EF06347005C1625 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				E15FC8001EF0654A005C1625 /* FileURLExtractor.swift */,
+			);
+			name = Firebase;
 			sourceTree = "<group>";
 		};
 		E189FC071EE5666D00278F50 /* Cells */ = {
@@ -420,6 +434,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E15FC8011EF0654A005C1625 /* FileURLExtractor.swift in Sources */,
 				BB2385641B3DD5AB0079CD01 /* LoginVC.swift in Sources */,
 				E1DD64D91ED8A7EA00D596A5 /* Validatable.swift in Sources */,
 				BB2385841B3DD8660079CD01 /* GroceryVC.swift in Sources */,
@@ -431,6 +446,7 @@
 				E115FB1E1ED9BB85003C1C50 /* AlertActionExtension.swift in Sources */,
 				E1DD64DE1ED8ACD100D596A5 /* EasyAlert.swift in Sources */,
 				E15FC7F91EF04C79005C1625 /* SegueExtension.swift in Sources */,
+				E10335581EF0687E0064072E /* FIRStorageLocations.swift in Sources */,
 				E18FC71E1EEC07C90032316E /* TextView.swift in Sources */,
 				E115FB2A1EDC14AA003C1C50 /* GroceryListVC.swift in Sources */,
 				E1A629C11EEF152D0042C325 /* Injectable.swift in Sources */,

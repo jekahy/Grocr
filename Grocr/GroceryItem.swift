@@ -22,14 +22,11 @@
 
 import Foundation
 import FirebaseDatabase
-import FirebaseStorage
 import ObjectMapper
 import RxSwift
 
 struct GroceryItem:FRModel {
   
-  fileprivate let storageRef = Storage.storage().reference().child("grocery-items-images")
-
   var ref: DatabaseReference!
   var key: String!
   
@@ -42,13 +39,7 @@ struct GroceryItem:FRModel {
   var itemDescription:String?
   var completed = false
   var imageID:String?
-  var imageURL:Observable<URL?>?{
-    let storageRef = Storage.storage().reference().child("grocery-items-images")
-    if let imgID = imageID{
-      return storageRef.child(imgID).downloadURL
-    }
-    return nil
-  }
+  
   
   init?(map: Map) {}
 

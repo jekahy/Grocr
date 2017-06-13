@@ -25,11 +25,9 @@ protocol GroceryVMType:class {
 
 final class GroceryVM: GroceryVMType {
   
-  fileprivate static let groceriesPath = "grocery-lists"
-  fileprivate static let itemsPath = "grocery-items"
   fileprivate let groceryRef:DatabaseReference
   fileprivate let groceryItemsRef:DatabaseReference
-  fileprivate let itemsRef = Database.database().reference(withPath: itemsPath)
+  fileprivate let itemsRef = FIRDatabaseLocation.items.reference()
 
   fileprivate let itemsVar = Variable<[GroceryItemVMType]>([])
   lazy var itemVMs:Observable<[GroceryItemVMType]> = self.itemsVar.asObservable()
@@ -49,7 +47,7 @@ final class GroceryVM: GroceryVMType {
   
   init(_ groceryID:String)
   {
-    groceryRef = Database.database().reference(withPath: GroceryVM.groceriesPath).child("\(groceryID)")
+    groceryRef = FIRDatabaseLocation.lists.reference().child("\(groceryID)")
     groceryItemsRef = groceryRef.child("items")
     
     groceryRef.observe(.value, with: {[weak self]  snapshot in

@@ -26,6 +26,7 @@
 		E139E1C21EE6C62300E5CF3C /* GenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E139E1C11EE6C62300E5CF3C /* GenericCell.swift */; };
 		E145A51B1ED87CE000A1179E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */; };
 		E15FC7F91EF04C79005C1625 /* SegueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15FC7F81EF04C79005C1625 /* SegueExtension.swift */; };
+		E15FC7FC1EF05F96005C1625 /* FIRDatabaseLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15FC7FB1EF05F96005C1625 /* FIRDatabaseLocations.swift */; };
 		E16068981EDDC8BE00C522D8 /* GroceryItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */; };
 		E16A76651EED614F004050E3 /* StorageReferenceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16A76641EED614F004050E3 /* StorageReferenceExtension.swift */; };
 		E1744D0D1EE7DAE100A17A27 /* ViewModelAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1744D0C1EE7DAE100A17A27 /* ViewModelAvailable.swift */; };
@@ -75,6 +76,7 @@
 		E145A51A1ED87CE000A1179E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E157370A1ED88BC600DDBB82 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
 		E15FC7F81EF04C79005C1625 /* SegueExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SegueExtension.swift; path = Extensions/SegueExtension.swift; sourceTree = "<group>"; };
+		E15FC7FB1EF05F96005C1625 /* FIRDatabaseLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FIRDatabaseLocations.swift; path = Enums/FIRDatabaseLocations.swift; sourceTree = "<group>"; };
 		E16068971EDDC8BE00C522D8 /* GroceryItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItemVC.swift; sourceTree = "<group>"; };
 		E16A76641EED614F004050E3 /* StorageReferenceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StorageReferenceExtension.swift; path = Extensions/StorageReferenceExtension.swift; sourceTree = "<group>"; };
 		E1744D0C1EE7DAE100A17A27 /* ViewModelAvailable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModelAvailable.swift; path = Protocols/ViewModelAvailable.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				E157370A1ED88BC600DDBB82 /* Grocr.entitlements */,
+				E15FC7FA1EF05F54005C1625 /* Enums */,
 				E1DD64DA1ED8AA3500D596A5 /* Extensions */,
 				E1DD64D51ED8A69700D596A5 /* Protocols */,
 				E1DD64D41ED8A4FD00D596A5 /* Controls */,
@@ -211,6 +214,14 @@
 				BB2385611B3DD5AB0079CD01 /* AppDelegate.swift */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		E15FC7FA1EF05F54005C1625 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				E15FC7FB1EF05F96005C1625 /* FIRDatabaseLocations.swift */,
+			);
+			name = Enums;
 			sourceTree = "<group>";
 		};
 		E189FC071EE5666D00278F50 /* Cells */ = {
@@ -432,6 +443,7 @@
 				E16068981EDDC8BE00C522D8 /* GroceryItemVC.swift in Sources */,
 				E1DD64D71ED8A6B600D596A5 /* ErrorBorder.swift in Sources */,
 				E19ADEA11EDC468200F18BB7 /* FRModel.swift in Sources */,
+				E15FC7FC1EF05F96005C1625 /* FIRDatabaseLocations.swift in Sources */,
 				E115FB201ED9C19A003C1C50 /* AlertVCExtension.swift in Sources */,
 				E103D9F41EE1EB3100ECC881 /* DictionaryExtension.swift in Sources */,
 				E1F1130A1EE02B4F0055621C /* GroceryListVM.swift in Sources */,

@@ -38,7 +38,7 @@ protocol GroceryItemVMType:class {
 final class GroceryItemVM:GroceryItemVMType {
   
   
-  fileprivate let groceriesRef = Database.database().reference(withPath: "grocery-lists")
+  fileprivate let groceriesRef = FIRDatabaseLocation.lists.reference()
   fileprivate let itemRef:DatabaseReference
   
   fileprivate let titleSubj = BehaviorSubject<String>(value: "")
@@ -67,7 +67,7 @@ final class GroceryItemVM:GroceryItemVMType {
 
 
     itemID = groceryItemID
-    itemRef = Database.database().reference(withPath: "grocery-items/\(groceryItemID)")
+    itemRef = FIRDatabaseLocation.items.reference().child("\(groceryItemID)")
     
     itemRef.observe(.value, with: {[unowned self] snapshot in
       

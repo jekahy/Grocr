@@ -19,7 +19,7 @@ protocol GroceryListType {
 final class GroceryListVM : GroceryListType {
 
   
-  fileprivate let ref = Database.database().reference(withPath: "grocery-lists")
+  fileprivate let ref = FIRDatabaseLocation.lists.reference()
 
   fileprivate let groceriesVar = Variable<[GroceryVM]>([])
   lazy var groceryVMs: Observable<[GroceryVM]> = self.groceriesVar.asObservable()
@@ -36,7 +36,6 @@ final class GroceryListVM : GroceryListType {
     })
     
     ref.observe(.childRemoved, with: { [weak self] snapshot in
-      
       
         if let idxToDelete = self?.groceriesVar.value.index(where: {$0.groceryID == snapshot.key}){
           self?.groceriesVar.value.remove(at: idxToDelete)

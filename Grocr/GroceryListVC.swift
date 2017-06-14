@@ -13,7 +13,7 @@ import RxCocoa
 class GroceryListVC:UIViewController {
 
   fileprivate let cellIdentifier = "listCell"
-  fileprivate let viewModel:GroceryListType = GroceryListVM()
+  fileprivate let viewModel:GroceryListType = GroceryListVM(api: APIManager())
   fileprivate var disposeBag:DisposeBag! = DisposeBag()
   
   @IBOutlet weak var tableView: UITableView!

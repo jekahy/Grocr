@@ -7,7 +7,6 @@
 //
 
 import RxSwift
-import FirebaseDatabase
 
 protocol GroceryListType {
   
@@ -18,49 +17,32 @@ protocol GroceryListType {
 
 final class GroceryListVM : GroceryListType {
 
+  private let apiManager : APIProtocol
+  lazy var groceryVMs: Observable<[GroceryVM]> = self.apiManager.getGroceries().map({$0.map({GroceryVM($0, api: APIManager())})})
   
-  fileprivate let ref = FIRDatabaseLocation.lists.reference()
-
-  fileprivate let groceriesVar = Variable<[GroceryVM]>([])
-  lazy var groceryVMs: Observable<[GroceryVM]> = self.groceriesVar.asObservable()
   
-  init()
+  init(api:APIProtocol)
   {
-    ref.observe(.childAdded, with: { [weak self] snapshot in
-      
-      if let grocery = Grocery(snapshot:snapshot){
-        
-        self?.groceriesVar.value.append(GroceryVM(grocery.key))
-      }
-      
-    })
-    
-    ref.observe(.childRemoved, with: { [weak self] snapshot in
-      
-        if let idxToDelete = self?.groceriesVar.value.index(where: {$0.groceryID == snapshot.key}){
-          self?.groceriesVar.value.remove(at: idxToDelete)
-        }
-      
-    })
+    apiManager = api
   }
   
   
   func addGrocery(_ name: String)
   {
-    
-    let grListRef = ref.childByAutoId()
-    let grList = Grocery(name: name, ref: grListRef)
-    grListRef.setValue(grList.jsonStr)
+    apiManager.addGrocery(name)
+//    let grListRef = ref.childByAutoId()
+//    let grList = Grocery(name: name, ref: grListRef)
+//    grListRef.setValue(grList.jsonStr)
 
   }
   
   func removeGrocery(atIndex index:Int)
   {
-    groceriesVar.value[index].removeFromDB()
-  }
-
-  deinit {
+//    if let grocery = groceriesVar.value[index].grocery {
+//      apiManager.removeGrocery(grocery)
+//    }
+//    groceriesVar.value[index].removeFromDB()
     
-    ref.removeAllObservers()
+    
   }
 }

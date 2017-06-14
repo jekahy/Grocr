@@ -15,6 +15,7 @@ protocol GroceryVMType:class {
   var title: Driver<String>{get}
   var count: Driver<String>{get}
   var groceryID:String {get}
+  var grocery:Grocery!{get}
   func removeFromDB()
 
   func addItem(_ name:String)
@@ -25,12 +26,8 @@ protocol GroceryVMType:class {
 
 final class GroceryVM: GroceryVMType {
   
-  fileprivate let groceryRef:DatabaseReference
-  fileprivate let groceryItemsRef:DatabaseReference
-  fileprivate let itemsRef = FIRDatabaseLocation.items.reference()
+  lazy var itemVMs:Observable<[GroceryItemVMType]> = self.apiManager.getGroceryItems(self.grocery).map({$0.map({GroceryItemVM($0)})})
 
-  fileprivate let itemsVar = Variable<[GroceryItemVMType]>([])
-  lazy var itemVMs:Observable<[GroceryItemVMType]> = self.itemsVar.asObservable()
 
   fileprivate (set) lazy var title: Driver<String> = self.titleSubj.asDriver(onErrorJustReturn: "")
   fileprivate (set) lazy var count: Driver<String> = self.countSubj.asDriver(onErrorJustReturn: "")
@@ -39,18 +36,20 @@ final class GroceryVM: GroceryVMType {
   fileprivate let countSubj = BehaviorSubject<String>(value: "")
 
 
-  fileprivate var grocery:Grocery!
+  fileprivate (set) var grocery:Grocery!
+  private let apiManager : APIProtocol
+  private let disposeBag = DisposeBag()
   
   var groceryID: String {
     return grocery.key
   }
   
-  init(_ groceryID:String)
+  init(_ grocery:Grocery, api:APIProtocol)
   {
-    groceryRef = FIRDatabaseLocation.lists.reference().child("\(groceryID)")
-    groceryItemsRef = groceryRef.child("items")
+    apiManager = api
+    self.grocery = grocery
     
-    groceryRef.observe(.value, with: {[weak self]  snapshot in
+    self.grocery.ref.observe(.value, with: {[weak self]  snapshot in
       
       if let groc = Grocery(snapshot: snapshot){
         self?.grocery = groc
@@ -62,52 +61,30 @@ final class GroceryVM: GroceryVMType {
       }
     })
 
-   
-    groceryItemsRef.observe(.childRemoved, with: { [weak self] snapshot in
-      
-      if let idxToDelete = self?.itemsVar.value.index(where: {$0.itemID == snapshot.key}){
-          self?.itemsVar.value.remove(at: idxToDelete)
-      }
-    })
-    
-    groceryItemsRef.observe(.childAdded, with: { [weak self] snapshot in
-      
-      let item = GroceryItemVM(snapshot.key)
-      self?.itemsVar.value.append(item)
-    })
   }
   
   func addItem(_ name: String)
   {
-    
-    let groceryItemRef = itemsRef.childByAutoId()
-    
-    let groceryItem = GroceryItem(name: name,
-                                  addedByUser: Auth.auth().currentUser?.email,
-                                  groceryID:groceryID,
-                                  ref: groceryItemRef)
-    
-    groceryItemRef.setValue(groceryItem.jsonStr)
-    groceryItemsRef.updateChildValues([groceryItem.key : false])
-  
+    apiManager.addGroceryItem(name, to: grocery)
   }
   
   func removeFromDB()
   {
-    var itemsToRemove = [String:AnyObject]()
-    grocery.items.keys.forEach{itemsToRemove[$0]=NSNull()}
-    itemsRef.updateChildValues(itemsToRemove)
-    groceryRef.removeAllObservers()
-    groceryRef.removeValue()
+    
+//    var itemsToRemove = [String:AnyObject]()
+//    grocery.items.keys.forEach{itemsToRemove[$0]=NSNull()}
+//    itemsRef.updateChildValues(itemsToRemove)
+//    groceryRef.removeAllObservers()
+//    groceryRef.removeValue()
 
   }
 
   
   func removeItem(atIndex index:Int)
   {
-    let itemVM = itemsVar.value[index]
-    groceryItemsRef.updateChildValues([itemVM.itemID : NSNull()])
-    itemVM.removeFromDB()
+//    let itemVM = itemsVar.value[index]
+//    groceryItemsRef.updateChildValues([itemVM.itemID : NSNull()])
+//    itemVM.removeFromDB()
   }
   
   deinit
@@ -116,7 +93,6 @@ final class GroceryVM: GroceryVMType {
     countSubj.onCompleted()
     titleSubj.dispose()
     countSubj.dispose()
-    groceryRef.removeAllObservers()
-    groceryItemsRef.removeAllObservers()
+
   }
 }

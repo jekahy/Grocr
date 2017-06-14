@@ -17,6 +17,7 @@
 		BB23858A1B3DD9640079CD01 /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385891B3DD9640079CD01 /* GroceryItem.swift */; };
 		BB7DA5111B42C8100018B530 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7DA5101B42C8100018B530 /* User.swift */; };
 		E10335581EF0687E0064072E /* FIRStorageLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10335571EF0687E0064072E /* FIRStorageLocations.swift */; };
+		E103355B1EF152420064072E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E103355A1EF152420064072E /* APIManager.swift */; };
 		E103D9F41EE1EB3100ECC881 /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E103D9F31EE1EB3100ECC881 /* DictionaryExtension.swift */; };
 		E103D9F61EE2C7FA00ECC881 /* BoolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E103D9F51EE2C7FA00ECC881 /* BoolExtension.swift */; };
 		E115FB1E1ED9BB85003C1C50 /* AlertActionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115FB1D1ED9BB85003C1C50 /* AlertActionExtension.swift */; };
@@ -68,6 +69,7 @@
 		BB2385891B3DD9640079CD01 /* GroceryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItem.swift; sourceTree = "<group>"; };
 		BB7DA5101B42C8100018B530 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E10335571EF0687E0064072E /* FIRStorageLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FIRStorageLocations.swift; path = Enums/FIRStorageLocations.swift; sourceTree = "<group>"; };
+		E103355A1EF152420064072E /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		E103D9F31EE1EB3100ECC881 /* DictionaryExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DictionaryExtension.swift; path = Extensions/DictionaryExtension.swift; sourceTree = "<group>"; };
 		E103D9F51EE2C7FA00ECC881 /* BoolExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoolExtension.swift; path = Extensions/BoolExtension.swift; sourceTree = "<group>"; };
 		E115FB1D1ED9BB85003C1C50 /* AlertActionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertActionExtension.swift; path = Extensions/AlertActionExtension.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				E157370A1ED88BC600DDBB82 /* Grocr.entitlements */,
+				E10335591EF152190064072E /* API */,
 				E15FC7FD1EF06347005C1625 /* Firebase */,
 				E15FC7FA1EF05F54005C1625 /* Enums */,
 				E1DD64DA1ED8AA3500D596A5 /* Extensions */,
@@ -219,6 +222,14 @@
 				BB2385611B3DD5AB0079CD01 /* AppDelegate.swift */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		E10335591EF152190064072E /* API */ = {
+			isa = PBXGroup;
+			children = (
+				E103355A1EF152420064072E /* APIManager.swift */,
+			);
+			name = API;
 			sourceTree = "<group>";
 		};
 		E15FC7FA1EF05F54005C1625 /* Enums */ = {
@@ -470,6 +481,7 @@
 				E115FB2C1EDC17AA003C1C50 /* Grocery.swift in Sources */,
 				E18FC71A1EEBF8120032316E /* Editable.swift in Sources */,
 				BB7DA5111B42C8100018B530 /* User.swift in Sources */,
+				E103355B1EF152420064072E /* APIManager.swift in Sources */,
 				BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */,
 				E139E1C21EE6C62300E5CF3C /* GenericCell.swift in Sources */,
 			);

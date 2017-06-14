@@ -62,23 +62,27 @@ final class GroceryItemVM:GroceryItemVMType {
   let itemID: String
   
   
-  init(_ groceryItemID:String) {
+  init(_ groceryItem:GroceryItem) {
 
 
-    itemID = groceryItemID
-    itemRef = FIRDatabaseLocation.items.reference().child("\(groceryItemID)")
+    itemID = groceryItem.key
+    itemRef = groceryItem.ref
     
-    itemRef.observe(.value, with: {[unowned self] snapshot in
+    itemRef.observe(.value, with: {[weak self] snapshot in
       
       if let item = GroceryItem(snapshot: snapshot){
-        self.groceryItem = item
-        self.titleSubj.onNext(item.name)
-        self.amountSubj.onNext(item.amount)
-        self.descriptionSubj.onNext(item.itemDescription)
-        self.completedSubj.onNext(item.completed)
-        let urlExtractor = FileURLExtractor.imageURL(self.groceryItem?.imageID)
-        urlExtractor?.bind(to:self.imgURLSubj).disposed(by: self.disposeBag)
+        self?.groceryItem = item
+        self?.titleSubj.onNext(item.name)
+        self?.amountSubj.onNext(item.amount)
+        self?.descriptionSubj.onNext(item.itemDescription)
+        self?.completedSubj.onNext(item.completed)
         
+        if let strSelf = self {
+          let urlExtractor = FileURLExtractor.imageURL(strSelf.groceryItem?.imageID)
+          urlExtractor?.bind(to:strSelf.imgURLSubj).disposed(by: strSelf.disposeBag)
+        }
+        
+
       }
     })
     

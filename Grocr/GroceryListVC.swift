@@ -60,8 +60,7 @@ class GroceryListVC:UIViewController {
     alert.addTextField()
     alert.addAction(saveAction)
     alert.addAction(.cancel)
-    
-    
+  
     present(alert, animated: true, completion: nil)
   }
 
@@ -74,7 +73,9 @@ extension GroceryListVC:UITableViewDelegate {
     let deleteAction = UITableViewRowAction(style: .destructive, title: "Remove") {
       [weak self] _, indexPath in
       
-      self?.viewModel.removeGrocery(atIndex: indexPath.row)
+      if let groceryVM:GroceryVMType = try? tableView.rx.model(at: indexPath){
+        self?.viewModel.removeGrocery(groceryVM)
+      }
     }
     return [deleteAction]
   }

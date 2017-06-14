@@ -12,7 +12,7 @@ protocol GroceryListType {
   
   var groceryVMs:Observable<[GroceryVM]>{get}
   func addGrocery(_ name:String)
-  func removeGrocery(atIndex index:Int)
+  func removeGrocery(_ grocery:GroceryVMType)
 }
 
 final class GroceryListVM : GroceryListType {
@@ -30,19 +30,10 @@ final class GroceryListVM : GroceryListType {
   func addGrocery(_ name: String)
   {
     apiManager.addGrocery(name)
-//    let grListRef = ref.childByAutoId()
-//    let grList = Grocery(name: name, ref: grListRef)
-//    grListRef.setValue(grList.jsonStr)
-
   }
   
-  func removeGrocery(atIndex index:Int)
+  func removeGrocery(_ groceryVM:GroceryVMType)
   {
-//    if let grocery = groceriesVar.value[index].grocery {
-//      apiManager.removeGrocery(grocery)
-//    }
-//    groceriesVar.value[index].removeFromDB()
-    
-    
+    apiManager.removeGrocery(groceryVM.grocery)
   }
 }

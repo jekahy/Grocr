@@ -14,13 +14,11 @@ protocol GroceryVMType:class {
   
   var title: Driver<String>{get}
   var count: Driver<String>{get}
-  var groceryID:String {get}
   var grocery:Grocery!{get}
-  func removeFromDB()
+  var itemVMs:Observable<[GroceryItemVMType]> {get}
 
   func addItem(_ name:String)
-  func removeItem(atIndex index:Int)
-  var itemVMs:Observable<[GroceryItemVMType]> {get}
+  func removeItem(_ itemVM:GroceryItemVMType)
 }
 
 
@@ -35,14 +33,10 @@ final class GroceryVM: GroceryVMType {
   fileprivate let titleSubj = BehaviorSubject<String>(value: "")
   fileprivate let countSubj = BehaviorSubject<String>(value: "")
 
-
   fileprivate (set) var grocery:Grocery!
   private let apiManager : APIProtocol
   private let disposeBag = DisposeBag()
   
-  var groceryID: String {
-    return grocery.key
-  }
   
   init(_ grocery:Grocery, api:APIProtocol)
   {
@@ -68,31 +62,14 @@ final class GroceryVM: GroceryVMType {
     apiManager.addGroceryItem(name, to: grocery)
   }
   
-  func removeFromDB()
+  func removeItem(_ itemVM:GroceryItemVMType)
   {
-    
-//    var itemsToRemove = [String:AnyObject]()
-//    grocery.items.keys.forEach{itemsToRemove[$0]=NSNull()}
-//    itemsRef.updateChildValues(itemsToRemove)
-//    groceryRef.removeAllObservers()
-//    groceryRef.removeValue()
-
-  }
-
-  
-  func removeItem(atIndex index:Int)
-  {
-//    let itemVM = itemsVar.value[index]
-//    groceryItemsRef.updateChildValues([itemVM.itemID : NSNull()])
-//    itemVM.removeFromDB()
+    apiManager.removeItem(itemVM.groceryItem, from: grocery)
   }
   
   deinit
   {
     titleSubj.onCompleted()
     countSubj.onCompleted()
-    titleSubj.dispose()
-    countSubj.dispose()
-
   }
 }

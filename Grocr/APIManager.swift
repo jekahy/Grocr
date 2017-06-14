@@ -108,10 +108,7 @@ final class APIManager : APIProtocol {
           }
         })
         
-        
       })
-      
-      
       
       return Disposables.create {
         groceryItemsRef.removeObserver(withHandle: h1)

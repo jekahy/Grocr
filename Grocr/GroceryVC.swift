@@ -95,14 +95,18 @@ class GroceryVC: UIViewController,UITableViewDelegate, Injectable {
   }
   
   
-//  MARK: TableView delegate method
+//  MARK: TableView delegate methods
   
   func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
     
     let deleteAction = UITableViewRowAction(style: .destructive, title: "Remove") {
       [weak self] _, indexPath in
       
-      self?.viewModel.removeItem(atIndex: indexPath.row)
+      if let itemVM:GroceryItemVMType = try? tableView.rx.model(at: indexPath){
+        self?.viewModel.removeItem(itemVM)
+      }
+      
+      
     }
     return [deleteAction]
   }

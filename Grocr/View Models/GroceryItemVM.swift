@@ -26,6 +26,8 @@ protocol GroceryItemVMType:class {
   var amount:Driver<String?>{get}
   var description:Driver<String?>{get}
   var updateCompleted:PublishSubject<Bool>{get}
+  
+  var groceryItem:GroceryItem! {get}
   var itemID:String{get}
   func removeFromDB()
   
@@ -55,7 +57,7 @@ final class GroceryItemVM:GroceryItemVMType {
 
   fileprivate var disposeBag:DisposeBag! = DisposeBag()
   
-  fileprivate var groceryItem:GroceryItem?
+  fileprivate (set) var groceryItem:GroceryItem!
   
   fileprivate var editVM:GroceryItemEditVM?
   

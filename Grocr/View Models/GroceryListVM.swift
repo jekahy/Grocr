@@ -18,7 +18,7 @@ protocol GroceryListType {
 final class GroceryListVM : GroceryListType {
 
   private let apiManager : APIProtocol
-  lazy var groceryVMs: Observable<[GroceryVM]> = self.apiManager.getGroceries().map({$0.map({GroceryVM($0, api: APIManager())})})
+  lazy var groceryVMs: Observable<[GroceryVM]> = self.apiManager.getGroceries().map({$0.map({GroceryVM($0.key, api: APIManager())})})
   
   
   init(api:APIProtocol)
@@ -34,6 +34,8 @@ final class GroceryListVM : GroceryListType {
   
   func removeGrocery(_ groceryVM:GroceryVMType)
   {
-    apiManager.removeGrocery(groceryVM.grocery)
+    if let grocery = groceryVM.grocery {
+      apiManager.removeGrocery(grocery)
+    }
   }
 }

@@ -8,15 +8,6 @@
 
 import RxSwift
 import RxCocoa
-import FirebaseDatabase
-
-enum ImageUploadError:Error {
-  
-  case failedWithMessage(String)
-  case failed
-  case cancelled
-}
-
 
 protocol GroceryItemVMType:class {
   
@@ -27,9 +18,7 @@ protocol GroceryItemVMType:class {
   var description:Driver<String?>{get}
   var updateCompleted:PublishSubject<Bool>{get}
   
-  var groceryItem:GroceryItem! {get}
-  var itemID:String{get}
-  func removeFromDB()
+  var groceryItem:GroceryItem? {get}
   
   func startEditing(title:Observable<String?>, amount:Observable<String?>, description:Observable<String?>, imageUploadEvent:Observable<UIImage>)->Observable<Double>
   func saveEditedData()
@@ -37,10 +26,6 @@ protocol GroceryItemVMType:class {
 }
 
 final class GroceryItemVM:GroceryItemVMType {
-  
-  
-  fileprivate let groceriesRef = FIRDatabaseLocation.lists.reference()
-  fileprivate let itemRef:DatabaseReference
   
   fileprivate let titleSubj = BehaviorSubject<String>(value: "")
   fileprivate let completedSubj = BehaviorSubject<Bool>(value: false)
@@ -57,44 +42,37 @@ final class GroceryItemVM:GroceryItemVMType {
 
   fileprivate var disposeBag:DisposeBag! = DisposeBag()
   
-  fileprivate (set) var groceryItem:GroceryItem!
+  fileprivate (set) var groceryItem:GroceryItem?
   
   fileprivate var editVM:GroceryItemEditVM?
   
-  let itemID: String
+  private let apiManager:APIProtocol
   
-  
-  init(_ groceryItem:GroceryItem) {
+  init(_ itemID:String, api:APIProtocol) {
 
-
-    itemID = groceryItem.key
-    itemRef = groceryItem.ref
+    apiManager = api
     
-    itemRef.observe(.value, with: {[weak self] snapshot in
+    apiManager.getGroceryItem(itemID).subscribe(onNext: {[weak self] item in
       
-      if let item = GroceryItem(snapshot: snapshot){
-        self?.groceryItem = item
-        self?.titleSubj.onNext(item.name)
-        self?.amountSubj.onNext(item.amount)
-        self?.descriptionSubj.onNext(item.itemDescription)
-        self?.completedSubj.onNext(item.completed)
-        
-        if let strSelf = self {
-          let urlExtractor = FileURLExtractor.imageURL(strSelf.groceryItem?.imageID)
-          urlExtractor?.bind(to:strSelf.imgURLSubj).disposed(by: strSelf.disposeBag)
-        }
-        
-
+      self?.groceryItem = item
+      self?.titleSubj.onNext(item.name)
+      self?.amountSubj.onNext(item.amount)
+      self?.descriptionSubj.onNext(item.itemDescription)
+      self?.completedSubj.onNext(item.completed)
+      
+      if let strSelf = self {
+        let urlExtractor = FileURLExtractor.imageURL(strSelf.groceryItem?.imageID)
+        urlExtractor?.bind(to:strSelf.imgURLSubj).disposed(by: strSelf.disposeBag)
       }
-    })
+
+    }).disposed(by: disposeBag)
+    
     
     updateCompleted.asObservable()
       .subscribe(onNext: {[weak self]  newVal in
         if let item = self?.groceryItem{
-          self?.itemRef.child("completed").setValue(newVal)
-          self?.groceriesRef.child("\(item.groceryID!)/items").updateChildValues([item.key:newVal])
+          self?.apiManager.updateGroceryItemCompletion(item, completed: newVal)
         }
-        
       }).disposed(by: disposeBag)
   }
   
@@ -115,14 +93,9 @@ final class GroceryItemVM:GroceryItemVMType {
     editVM = nil
   }
   
-  func removeFromDB()
+  
+  deinit
   {
-    itemRef.removeValue()
-  }
-  
-  
-  deinit {
-    itemRef.removeAllObservers()
     updateCompleted.onCompleted()
 
   }

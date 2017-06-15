@@ -11,13 +11,16 @@ import FirebaseDatabase
 
 protocol APIProtocol {
   
+  func getGrocery(_ groceryID:String)->Observable<Grocery>
   func getGroceries() -> Observable<[Grocery]>
-  func getGroceryItems(_ grocery:Grocery) -> Observable<[GroceryItem]>
   func addGrocery(_ name: String)
-  func addGroceryItem(_ name: String, to:Grocery)
   func removeGrocery(_ grocery: Grocery)
-  func removeItem(_ grocery: GroceryItem, from:Grocery)
-  
+
+  func getGroceryItem(_ itemID:String)->Observable<GroceryItem>
+  func getGroceryItems(_ grocery:Grocery) -> Observable<[GroceryItem]>
+  func addGroceryItem(_ name: String, to:Grocery)
+  func removeItem(_ item: GroceryItem, from:Grocery)
+  func updateGroceryItemCompletion(_ item:GroceryItem,  completed:Bool)
 }
 
 
@@ -34,6 +37,22 @@ final class APIManager : APIProtocol {
     let grListRef = APIManager.listsRef.childByAutoId()
     let grList = Grocery(name: name, ref: grListRef)
     grListRef.setValue(grList.jsonStr)
+  }
+  
+  func getGrocery(_ groceryID:String)->Observable<Grocery>
+  {
+    return Observable<Grocery>.create({ observer -> Disposable in
+      
+      let ref = APIManager.listsRef.child(groceryID)
+      let h = ref.observe(.value, with: { snapshot in
+        if let groc = Grocery(snapshot: snapshot){
+          observer.onNext(groc)
+        }
+      })
+      return Disposables.create {
+        ref.removeObserver(withHandle: h)
+      }
+    })
   }
   
   func removeGrocery(_ grocery: Grocery)
@@ -81,6 +100,24 @@ final class APIManager : APIProtocol {
   }
   
   
+  
+  func getGroceryItem(_ itemID:String)->Observable<GroceryItem>
+  {
+    return Observable<GroceryItem>.create({ observer -> Disposable in
+      
+      let ref = APIManager.itemsRef.child(itemID)
+      let h = ref.observe(.value, with: { snapshot in
+        if let item = GroceryItem(snapshot: snapshot){
+          observer.onNext(item)
+        }
+      })
+      return Disposables.create {
+        ref.removeObserver(withHandle: h)
+      }
+    })
+  }
+  
+  
   func getGroceryItems(_ grocery:Grocery) -> Observable<[GroceryItem]>
   {
 
@@ -117,8 +154,14 @@ final class APIManager : APIProtocol {
       
     })
     
-}
+  }
   
+  
+  func updateGroceryItemCompletion(_ item:GroceryItem,  completed:Bool)
+  {
+    item.ref.child("completed").setValue(completed)
+    APIManager.listsRef.child("\(item.groceryID!)/items").updateChildValues([item.key:completed])
+  }
   
   
 }

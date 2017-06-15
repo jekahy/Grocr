@@ -8,13 +8,12 @@
 
 import RxSwift
 import RxCocoa
-import FirebaseDatabase
 
 protocol GroceryVMType:class {
   
   var title: Driver<String>{get}
   var count: Driver<String>{get}
-  var grocery:Grocery!{get}
+  var grocery:Grocery?{get}
   var itemVMs:Observable<[GroceryItemVMType]> {get}
 
   func addItem(_ name:String)
@@ -24,47 +23,53 @@ protocol GroceryVMType:class {
 
 final class GroceryVM: GroceryVMType {
   
-  lazy var itemVMs:Observable<[GroceryItemVMType]> = self.apiManager.getGroceryItems(self.grocery).map({$0.map({GroceryItemVM($0)})})
+  lazy var itemVMs:Observable<[GroceryItemVMType]> = {
+    guard let grocery = self.grocery else{
+      return Observable<[GroceryItemVMType]>.empty()
+    }
+    return self.apiManager.getGroceryItems(grocery).map({$0.map({GroceryItemVM($0.key, api: APIManager())})})
+  }()
 
 
-  fileprivate (set) lazy var title: Driver<String> = self.titleSubj.asDriver(onErrorJustReturn: "")
-  fileprivate (set) lazy var count: Driver<String> = self.countSubj.asDriver(onErrorJustReturn: "")
+  private (set) lazy var title: Driver<String> = self.titleSubj.asDriver(onErrorJustReturn: "")
+  private (set) lazy var count: Driver<String> = self.countSubj.asDriver(onErrorJustReturn: "")
   
-  fileprivate let titleSubj = BehaviorSubject<String>(value: "")
-  fileprivate let countSubj = BehaviorSubject<String>(value: "")
+  private let titleSubj = BehaviorSubject<String>(value: "")
+  private let countSubj = BehaviorSubject<String>(value: "")
 
-  fileprivate (set) var grocery:Grocery!
+  private (set) var grocery:Grocery?
   private let apiManager : APIProtocol
   private let disposeBag = DisposeBag()
   
   
-  init(_ grocery:Grocery, api:APIProtocol)
+  init(_ groceryID:String, api:APIProtocol)
   {
     apiManager = api
-    self.grocery = grocery
     
-    self.grocery.ref.observe(.value, with: {[weak self]  snapshot in
+    apiManager.getGrocery(groceryID).subscribe(onNext: {[weak self] grocery in
       
-      if let groc = Grocery(snapshot: snapshot){
-        self?.grocery = groc
-        self?.titleSubj.onNext(groc.name)
-        
-        let completedItems = groc.items.filter{$0.value}.count
-        let newCompletionCount = groc.items.count > 0 ? "\(completedItems)/\(groc.items.count)" : ""
-        self?.countSubj.onNext(newCompletionCount)
-      }
-    })
-
+      self?.grocery = grocery
+      self?.titleSubj.onNext(grocery.name)
+      
+      let completedItems = grocery.items.filter{$0.value}.count
+      let newCompletionCount = grocery.items.count > 0 ? "\(completedItems)/\(grocery.items.count)" : ""
+      self?.countSubj.onNext(newCompletionCount)
+      
+    }).disposed(by: disposeBag)
   }
   
   func addItem(_ name: String)
   {
-    apiManager.addGroceryItem(name, to: grocery)
+    if let grocery = self.grocery {
+      apiManager.addGroceryItem(name, to: grocery)
+    }
   }
   
   func removeItem(_ itemVM:GroceryItemVMType)
   {
-    apiManager.removeItem(itemVM.groceryItem, from: grocery)
+    if let grocery = self.grocery, let item = itemVM.groceryItem {
+      apiManager.removeItem(item, from: grocery)
+    }
   }
   
   deinit

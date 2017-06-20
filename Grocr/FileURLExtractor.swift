@@ -16,7 +16,8 @@ struct FileURLExtractor {
   static func imageURL(_ imageID:String?) -> Observable<URL?>?
   {
     if let imageID = imageID{
-      return storageRef.child(imageID).downloadURL
+      let imageName = imageID + ".png"
+      return storageRef.child(imageName).downloadURL
     }
     return nil
   }

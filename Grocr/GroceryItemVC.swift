@@ -35,7 +35,7 @@ class GroceryItemVC: UIViewController, EasyAlert, Injectable {
   
   fileprivate let disposeBag = DisposeBag()
   
-  fileprivate let uploadImgSubj = PublishSubject<UIImage>()
+  fileprivate var uploadImgSubj = PublishSubject<UIImage>()
   
   fileprivate var viewModel:T!
  
@@ -174,11 +174,10 @@ class GroceryItemVC: UIViewController, EasyAlert, Injectable {
     imgUploadBut.isHidden = !isEditMode
     
     if isEditMode {
-        bindEditingStaff()
         titleLab.enableEditMode()
         amountLab.enableEditMode()
         descriptionTextView.enableEditMode()
-      
+        bindEditFields()
     }else{
         viewModel.saveEditedData()
         view.endEditing(true)
@@ -189,18 +188,27 @@ class GroceryItemVC: UIViewController, EasyAlert, Injectable {
     
   }
   
-  fileprivate func bindEditingStaff()
+  fileprivate func bindEditFields()
   {
     
-    let uploadImgProgressObservable = viewModel.startEditing(title: titleLab.textInput, amount: amountLab.textInput, description: descriptionTextView.rx.text.asObservable(), imageUploadEvent: uploadImgSubj.asObservable())
+    viewModel.startEditing(title: titleLab.textInput, amount: amountLab.textInput, description: descriptionTextView.rx.text.asObservable())
     
-    uploadImgProgressObservable.subscribe(onNext: { progress in
+  }
+  
+  fileprivate func createUploadObservers()
+  {
+    uploadImgSubj = PublishSubject<UIImage>()
+    
+    let imgUploadProgressObserver = PublishSubject<Double>()
+    
+    viewModel.enableImageUpload(imageUploadEvent: uploadImgSubj.asObservable(), uploadProgressObserver: imgUploadProgressObserver.asObserver())
+    
+    imgUploadProgressObserver.subscribe(onNext: { progress in
       
         self.imgUploadBut.stopDownloadButton.progress = CGFloat(progress)
       
       }, onError: { error in
         
-        self.imgView.image = UIImage.placeholderImage
         self.imgUploadBut.state = .startDownload
         var mess = "Failed to upload image."
         if case ImageUploadError.failedWithMessage(let errorMess) = error{
@@ -233,15 +241,8 @@ class GroceryItemVC: UIViewController, EasyAlert, Injectable {
     present(imagePickerController, animated: true, completion: nil)
   }
 
-  
-//  MARK: IBActions
-  @IBAction func addImgTapped(_ sender: Any)
-  {
-    let imagePickerController = ImagePickerController()
-    imagePickerController.delegate = self
-    present(imagePickerController, animated: true, completion: nil)
-  }
-  
+
+//  
 // MARK: Injectable methods
   
   func inject(_ viewModel: GroceryItemVMType)
@@ -289,9 +290,10 @@ extension GroceryItemVC:PKDownloadButtonDelegate {
       
       case .startDownload:
         showImagePickerVC()
-        
+        createUploadObservers()
+      
       case .downloading:
-        uploadImgSubj.onError(ImageUploadError.cancelled)
+        uploadImgSubj.onCompleted()
         downloadButton.state = .startDownload
         imgView.image = UIImage.placeholderImage
       

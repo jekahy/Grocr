@@ -9,37 +9,20 @@
 import RxSwift
 import FirebaseDatabase
 
-protocol APIProtocol {
-  
-  func getGrocery(_ groceryID:String)->Observable<Grocery>
-  func getGroceries() -> Observable<[Grocery]>
-  func addGrocery(_ name: String)
-  func removeGrocery(_ grocery: Grocery)
-
-  func getGroceryItem(_ itemID:String)->Observable<GroceryItem>
-  func getGroceryItems(_ grocery:Grocery) -> Observable<[GroceryItem]>
-  func addGroceryItem(_ name: String, to:Grocery)
-  func removeItem(_ item: GroceryItem, from:Grocery)
-  func updateGroceryItemCompletion(_ item:GroceryItem,  completed:Bool)
-}
-
-
-final class APIManager : APIProtocol {
+class APIManager : APIProtocol {
   
   static let sharedAPI = APIManager()
   private static let listsRef = FIRDatabaseLocation.lists.reference()
-  private static
-  let itemsRef = FIRDatabaseLocation.items.reference()
+  private static let itemsRef = FIRDatabaseLocation.items.reference()
   
-  
-  func addGrocery(_ name: String)
+  static func addGrocery(_ name: String)
   {
     let grListRef = APIManager.listsRef.childByAutoId()
     let grList = Grocery(name: name, ref: grListRef)
     grListRef.setValue(grList.jsonStr)
   }
   
-  func getGrocery(_ groceryID:String)->Observable<Grocery>
+  static func getGrocery(_ groceryID:String)->Observable<Grocery>
   {
     return Observable<Grocery>.create({ observer -> Disposable in
       
@@ -55,31 +38,13 @@ final class APIManager : APIProtocol {
     })
   }
   
-  func removeGrocery(_ grocery: Grocery)
+  static func removeGrocery(_ grocery: Grocery)
   {
     grocery.ref.removeValue()
   }
-  
-  func addGroceryItem(_ name: String, to parentGrocery:Grocery)
-  {
-    let groceryItemRef = APIManager.itemsRef.childByAutoId()
-    
-    let groceryItem = GroceryItem(name: name,
-                                  addedByUser: Auth.auth().currentUser?.email,
-                                  groceryID:parentGrocery.key,
-                                  ref: groceryItemRef)
-    
-    groceryItemRef.setValue(groceryItem.jsonStr)
-    parentGrocery.ref.child("items").updateChildValues([groceryItem.key : false])
-  }
 
-  func removeItem(_ item: GroceryItem, from parentGrocery:Grocery)
-  {
-    parentGrocery.ref.child("items").updateChildValues([item.key : NSNull()])
-    item.ref.removeValue()
-  }
   
-  func getGroceries() -> Observable<[Grocery]>
+  static func getGroceries() -> Observable<[Grocery]>
   {
     let groceriesVar = Variable<[Grocery]>([])
     APIManager.listsRef.observe(.childAdded, with: { snapshot in
@@ -100,33 +65,15 @@ final class APIManager : APIProtocol {
   }
   
   
-  
-  func getGroceryItem(_ itemID:String)->Observable<GroceryItem>
+  static func getGroceryItems(_ grocery:Grocery) -> Observable<[GroceryItem]>
   {
-    return Observable<GroceryItem>.create({ observer -> Disposable in
-      
-      let ref = APIManager.itemsRef.child(itemID)
-      let h = ref.observe(.value, with: { snapshot in
-        if let item = GroceryItem(snapshot: snapshot){
-          observer.onNext(item)
-        }
-      })
-      return Disposables.create {
-        ref.removeObserver(withHandle: h)
-      }
-    })
-  }
-  
-  
-  func getGroceryItems(_ grocery:Grocery) -> Observable<[GroceryItem]>
-  {
-
+    
     return Observable<[GroceryItem]>.create({ observer -> Disposable in
-
+      
       var items = [GroceryItem]()
-
+      
       let groceryItemsRef = grocery.ref.child("items")
-
+      
       let h1 = groceryItemsRef.observe(.childRemoved, with: { snapshot in
         
         if let idxToDelete = items.index(where: {$0.key == snapshot.key}){
@@ -144,24 +91,62 @@ final class APIManager : APIProtocol {
             observer.onNext(items)
           }
         })
-        
       })
       
       return Disposables.create {
         groceryItemsRef.removeObserver(withHandle: h1)
         groceryItemsRef.removeObserver(withHandle: h2)
       }
-      
     })
+  }
+  
+  static func addGroceryItem(_ name: String, to parentGrocery:Grocery)
+  {
+    let groceryItemRef = APIManager.itemsRef.childByAutoId()
     
+    let groceryItem = GroceryItem(name: name,
+                                  addedByUser: Auth.auth().currentUser?.email,
+                                  groceryID:parentGrocery.key,
+                                  ref: groceryItemRef)
+    
+    groceryItemRef.setValue(groceryItem.jsonStr)
+    parentGrocery.ref.child("items").updateChildValues([groceryItem.key : false])
   }
   
   
-  func updateGroceryItemCompletion(_ item:GroceryItem,  completed:Bool)
+  static func getGroceryItem(_ itemID:String)->Observable<GroceryItem>
+  {
+    return Observable<GroceryItem>.create({ observer -> Disposable in
+      
+      let ref = APIManager.itemsRef.child(itemID)
+      let h = ref.observe(.value, with: { snapshot in
+        if let item = GroceryItem(snapshot: snapshot){
+          observer.onNext(item)
+        }
+      })
+      return Disposables.create {
+        ref.removeObserver(withHandle: h)
+      }
+    })
+  }
+  
+  
+  static func updateGroceryItemCompletion(_ item:GroceryItem,  completed:Bool)
   {
     item.ref.child("completed").setValue(completed)
     APIManager.listsRef.child("\(item.groceryID!)/items").updateChildValues([item.key:completed])
   }
+
+  static func removeItem(_ item: GroceryItem, from parentGrocery:Grocery)
+  {
+    parentGrocery.ref.child("items").updateChildValues([item.key : NSNull()])
+    item.ref.removeValue()
+  }
   
   
+  static func createImageID(for item:GroceryItem)->String
+  {
+    let imgItemRef = item.ref.child("imageID")
+    return imgItemRef.childByAutoId().key
+  }
 }

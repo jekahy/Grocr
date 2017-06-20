@@ -20,7 +20,10 @@ protocol GroceryItemVMType:class {
   
   var groceryItem:GroceryItem? {get}
   
-  func startEditing(title:Observable<String?>, amount:Observable<String?>, description:Observable<String?>, imageUploadEvent:Observable<UIImage>)->Observable<Double>
+  func startEditing(title:Observable<String?>, amount:Observable<String?>, description:Observable<String?>)
+  
+  func enableImageUpload(imageUploadEvent:Observable<UIImage>, uploadProgressObserver:AnyObserver<Double>)
+  
   func saveEditedData()
   
 }
@@ -46,9 +49,9 @@ final class GroceryItemVM:GroceryItemVMType {
   
   fileprivate var editVM:GroceryItemEditVM?
   
-  private let apiManager:APIProtocol
+  private let apiManager:APIProtocol.Type
   
-  init(_ itemID:String, api:APIProtocol) {
+  init(_ itemID:String, api:APIProtocol.Type) {
 
     apiManager = api
     
@@ -77,13 +80,17 @@ final class GroceryItemVM:GroceryItemVMType {
   }
   
   
-  func startEditing(title:Observable<String?>, amount:Observable<String?>, description:Observable<String?>, imageUploadEvent:Observable<UIImage>)->Observable<Double>
+  func startEditing(title:Observable<String?>, amount:Observable<String?>, description:Observable<String?>)
   {
     if let item = groceryItem {
-      editVM = GroceryItemEditVM(item: item, title: title, amount: amount, description: description, imageUploadEvent: imageUploadEvent)
-      return editVM!.imgUpload
+      editVM = GroceryItemEditVM(api: apiManager, item: item, title: title, amount: amount, description: description)
     }
-   return Observable.empty()
+  }
+  
+  func enableImageUpload(imageUploadEvent:Observable<UIImage>, uploadProgressObserver:AnyObserver<Double>)
+  {
+    
+    editVM?.prepareImageUpload(uploadTrigger: imageUploadEvent, uploadProgressObserver: uploadProgressObserver)
   }
   
   
@@ -97,7 +104,6 @@ final class GroceryItemVM:GroceryItemVMType {
   deinit
   {
     updateCompleted.onCompleted()
-
   }
 }
 

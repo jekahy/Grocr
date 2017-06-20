@@ -27,7 +27,7 @@ final class GroceryVM: GroceryVMType {
     guard let grocery = self.grocery else{
       return Observable<[GroceryItemVMType]>.empty()
     }
-    return self.apiManager.getGroceryItems(grocery).map({$0.map({GroceryItemVM($0.key, api: APIManager())})})
+    return self.apiManager.getGroceryItems(grocery).map({$0.map({GroceryItemVM($0.key, api: APIManager.self)})})
   }()
 
 
@@ -38,11 +38,11 @@ final class GroceryVM: GroceryVMType {
   private let countSubj = BehaviorSubject<String>(value: "")
 
   private (set) var grocery:Grocery?
-  private let apiManager : APIProtocol
+  private let apiManager : APIProtocol.Type
   private let disposeBag = DisposeBag()
   
   
-  init(_ groceryID:String, api:APIProtocol)
+  init(_ groceryID:String, api:APIProtocol.Type)
   {
     apiManager = api
     

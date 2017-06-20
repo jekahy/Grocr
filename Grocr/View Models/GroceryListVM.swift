@@ -17,11 +17,11 @@ protocol GroceryListType {
 
 final class GroceryListVM : GroceryListType {
 
-  private let apiManager : APIProtocol
-  lazy var groceryVMs: Observable<[GroceryVM]> = self.apiManager.getGroceries().map({$0.map({GroceryVM($0.key, api: APIManager())})})
+  private let apiManager : APIProtocol.Type
+  lazy var groceryVMs: Observable<[GroceryVM]> = self.apiManager.getGroceries().map({$0.map({GroceryVM($0.key, api: APIManager.self)})})
   
   
-  init(api:APIProtocol)
+  init(api:APIProtocol.Type)
   {
     apiManager = api
   }
